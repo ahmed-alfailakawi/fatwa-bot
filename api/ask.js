@@ -8,20 +8,15 @@ if (req.method !== ‘POST’) return res.status(405).end();
 const { question, mode } = req.body;
 if (!question) return res.status(400).json({ error: ‘no question’ });
 
-const FATWA_SYSTEM = `أنت بوت فتاوى إسلامي متخصص. أجب على السؤال الفقهي بأسلوب كل شيخ وفق منهجه المعروف.
-ابن باز: واضح مباشر حنبلي يعتمد النص.
-ابن عثيمين: تحليلي تفصيلي يذكر الأقوال ويرجح مع تيسير.
-الفوزان: محافظ دقيق يعتمد الفقه الحنبلي مع الدليل.
+const FATWA_SYSTEM = `You are an Islamic fatwa bot. Answer in Arabic based on each scholar’s methodology.
+Ibn Baz: clear, direct, Hanbali.
+Ibn Uthaymeen: analytical, detailed, with easement.
+Al-Fawzan: conservative, precise, Hanbali fiqh.
 
-أجب بـ JSON فقط ابدأ مباشرة بـ { بدون أي نص:
-{
-“binbaz”:{“ruling”:“حلال أو حرام أو مكروه أو مباح أو خلاف”,“answer”:“3-4 جمل”,“evidence”:“الدليل والمصدر”},
-“uthaymeen”:{“ruling”:“حلال أو حرام أو مكروه أو مباح أو خلاف”,“answer”:“3-4 جمل”,“evidence”:“الدليل والمصدر”},
-“fawzan”:{“ruling”:“حلال أو حرام أو مكروه أو مباح أو خلاف”,“answer”:“3-4 جمل”,“evidence”:“الدليل والمصدر”},
-“summary”:“خلاصة 2-3 جمل”
-}`;
+Reply ONLY with valid JSON starting with { no text before or after:
+{“binbaz”:{“ruling”:“one of: halal/haram/makruh/mubah/khilaf”,“answer”:“3-4 sentences in Arabic”,“evidence”:“source in Arabic”},“uthaymeen”:{“ruling”:“one of: halal/haram/makruh/mubah/khilaf”,“answer”:“3-4 sentences in Arabic”,“evidence”:“source in Arabic”},“fawzan”:{“ruling”:“one of: halal/haram/makruh/mubah/khilaf”,“answer”:“3-4 sentences in Arabic”,“evidence”:“source in Arabic”},“summary”:“2-3 sentences summary in Arabic”}`;
 
-const HADITH_SYSTEM = `أنت متخصص في علم الحديث والتخريج. عندما يُعطى حديث، قم بتخريجه وبيان درجته. أجب بـ JSON فقط ابدأ مباشرة بـ { بدون أي نص: { "text": "نص الحديث كاملاً", "grade": "صحيح أو حسن أو ضعيف أو موضوع أو لا أصل له", "source": "المصدر مع رقم الحديث إن أمكن", "scholars": "أقوال العلماء في هذا الحديث", "note": "أي ملاحظة مهمة" }`;
+const HADITH_SYSTEM = `You are a hadith verification specialist. When given a hadith text, verify and grade it. Reply ONLY with valid JSON starting with { no text before or after: {"text":"full hadith text in Arabic","grade":"one of: sahih/hasan/daif/mawdu","source":"source with hadith number in Arabic","scholars":"scholars opinions in Arabic","note":"any important note in Arabic"}`;
 
 try {
 const r = await fetch(‘https://api.anthropic.com/v1/messages’, {
@@ -46,7 +41,7 @@ if (data.error) return res.status(500).json({ error: data.error.message });
 const raw = data.content.filter(b => b.type === 'text').map(b => b.text).join('');
 const s = raw.indexOf('{');
 const e = raw.lastIndexOf('}');
-if (s < 0 || e < 0) return res.status(500).json({ error: 'no json' });
+if (s < 0 || e < 0) return res.status(500).json({ error: 'no json found' });
 
 return res.status(200).json(JSON.parse(raw.slice(s, e + 1)));
 ```
