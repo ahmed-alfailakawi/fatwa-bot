@@ -12,35 +12,30 @@
 body{font-family:'Tajawal',sans-serif;background:var(--cream);min-height:100vh;}
 .screen{display:none;min-height:100vh;flex-direction:column;}
 .screen.active{display:flex;}
-
-/* HOME */
 #s-home{background:linear-gradient(160deg,#f4845f 0%,#e63946 45%,#9d0208 100%);align-items:center;justify-content:center;padding:32px 20px;gap:24px;position:relative;overflow:hidden;}
-#s-home::before{content:’’;position:absolute;width:500px;height:500px;border-radius:50%;background:rgba(255,255,255,.04);top:-180px;left:-180px;}
-#s-home::after{content:’’;position:absolute;width:350px;height:350px;border-radius:50%;background:rgba(0,0,0,.06);bottom:-120px;right:-120px;}
+#s-home::before{content:'';position:absolute;width:500px;height:500px;border-radius:50%;background:rgba(255,255,255,.04);top:-180px;left:-180px;}
+#s-home::after{content:'';position:absolute;width:350px;height:350px;border-radius:50%;background:rgba(0,0,0,.06);bottom:-120px;right:-120px;}
 .home-content{position:relative;z-index:2;width:100%;max-width:460px;display:flex;flex-direction:column;align-items:center;gap:20px;}
 .logo-wrap{text-align:center;animation:dropIn .6s ease both;}
 .logo-icon{font-size:64px;filter:drop-shadow(0 6px 18px rgba(0,0,0,.3));margin-bottom:8px;}
-.logo-title{font-family:‘Amiri’,serif;font-size:28px;font-weight:700;color:#fff;text-shadow:0 2px 10px rgba(0,0,0,.3);}
+.logo-title{font-family:'Amiri',serif;font-size:28px;font-weight:700;color:#fff;text-shadow:0 2px 10px rgba(0,0,0,.3);}
 .logo-sub{font-size:12px;color:rgba(255,255,255,.65);margin-top:4px;}
 .search-wrap{width:100%;animation:dropIn .7s ease both;}
 .search-label{font-size:13px;color:rgba(255,255,255,.85);margin-bottom:8px;font-weight:600;display:block;text-align:center;}
 .search-box{display:flex;background:#fff;border-radius:18px;overflow:hidden;box-shadow:0 8px 32px rgba(0,0,0,.3);}
-.search-input{flex:1;border:none;outline:none;padding:16px 18px;font-family:‘Tajawal’,sans-serif;font-size:15px;color:#1a1a1a;background:transparent;min-width:0;}
+.search-input{flex:1;border:none;outline:none;padding:16px 18px;font-family:'Tajawal',sans-serif;font-size:15px;color:#1a1a1a;background:transparent;min-width:0;}
 .search-input::placeholder{color:#bbb;}
-.search-go{background:linear-gradient(135deg,var(–red),var(–red2));border:none;padding:0 22px;height:56px;cursor:pointer;color:#fff;font-size:22px;flex-shrink:0;transition:opacity .2s;}
-.search-go:hover{opacity:.85;}
+.search-go{background:linear-gradient(135deg,var(--red),var(--red2));border:none;padding:0 22px;height:56px;cursor:pointer;color:#fff;font-size:22px;flex-shrink:0;}
 .search-go:disabled{opacity:.4;cursor:not-allowed;}
 .scholars-strip{display:flex;gap:10px;flex-wrap:wrap;justify-content:center;animation:dropIn .8s ease both;}
 .sc-chip{display:flex;align-items:center;gap:6px;background:rgba(255,255,255,.15);backdrop-filter:blur(8px);border:1px solid rgba(255,255,255,.25);border-radius:20px;padding:7px 14px;color:#fff;font-size:12px;font-weight:700;}
-.credits{color:rgba(255,255,255,.45);font-size:11px;text-align:center;animation:dropIn .9s ease both;}
-
-/* LOADING */
+.credits{color:rgba(255,255,255,.45);font-size:11px;text-align:center;}
 #s-loading{background:linear-gradient(150deg,#e63946,#9d0208);align-items:center;justify-content:center;text-align:center;padding:32px;gap:20px;}
 .ld-mosque{font-size:80px;animation:float 2s ease-in-out infinite;}
-.ld-title{font-family:‘Amiri’,serif;font-size:24px;color:#fff;}
+.ld-title{font-family:'Amiri',serif;font-size:24px;color:#fff;}
 .ld-sub{color:rgba(255,255,255,.7);font-size:14px;}
 .ld-scholars{display:grid;grid-template-columns:1fr 1fr;gap:10px;max-width:280px;width:100%;}
-.ld-sc{background:rgba(255,255,255,.12);border-radius:12px;padding:12px;display:flex;flex-direction:column;align-items:center;gap:6px;backdrop-filter:blur(8px);border:1px solid rgba(255,255,255,.2);}
+.ld-sc{background:rgba(255,255,255,.12);border-radius:12px;padding:12px;display:flex;flex-direction:column;align-items:center;gap:6px;border:1px solid rgba(255,255,255,.2);}
 .ld-sc-av{font-size:26px;}
 .ld-sc-nm{font-size:11px;color:#fff;font-weight:700;text-align:center;}
 .dots{display:flex;gap:3px;}
@@ -48,17 +43,15 @@ body{font-family:'Tajawal',sans-serif;background:var(--cream);min-height:100vh;}
 .dots span:nth-child(2){animation-delay:.15s;}
 .dots span:nth-child(3){animation-delay:.3s;}
 .ld-bar-wrap{width:100%;max-width:260px;height:6px;background:rgba(255,255,255,.2);border-radius:10px;overflow:hidden;}
-.ld-bar{height:100%;background:#fff;border-radius:10px;transition:width .3s;}
-
-/* RESULTS */
-#s-results{background:var(–cream);overflow-y:auto;}
-.res-header{background:linear-gradient(135deg,var(–red),var(–red2));padding:18px 16px 20px;color:#fff;box-shadow:var(–sh);}
+.ld-bar{height:100%;background:#fff;border-radius:10px;width:0%;transition:width .3s;}
+#s-results{background:var(--cream);overflow-y:auto;}
+.res-header{background:linear-gradient(135deg,var(--red),var(--red2));padding:18px 16px 20px;color:#fff;box-shadow:var(--sh);}
 .res-header-top{display:flex;align-items:center;gap:10px;margin-bottom:8px;}
 .back-btn{width:36px;height:36px;background:rgba(255,255,255,.2);border-radius:10px;border:none;color:#fff;font-size:20px;cursor:pointer;display:flex;align-items:center;justify-content:center;}
 .res-header-top h2{font-size:15px;font-weight:700;flex:1;}
 .res-q-box{background:rgba(255,255,255,.15);border-radius:10px;padding:8px 12px;font-size:13px;color:rgba(255,255,255,.9);line-height:1.6;border:1px solid rgba(255,255,255,.2);}
 .res-body{padding:16px;display:flex;flex-direction:column;gap:12px;}
-.sc-card{background:#fff;border-radius:18px;overflow:hidden;box-shadow:var(–sh2);border:2px solid transparent;animation:slideUp .4s ease both;}
+.sc-card{background:#fff;border-radius:18px;overflow:hidden;box-shadow:var(--sh2);border:2px solid transparent;animation:slideUp .4s ease both;}
 .sc-head{padding:12px 14px;display:flex;align-items:center;gap:10px;}
 .sc-av{width:44px;height:44px;border-radius:12px;background:rgba(255,255,255,.2);display:flex;align-items:center;justify-content:center;font-size:22px;flex-shrink:0;}
 .sc-nm{font-size:14px;font-weight:700;}
@@ -68,33 +61,24 @@ body{font-family:'Tajawal',sans-serif;background:var(--cream);min-height:100vh;}
 .sc-ev{border-radius:10px;padding:10px 12px;font-size:12.5px;line-height:1.7;display:flex;gap:8px;align-items:flex-start;}
 .sc-ev-icon{font-size:15px;flex-shrink:0;margin-top:2px;}
 .sc-ev-ref{font-weight:700;display:block;margin-bottom:2px;}
-.sb{border-color:#1565c0;} .sb .sc-head{background:linear-gradient(135deg,#1565c0,#1976d2);color:#fff;} .sb .sc-ev{background:#e3f2fd;} .sb .sc-ev-ref{color:#1565c0;}
-.su{border-color:#2e7d32;} .su .sc-head{background:linear-gradient(135deg,#2e7d32,#388e3c);color:#fff;} .su .sc-ev{background:#e8f5e9;} .su .sc-ev-ref{color:#2e7d32;}
-.sf{border-color:#6a1b9a;} .sf .sc-head{background:linear-gradient(135deg,#6a1b9a,#7b1fa2);color:#fff;} .sf .sc-ev{background:#f3e5f5;} .sf .sc-ev-ref{color:#6a1b9a;}
-.sk{border-color:#e65100;} .sk .sc-head{background:linear-gradient(135deg,#e65100,#f57c00);color:#fff;} .sk .sc-ev{background:#fff3e0;} .sk .sc-ev-ref{color:#e65100;}
+.sb{border-color:#1565c0;}.sb .sc-head{background:linear-gradient(135deg,#1565c0,#1976d2);color:#fff;}.sb .sc-ev{background:#e3f2fd;}.sb .sc-ev-ref{color:#1565c0;}
+.su{border-color:#2e7d32;}.su .sc-head{background:linear-gradient(135deg,#2e7d32,#388e3c);color:#fff;}.su .sc-ev{background:#e8f5e9;}.su .sc-ev-ref{color:#2e7d32;}
+.sf{border-color:#6a1b9a;}.sf .sc-head{background:linear-gradient(135deg,#6a1b9a,#7b1fa2);color:#fff;}.sf .sc-ev{background:#f3e5f5;}.sf .sc-ev-ref{color:#6a1b9a;}
 .sum-card{background:linear-gradient(135deg,#ffd700,#f5a623);border-radius:18px;padding:16px;box-shadow:0 6px 20px rgba(245,166,35,.28);animation:slideUp .5s ease both;}
 .sum-top{display:flex;align-items:center;gap:8px;margin-bottom:10px;}
 .sum-badge{background:rgba(0,0,0,.15);border-radius:8px;padding:4px 10px;font-size:12px;font-weight:700;color:#fff;}
 .sum-text{font-size:13.5px;line-height:1.85;color:#3a1a00;}
-.new-btn{background:var(–red);color:#fff;border:none;border-radius:14px;padding:14px;font-family:‘Tajawal’,sans-serif;font-size:15px;font-weight:700;cursor:pointer;box-shadow:0 6px 20px rgba(230,57,70,.32);display:flex;align-items:center;justify-content:center;gap:8px;animation:slideUp .6s ease both;}
+.new-btn{background:var(--red);color:#fff;border:none;border-radius:14px;padding:14px;font-family:'Tajawal',sans-serif;font-size:15px;font-weight:700;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:8px;animation:slideUp .6s ease both;}
 .disc{background:#fff8e1;border:1.5px solid #ffe082;border-radius:12px;padding:10px 14px;font-size:12px;color:#795548;line-height:1.6;display:flex;gap:8px;align-items:flex-start;animation:slideUp .7s ease both;}
 .err-box{padding:40px 20px;text-align:center;}
-.err-icon-big{font-size:52px;margin-bottom:14px;}
-.err-title{font-size:16px;font-weight:700;color:var(–red2);margin-bottom:8px;}
-.err-msg{font-size:14px;color:#666;margin-bottom:16px;line-height:1.6;}
-.err-detail{font-size:11px;color:#999;background:#f5f5f5;border-radius:8px;padding:8px 12px;margin-bottom:20px;word-break:break-all;direction:ltr;text-align:left;max-height:80px;overflow-y:auto;}
-
+.err-detail{font-size:11px;color:#999;background:#f5f5f5;border-radius:8px;padding:8px 12px;margin-bottom:20px;word-break:break-all;direction:ltr;text-align:left;}
 @keyframes dropIn{from{opacity:0;transform:translateY(-18px)}to{opacity:1;transform:translateY(0)}}
 @keyframes slideUp{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:translateY(0)}}
 @keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-14px)}}
 @keyframes bounce{0%,80%,100%{transform:scale(.7);opacity:.4}40%{transform:scale(1);opacity:1}}
 </style>
-
 </head>
 <body>
-
-<!-- HOME -->
-
 <div class="screen active" id="s-home">
   <div class="home-content">
     <div class="logo-wrap">
@@ -103,10 +87,9 @@ body{font-family:'Tajawal',sans-serif;background:var(--cream);min-height:100vh;}
       <div class="logo-sub">إعداد: أحمد الفيلكاوي</div>
     </div>
     <div class="search-wrap">
-      <span class="search-label">اكتب سؤالك الفقهي وسيجيبك المشايخ الأربعة</span>
+      <span class="search-label">اكتب سؤالك الفقهي وسيجيبك المشايخ الثلاثة</span>
       <div class="search-box">
-        <input class="search-input" id="mainInput" type="text" placeholder="ما حكم...؟"
-          onkeydown="if(event.key==='Enter')doSearch()">
+        <input class="search-input" id="mainInput" type="text" placeholder="ما حكم...؟" onkeydown="if(event.key==='Enter')doSearch()">
         <button class="search-go" id="goBtn" onclick="doSearch()">🔍</button>
       </div>
     </div>
@@ -114,28 +97,23 @@ body{font-family:'Tajawal',sans-serif;background:var(--cream);min-height:100vh;}
       <div class="sc-chip">📖 ابن باز</div>
       <div class="sc-chip">📚 ابن عثيمين</div>
       <div class="sc-chip">📜 الفوزان</div>
-      <div class="sc-chip">🎓 الخميس</div>
     </div>
     <div class="credits">جميع الإجابات من منهج أهل السنة والجماعة</div>
   </div>
 </div>
 
-<!-- LOADING -->
-
 <div class="screen" id="s-loading">
   <div class="ld-mosque">🕌</div>
   <div class="ld-title">جارٍ الاستشارة...</div>
-  <div class="ld-sub">يتم البحث في فتاوى المشايخ الأربعة</div>
+  <div class="ld-sub">يتم البحث في فتاوى المشايخ الثلاثة</div>
   <div class="ld-scholars">
     <div class="ld-sc"><div class="ld-sc-av">📖</div><div class="ld-sc-nm">ابن باز</div><div class="dots"><span></span><span></span><span></span></div></div>
     <div class="ld-sc"><div class="ld-sc-av">📚</div><div class="ld-sc-nm">ابن عثيمين</div><div class="dots"><span></span><span></span><span></span></div></div>
     <div class="ld-sc"><div class="ld-sc-av">📜</div><div class="ld-sc-nm">الفوزان</div><div class="dots"><span></span><span></span><span></span></div></div>
-    <div class="ld-sc"><div class="ld-sc-av">🎓</div><div class="ld-sc-nm">الخميس</div><div class="dots"><span></span><span></span><span></span></div></div>
+    <div class="ld-sc"><div class="ld-sc-av">✨</div><div class="ld-sc-nm">الخلاصة</div><div class="dots"><span></span><span></span><span></span></div></div>
   </div>
-  <div class="ld-bar-wrap"><div class="ld-bar" id="ldBar" style="width:0%"></div></div>
+  <div class="ld-bar-wrap"><div class="ld-bar" id="ldBar"></div></div>
 </div>
-
-<!-- RESULTS -->
 
 <div class="screen" id="s-results">
   <div class="res-header">
@@ -150,26 +128,10 @@ body{font-family:'Tajawal',sans-serif;background:var(--cream);min-height:100vh;}
 
 <script>
 const SCHOLARS=[
-  {id:'binbaz',    cls:'sb', name:'الشيخ ابن باز',      title:'رحمه الله', icon:'📖'},
-  {id:'uthaymeen', cls:'su', name:'الشيخ ابن عثيمين',   title:'رحمه الله', icon:'📚'},
-  {id:'fawzan',    cls:'sf', name:'الشيخ الفوزان',      title:'حفظه الله', icon:'📜'},
-  {id:'khamees',   cls:'sk', name:'الشيخ عثمان الخميس', title:'حفظه الله', icon:'🎓'},
+  {id:'binbaz', cls:'sb', name:'الشيخ ابن باز',     title:'رحمه الله', icon:'📖'},
+  {id:'uthaymeen',cls:'su',name:'الشيخ ابن عثيمين', title:'رحمه الله', icon:'📚'},
+  {id:'fawzan',  cls:'sf', name:'الشيخ الفوزان',    title:'حفظه الله', icon:'📜'},
 ];
-
-const SYSTEM = `أنت بوت فتاوى إسلامي. أجب على السؤال الفقهي بأسلوب كل شيخ وفق منهجه المعروف.
-
-ابن باز: واضح مباشر حنبلي يعتمد النص.
-ابن عثيمين: تحليلي تفصيلي مع تيسير.
-الفوزان: محافظ دقيق فقه حنبلي.
-الخميس: مباشر علمي يرجح الأقوى.
-
-تعليمات مهمة جداً:
-- اكتب JSON فقط، ابدأ مباشرة بـ { بدون أي كلام قبله
-- لا تكتب أي نص بعد الـ JSON
-- لا تستخدم backticks أو markdown
-- اكتب الـ JSON في سطر واحد
-
-{"binbaz":{"answer":"الإجابة 3-4 جمل","evidence":"الدليل والمصدر"},"uthaymeen":{"answer":"الإجابة 3-4 جمل","evidence":"الدليل والمصدر"},"fawzan":{"answer":"الإجابة 3-4 جمل","evidence":"الدليل والمصدر"},"khamees":{"answer":"الإجابة 3-4 جمل","evidence":"الدليل والمصدر"},"summary":"خلاصة 2-3 جمل"}`;
 
 function go(s){
   document.querySelectorAll('.screen').forEach(x=>x.classList.remove('active'));
@@ -177,19 +139,16 @@ function go(s){
   window.scrollTo(0,0);
 }
 
-/* Animate loading bar manually */
 let barTimer=null;
 function startBar(){
   const b=document.getElementById('ldBar');
   b.style.width='0%';
-  let pct=0;
+  let p=0;
   clearInterval(barTimer);
   barTimer=setInterval(()=>{
-    // slow down as it approaches 90%
-    const step = pct<40?3 : pct<70?1.5 : pct<88?.5:.1;
-    pct=Math.min(pct+step,90);
-    b.style.width=pct+'%';
-    if(pct>=90) clearInterval(barTimer);
+    p=Math.min(p+(p<40?3:p<70?1.5:.4),90);
+    b.style.width=p+'%';
+    if(p>=90)clearInterval(barTimer);
   },150);
 }
 function finishBar(){
@@ -202,69 +161,32 @@ async function doSearch(){
   const q=inp.value.trim();
   if(!q){inp.focus();return;}
   document.getElementById('goBtn').disabled=true;
-  go('loading');
-  startBar();
-
+  go('loading');startBar();
   try{
-    const data=await callClaude(q);
+    const r=await fetch('/api/ask',{
+      method:'POST',
+      headers:{'Content-Type':'application/json'},
+      body:JSON.stringify({question:q})
+    });
+    const data=await r.json();
+    if(data.error)throw new Error(data.error);
     finishBar();
     renderResults(q,data);
     go('results');
   }catch(err){
     finishBar();
-    renderError(q, String(err));
+    renderError(q,String(err));
     go('results');
   }
   document.getElementById('goBtn').disabled=false;
-}
-
-async function callClaude(question){
-  let resp, bodyText;
-  try{
-    resp = await fetch('https://api.anthropic.com/v1/messages',{
-      method:'POST',
-      headers:{'Content-Type':'application/json'},
-      body:JSON.stringify({
-        model:'claude-sonnet-4-20250514',
-        max_tokens:1500,
-        system:SYSTEM,
-        messages:[{role:'user',content:question}]
-      })
-    });
-    bodyText = await resp.text();
-  }catch(networkErr){
-    throw new Error('خطأ في الشبكة: '+networkErr.message);
-  }
-
-  // Parse HTTP response
-  let body;
-  try{ body=JSON.parse(bodyText); }
-  catch(e){ throw new Error('استجابة غير صالحة من الخادم:\n'+bodyText.slice(0,300)); }
-
-  if(body.error) throw new Error('خطأ API: '+JSON.stringify(body.error));
-  if(!body.content?.length) throw new Error('استجابة فارغة:\n'+bodyText.slice(0,300));
-
-  // Collect text
-  const raw=body.content.filter(b=>b.type==='text').map(b=>b.text).join('');
-  if(!raw) throw new Error('لا نص في الاستجابة');
-
-  // Extract JSON — find outermost { }
-  const s=raw.indexOf('{');
-  const e=raw.lastIndexOf('}');
-  if(s<0||e<0||e<=s) throw new Error('لا JSON في الاستجابة:\n'+raw.slice(0,400));
-
-  const jsonStr=raw.slice(s,e+1);
-  try{ return JSON.parse(jsonStr); }
-  catch(pe){ throw new Error('JSON تالف: '+pe.message+'\n\n'+jsonStr.slice(0,400)); }
 }
 
 function renderResults(q,data){
   document.getElementById('resQ').textContent=q;
   const body=document.getElementById('resBody');
   body.innerHTML='';
-
   SCHOLARS.forEach((sc,i)=>{
-    const d=data[sc.id]; if(!d) return;
+    const d=data[sc.id];if(!d)return;
     const card=document.createElement('div');
     card.className='sc-card '+sc.cls;
     card.style.animationDelay=(i*.1)+'s';
@@ -275,26 +197,20 @@ function renderResults(q,data){
       </div>
       <div class="sc-body">
         <div class="sc-ans">${d.answer}</div>
-        <div class="sc-ev">
-          <div class="sc-ev-icon">📌</div>
-          <div><span class="sc-ev-ref">الدليل</span>${d.evidence}</div>
-        </div>
+        <div class="sc-ev"><div class="sc-ev-icon">📌</div><div><span class="sc-ev-ref">الدليل</span>${d.evidence}</div></div>
       </div>`;
     body.appendChild(card);
   });
-
   if(data.summary){
     const s=document.createElement('div');
     s.className='sum-card';
     s.innerHTML=`<div class="sum-top"><span style="font-size:22px">✨</span><span class="sum-badge">خلاصة الأقوال</span></div><div class="sum-text">${data.summary}</div>`;
     body.appendChild(s);
   }
-
   const btn=document.createElement('button');
   btn.className='new-btn';btn.innerHTML='🔍 سؤال جديد';
   btn.onclick=()=>go('home');
   body.appendChild(btn);
-
   const disc=document.createElement('div');
   disc.className='disc';
   disc.innerHTML='<span>⚠️</span><span>هذا البوت تعليمي استرشادي ولا يُغني عن مراجعة العلماء مباشرةً — إعداد: أحمد الفيلكاوي</span>';
@@ -305,9 +221,9 @@ function renderError(q,detail){
   document.getElementById('resQ').textContent=q;
   document.getElementById('resBody').innerHTML=`
     <div class="err-box">
-      <div class="err-icon-big">⚠️</div>
-      <div class="err-title">تعذّر الحصول على الإجابة</div>
-      <div class="err-msg">حدث خطأ أثناء الاتصال بالخادم.<br>يرجى المحاولة مجدداً.</div>
+      <div style="font-size:52px;margin-bottom:14px">⚠️</div>
+      <div style="font-size:16px;font-weight:700;color:#c1121f;margin-bottom:8px">تعذّر الحصول على الإجابة</div>
+      <div style="font-size:14px;color:#666;margin-bottom:16px;line-height:1.6">يرجى المحاولة مجدداً</div>
       ${detail?`<div class="err-detail">${detail}</div>`:''}
       <button class="new-btn" onclick="go('home')" style="max-width:220px;margin:0 auto">← حاول مجدداً</button>
     </div>`;
