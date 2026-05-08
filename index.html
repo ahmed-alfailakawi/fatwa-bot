@@ -293,6 +293,29 @@ function getHadithDot(grade){
 }
 
 let barTimer=null;
+  const DHIKR = [
+  'سبحان الله',
+  'الحمد لله',
+  'الله أكبر',
+  'اللهم صلِّ على محمد',
+  'لا إله إلا الله',
+  'لا حول ولا قوة إلا بالله',
+];
+let dhikrTimer = null;
+
+function startDhikr() {
+  let i = 0;
+  document.getElementById('ldSub').textContent = DHIKR[0];
+  dhikrTimer = setInterval(() => {
+    i = (i + 1) % DHIKR.length;
+    document.getElementById('ldSub').textContent = DHIKR[i];
+  }, 1500);
+}
+
+function stopDhikr() {
+  clearInterval(dhikrTimer);
+}
+
 function startBar(){
   const b=document.getElementById('ldBar');
   b.style.width='0%';let p=0;
