@@ -46,12 +46,15 @@ position:fixed;overflow:hidden;
 .scholars-strip{display:flex;gap:6px;flex-wrap:wrap;justify-content:center;}
 .sc-chip{display:flex;align-items:center;gap:4px;background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.18);border-radius:20px;padding:4px 10px;color:rgba(255,255,255,.8);font-size:10.5px;font-weight:600;}
 .credits{color:rgba(255,255,255,.3);font-size:10px;text-align:center;}
+.src-btn{background:rgba(255,255,255,.25);border:1px solid rgba(255,255,255,.4);border-radius:8px;padding:4px 8px;color:#fff;font-size:11px;cursor:pointer;text-decoration:none;display:inline-flex;align-items:center;gap:3px;white-space:nowrap;transition:all .2s;flex-shrink:0;}
+.src-btn:hover{background:rgba(255,255,255,.35);}
+
 
 /* LOADING PAGE */
 #p-loading{background:linear-gradient(150deg,#f4845f,#e63946,#9d0208);align-items:center;justify-content:center;text-align:center;padding:32px;gap:20px;}
 .ld-mosque{font-size:70px;animation:float 2s ease-in-out infinite;}
 .ld-title{font-family:‘Amiri’,serif;font-size:24px;color:#fff;}
-.ld-sub{color:rgba(255,255,255,.75);font-size:14px;}
+.ld-sub{color:rgba(255,255,255,.75);font-size:16px;font-weight:700;min-height:28px;transition:all .3s;}
 .ld-scholars{display:grid;grid-template-columns:1fr 1fr;gap:10px;max-width:280px;width:100%;}
 .ld-sc{background:rgba(255,255,255,.15);border-radius:14px;padding:14px;display:flex;flex-direction:column;align-items:center;gap:6px;border:1px solid rgba(255,255,255,.25);}
 .ld-sc-av{font-size:26px;}
@@ -153,11 +156,6 @@ position:fixed;overflow:hidden;
           <input class="search-input" id="hadithInput" type="text" placeholder="اكتب الحديث هنا..." onkeydown="if(event.key==='Enter')doSearch('hadith')">
           <button class="search-go" id="hadithBtn" onclick="doSearch('hadith')">🔍</button>
         </div>
-      </div>
-      <div class="scholars-strip" id="scholarsStrip">
-        <div class="sc-chip"> ابن باز</div>
-        <div class="sc-chip"> ابن عثيمين</div>
-        <div class="sc-chip"> الفوزان</div>
       </div>
       <div class="credits">جميع الإجابات من منهج أهل السنة والجماعة</div>
     </div>
@@ -392,6 +390,17 @@ function renderHadith(q,data){
 }
 
 function appendFooter(body){
+  const btn=document.createElement('button');
+  btn.className='new-btn';
+  btn.innerHTML=currentMode==='fatwa'?'🔍 سؤال جديد':'🔍 بحث جديد';
+  btn.onclick=()=>goTo('home');
+  body.appendChild(btn);
+  const disc=document.createElement('div');
+  disc.className='disc';
+  disc.innerHTML='<span style="font-size:18px">⚠️</span><div>هذا البوت تعليمي استرشادي فقط، ولا يُغني عن مراجعة العلماء الثقات مباشرةً في المسائل الشرعية المهمة.<br><a href="mailto:ahmed.fy2015@gmail.com" style="color:#e63946;font-size:11px;display:inline-flex;align-items:center;gap:4px;margin-top:6px;text-decoration:none;">✉️ تواصل واقتراحات</a></div>';
+  body.appendChild(disc);
+}
+
   const btn=document.createElement('button');
   btn.className='new-btn';
   btn.innerHTML=currentMode==='fatwa'?'🔍 سؤال جديد':'🔍 بحث جديد';
