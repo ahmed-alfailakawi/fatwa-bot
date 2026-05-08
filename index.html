@@ -155,9 +155,9 @@ position:fixed;overflow:hidden;
         </div>
       </div>
       <div class="scholars-strip" id="scholarsStrip">
-        <div class="sc-chip">📖 ابن باز</div>
-        <div class="sc-chip">📚 ابن عثيمين</div>
-        <div class="sc-chip">📜 الفوزان</div>
+        <div class="sc-chip"> ابن باز</div>
+        <div class="sc-chip"> ابن عثيمين</div>
+        <div class="sc-chip"> الفوزان</div>
       </div>
       <div class="credits">جميع الإجابات من منهج أهل السنة والجماعة</div>
     </div>
@@ -171,10 +171,10 @@ position:fixed;overflow:hidden;
   <div class="ld-title" id="ldTitle">جارٍ الاستشارة...</div>
   <div class="ld-sub" id="ldSub">يتم البحث في فتاوى المشايخ الثلاثة</div>
   <div class="ld-scholars">
-    <div class="ld-sc"><div class="ld-sc-av">📖</div><div class="ld-sc-nm">ابن باز</div><div class="dots"><span></span><span></span><span></span></div></div>
-    <div class="ld-sc"><div class="ld-sc-av">📚</div><div class="ld-sc-nm">ابن عثيمين</div><div class="dots"><span></span><span></span><span></span></div></div>
-    <div class="ld-sc"><div class="ld-sc-av">📜</div><div class="ld-sc-nm">الفوزان</div><div class="dots"><span></span><span></span><span></span></div></div>
-    <div class="ld-sc"><div class="ld-sc-av">✨</div><div class="ld-sc-nm">الخلاصة</div><div class="dots"><span></span><span></span><span></span></div></div>
+    <div class="ld-sc"><div class="ld-sc-av"></div><div class="ld-sc-nm">ابن باز</div><div class="dots"><span></span><span></span><span></span></div></div>
+    <div class="ld-sc"><div class="ld-sc-av"></div><div class="ld-sc-nm">ابن عثيمين</div><div class="dots"><span></span><span></span><span></span></div></div>
+    <div class="ld-sc"><div class="ld-sc-av"></div><div class="ld-sc-nm">الفوزان</div><div class="dots"><span></span><span></span><span></span></div></div>
+    <div class="ld-sc"><div class="ld-sc-av"></div><div class="ld-sc-nm">الخلاصة</div><div class="dots"><span></span><span></span><span></span></div></div>
   </div>
   <div class="ld-bar-wrap"><div class="ld-bar" id="ldBar"></div></div>
 </div>
@@ -195,10 +195,16 @@ position:fixed;overflow:hidden;
 
 <script>
 const SCHOLARS=[
-  {id:'binbaz',    name:'الشيخ ابن باز',    title:'رحمه الله', icon:'📖'},
-  {id:'uthaymeen', name:'الشيخ ابن عثيمين', title:'رحمه الله', icon:'📚'},
-  {id:'fawzan',    name:'الشيخ الفوزان',    title:'حفظه الله', icon:'📜'},
+  {id:'albani',    name:'الشيخ الألباني',           title:'رحمه الله', icon:'', src:'https://dorar.net'},
+  {id:'binbaz',    name:'الشيخ ابن باز',            title:'رحمه الله', icon:'', src:'https://binbaz.org.sa'},
+  {id:'uthaymeen', name:'الشيخ ابن عثيمين',         title:'رحمه الله', icon:'', src:'https://ibnothaimeen.com'},
+  {id:'alshikh',   name:'الشيخ صالح آل الشيخ',     title:'حفظه الله', icon:'', src:'https://dorar.net'},
+  {id:'fawzan',    name:'الشيخ الفوزان',            title:'حفظه الله', icon:'', src:'https://alfawzan.af.org.sa'},
+  {id:'abdulaziz', name:'الشيخ عبدالعزيز آل الشيخ',title:'حفظه الله', icon:'', src:'https://dorar.net'},
+  {id:'alkamees',  name:'الشيخ د. عثمان الخميس',   title:'حفظه الله', icon:'', src:'https://youtube.com/@othmanalkamees', isYoutube:true},
+  {id:'aljaser',   name:'الشيخ د. مطلق الجاسر',    title:'حفظه الله', icon:'', src:'https://youtube.com/@dr-mutlaq', isYoutube:true},
 ];
+
 let currentMode='fatwa';
 
 function goTo(id){
@@ -219,6 +225,64 @@ function switchTab(mode){
 }
 
 function getRulingDot(ruling){
+  if(!ruling) return 'dot-khilaf';
+  const r=ruling.toLowerCase();
+  if(r.includes('halal')||r.includes('mubah')) return 'dot-halal';
+  if(r.includes('makruh')||r.includes('khilaf')) return 'dot-makruh';
+  if(r.includes('haram')) return 'dot-haram';
+  return 'dot-khilaf';
+}
+
+function renderFatwa(q,data){
+  document.getElementById('resQ').textContent=q;
+  document.getElementById('resTitle').textContent='إجابات المشايخ';
+  document.getElementById('resBadge').textContent='📚 فتوى';
+  const body=document.getElementById('resBody');
+  body.innerHTML='';
+  SCHOLARS.forEach((sc,i)=>{
+    const d=data[sc.id];if(!d)return;
+    if(sc.isYoutube){
+      const card=document.createElement('div');
+      card.className='sc-card';
+      card.style.animationDelay=(i*.1)+'s';
+      card.innerHTML=`
+        <div class="sc-head">
+          <div class="sc-av">${sc.icon}</div>
+          <div class="sc-info"><div class="sc-nm">${sc.name}</div><div class="sc-tl">${sc.title}</div></div>
+          ${d.sourceUrl?`<a href="${d.sourceUrl}" target="_blank" class="src-btn">▶ مشاهدة</a>`:''}
+        </div>
+        <div class="sc-body">
+          <div class="sc-ans">${d.answer}</div>
+        </div>`;
+      body.appendChild(card);
+      return;
+    }
+    const dotClass=getRulingDot(d.ruling||'');
+    const card=document.createElement('div');
+    card.className='sc-card';
+    card.style.animationDelay=(i*.1)+'s';
+    card.innerHTML=`
+      <div class="sc-head">
+        <div class="sc-av">${sc.icon}</div>
+        <div class="sc-info"><div class="sc-nm">${sc.name}</div><div class="sc-tl">${sc.title}</div></div>
+        ${d.sourceUrl?`<a href="${d.sourceUrl}" target="_blank" class="src-btn">🔗 المصدر</a>`:''}
+        <div class="ruling-dot ${dotClass}"></div>
+      </div>
+      <div class="sc-body">
+        <div class="sc-ans">${d.answer}</div>
+        <div class="sc-ev"><div class="sc-ev-icon">📌</div><div><span class="sc-ev-ref">الدليل</span>${d.evidence}</div></div>
+      </div>`;
+    body.appendChild(card);
+  });
+  if(data.summary){
+    const s=document.createElement('div');
+    s.className='sum-card';
+    s.innerHTML=`<div class="sum-top"><span style="font-size:20px">✨</span><span class="sum-badge">خلاصة الأقوال</span></div><div class="sum-text">${data.summary}</div>`;
+    body.appendChild(s);
+  }
+  appendFooter(body);
+}
+
   if(!ruling) return 'dot-khilaf';
   const r=ruling.toLowerCase();
   if(r.includes('halal')||r.includes('mubah')) return 'dot-halal';
