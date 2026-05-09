@@ -51,9 +51,11 @@ module.exports = async function handler(req, res) {
 
   try {
     const q = encodeURIComponent(question);
-    const [kResult, jResult, binbazText, islamwebText, islamqaText] = await Promise.all([
+    const [kResult, jResult, fResult, uResult, binbazText, islamwebText, islamqaText] = await Promise.all([
       findYT("عثمان الخميس", question),
       findYT("مطلق الجاسر", question),
+      findYT("الفوزان", question),
+      findYT("ابن عثيمين", question),
       fetchSource("https://binbaz.org.sa/fatwas?search=" + q),
       fetchSource("https://www.islamweb.net/ar/fatwa/search/?q=" + q),
       fetchSource("https://islamqa.info/ar/search/?q=" + q),
@@ -61,8 +63,12 @@ module.exports = async function handler(req, res) {
 
     const kSrc = kResult ? kResult.url : "https://www.youtube.com/@othmanalkamees/search?query=" + encodeURIComponent(question);
     const jSrc = jResult ? jResult.url : "https://www.youtube.com/@dr-mutlaq/search?query=" + encodeURIComponent(question);
+    const fSrc = fResult ? fResult.url : "https://www.youtube.com/@dralfawzann/search?query=" + encodeURIComponent(question);
+    const uSrc = uResult ? uResult.url : "https://www.youtube.com/@ibnothaimeentv/search?query=" + encodeURIComponent(question);
     const kTitle = kResult ? kResult.title : "لم نجد فيديو للشيخ في هذه المسألة";
     const jTitle = jResult ? jResult.title : "لم نجد فيديو للشيخ في هذه المسألة";
+    const fTitle = fResult ? fResult.title : "لم نجد فيديو للشيخ في هذه المسألة";
+    const uTitle = uResult ? uResult.title : "لم نجد فيديو للشيخ في هذه المسألة";
 
     const ctx = [
       binbazText ? "[binbaz.org.sa]\n" + binbazText : null,
@@ -79,13 +85,14 @@ module.exports = async function handler(req, res) {
 نتائج البحث من المواقع الرسمية:
 ${ctx || "لم نجد نتائج."}
 
-قاعدة صارمة: اعتمد فقط على ما وجدناه. إذا لم تجد فتوى موثقة اكتب "لم يفتِ الشيخ في هذه المسألة". لا تخترع أبداً.
+قاعدة صارمة: إذا لم تجد فتوى موثقة اكتب "لم يفتِ الشيخ في هذه المسألة". لا تخترع أبداً.
 
 أجب بـ JSON فقط:
 {
   "summary":   "خلاصة جامعة",
   "binbaz":    {"answer":"...","evidence":"...","ruling":"...","sourceUrl":"https://binbaz.org.sa/fatwas?search=${q}"},
-  "abdulaziz": {"answer":"...","evidence":"...","ruling":"...","sourceUrl":"https://www.islamweb.net/ar/fatwa/search/?q=${q}"},
+  "fawzan":    {"answer":"${fTitle}","evidence":"","ruling":"khilaf","sourceUrl":"${fSrc}"},
+  "uthaymeen": {"answer":"${uTitle}","evidence":"","ruling":"khilaf","sourceUrl":"${uSrc}"},
   "alkamees":  {"answer":"${kTitle}","evidence":"","ruling":"khilaf","sourceUrl":"${kSrc}"},
   "aljaser":   {"answer":"${jTitle}","evidence":"","ruling":"khilaf","sourceUrl":"${jSrc}"}
 }`;
