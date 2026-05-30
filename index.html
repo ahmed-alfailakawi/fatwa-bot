@@ -2,273 +2,310 @@
 <html lang="ar" dir="rtl">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
 <title>سَل العلماء</title>
 <link href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=Tajawal:wght@300;400;500;700;900&display=swap" rel="stylesheet">
 <style>
-:root{--red:#e63946;--red2:#c1121f;--orange:#f4845f;--warm:#fff5f0;--sh:0 8px 32px rgba(0,0,0,.2);--sh2:0 4px 16px rgba(230,57,70,.12);}
-*{margin:0;padding:0;box-sizing:border-box;}
-html,body{font-family:'Tajawal',sans-serif;background:var(--warm);min-height:100vh;overflow-x:hidden;}
-.page{display:none;min-height:100vh;flex-direction:column;position:fixed;top:0;left:0;right:0;bottom:0;overflow-y:auto;}
-.page.active{display:flex;}
-#p-home{background:linear-gradient(170deg,#f4845f 0%,#e63946 50%,#9d0208 100%);position:fixed;overflow:hidden;}
-.top-half{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;position:relative;z-index:2;padding:40px 20px 20px;}
-.logo-img{width:75%;max-width:280px;height:auto;border-radius:20px;}
-.logo-sub{font-family:'Tajawal',sans-serif;font-size:12px;font-weight:500;color:rgba(255,255,255,.6);letter-spacing:2px;margin-top:10px;}
-.bottom-half{position:relative;z-index:2;padding:0 16px 50px;}
-.card{background:rgba(255,255,255,.14);backdrop-filter:blur(20px);border:1px solid rgba(255,255,255,.22);border-radius:24px;padding:18px 16px;display:flex;flex-direction:column;gap:12px;}
-.tabs-wrap{display:flex;gap:6px;}
-.tab-btn{flex:1;padding:10px 6px;border-radius:12px;border:1.5px solid rgba(255,255,255,.25);background:transparent;color:rgba(255,255,255,.8);font-family:'Tajawal',sans-serif;font-size:13px;font-weight:700;cursor:pointer;transition:all .2s;}
-.tab-btn.active{background:#fff;color:var(--red);border-color:#fff;}
-.search-label{font-size:11px;color:rgba(255,255,255,.75);margin-bottom:6px;font-weight:600;display:block;text-align:center;}
-.search-box{display:flex;background:#fff;border-radius:14px;overflow:hidden;box-shadow:0 4px 16px rgba(0,0,0,.15);}
-.search-input{flex:1;border:none;outline:none;padding:12px 14px;font-family:'Tajawal',sans-serif;font-size:14px;color:#1a1a1a;background:transparent;min-width:0;direction:rtl;}
-.search-input::placeholder{color:#ccc;}
-.search-go{background:linear-gradient(135deg,var(--red),var(--red2));border:none;padding:0 16px;height:44px;cursor:pointer;color:#fff;font-size:18px;flex-shrink:0;}
-.search-go:disabled{opacity:.4;cursor:not-allowed;}
-.credits{color:rgba(255,255,255,.3);font-size:10px;text-align:center;}
-#p-loading{background:linear-gradient(150deg,#f4845f,#e63946,#9d0208);align-items:center;justify-content:center;text-align:center;padding:32px;gap:20px;}
-.ld-mosque{font-size:70px;animation:float 2s ease-in-out infinite;}
-.ld-title{font-family:'Amiri',serif;font-size:24px;color:#fff;}
-.ld-sub{color:rgba(255,255,255,.9);font-size:18px;font-weight:700;min-height:32px;}
+:root{
+  --m:#8B0000; --m2:#6B0000; --m3:#A80000;
+  --sg:linear-gradient(135deg,#909090,#D8D8D8,#808080);
+  --mg:linear-gradient(135deg,#A80000,#6B0000);
+}
+*{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent;}
+html,body{height:100%;background:#fff;font-family:'Tajawal',sans-serif;color:#1a1a1a;overflow:hidden;}
+
+.pg{display:none;position:fixed;inset:0;flex-direction:column;background:#fff;}
+.pg.on{display:flex;}
+
+#home{overflow-y:auto;-webkit-overflow-scrolling:touch;}
+
+.logo-area{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:16px 24px 8px;min-height:0;}
+.logo-area svg{width:88px;height:88px;}
+.site-name{font-family:'Amiri',serif;font-size:34px;color:var(--m);font-weight:700;margin-top:10px;letter-spacing:2px;}
+.divider{width:56px;height:1px;background:linear-gradient(90deg,transparent,#aaa,transparent);margin:7px auto;}
+.tagline{font-size:11px;color:#999;letter-spacing:2px;font-weight:600;}
+
+.search-card{flex-shrink:0;margin:0 14px;margin-bottom:max(env(safe-area-inset-bottom,20px), 20px);background:#fff;border:1.5px solid rgba(139,0,0,.14);border-radius:22px;padding:14px 13px;box-shadow:0 6px 28px rgba(139,0,0,.09),0 2px 8px rgba(0,0,0,.04);display:flex;flex-direction:column;gap:10px;}
+
+.tabs{display:flex;gap:5px;}
+.tab{flex:1;padding:8px 3px;border-radius:11px;border:1.5px solid rgba(139,0,0,.2);background:transparent;color:rgba(139,0,0,.55);font-family:'Tajawal',sans-serif;font-size:11px;font-weight:700;cursor:pointer;transition:all .18s;white-space:nowrap;}
+.tab.on{background:var(--mg);color:#fff;border-color:transparent;box-shadow:0 2px 10px rgba(139,0,0,.28);}
+
+.lbl{font-size:10.5px;color:#aaa;font-weight:600;text-align:center;display:block;margin-bottom:4px;}
+.sbox{display:flex;background:#f9f6f6;border-radius:13px;overflow:hidden;border:1.5px solid rgba(139,0,0,.13);}
+.sinput{flex:1;border:none;outline:none;padding:11px 13px;font-family:'Tajawal',sans-serif;font-size:14px;color:#1a1a1a;background:transparent;direction:rtl;}
+.sinput::placeholder{color:#ccc;}
+.sgo{background:var(--mg);border:none;padding:0 15px;height:42px;color:#fff;font-size:17px;cursor:pointer;flex-shrink:0;}
+.sgo:disabled{opacity:.3;}
+.foot{color:#ccc;font-size:10px;text-align:center;}
+
+#loading{background:linear-gradient(160deg,#fff8f8,#fff);align-items:center;justify-content:center;text-align:center;gap:18px;padding:32px;}
+.mosque{font-size:68px;animation:float 2s ease-in-out infinite;}
+.ld-t{font-family:'Amiri',serif;font-size:22px;color:var(--m);}
+.ld-s{font-size:17px;font-weight:700;color:var(--m2);min-height:30px;}
 .dots{display:flex;gap:3px;justify-content:center;}
-.dots span{width:5px;height:5px;background:rgba(255,255,255,.6);border-radius:50%;animation:bounce 1s infinite;}
-.dots span:nth-child(2){animation-delay:.15s;}
-.dots span:nth-child(3){animation-delay:.3s;}
-.ld-bar-wrap{width:100%;max-width:260px;height:6px;background:rgba(255,255,255,.2);border-radius:10px;overflow:hidden;}
-.ld-bar{height:100%;background:#fff;border-radius:10px;width:0%;transition:width .3s;}
-#p-results{background:var(--warm);}
-.res-header{background:linear-gradient(135deg,#f4845f,#e63946,#c1121f);padding:18px 16px 20px;color:#fff;box-shadow:var(--sh);flex-shrink:0;}
-.res-header-top{display:flex;align-items:center;gap:10px;margin-bottom:8px;}
-.back-btn{width:36px;height:36px;background:rgba(255,255,255,.2);border-radius:10px;border:none;color:#fff;font-size:20px;cursor:pointer;display:flex;align-items:center;justify-content:center;flex-shrink:0;}
-.res-header-top h2{font-size:13px;font-weight:700;flex:1;line-height:1.4;}
-.res-badge{font-size:11px;background:rgba(255,255,255,.2);border-radius:20px;padding:3px 10px;border:1px solid rgba(255,255,255,.3);white-space:nowrap;}
-.res-q-box{background:rgba(255,255,255,.18);border-radius:10px;padding:8px 12px;font-size:13px;color:rgba(255,255,255,.95);line-height:1.6;border:1px solid rgba(255,255,255,.25);}
-.res-body{padding:16px;display:flex;flex-direction:column;gap:12px;flex:1;}
-.sc-card{background:#fff;border-radius:18px;overflow:hidden;box-shadow:var(--sh2);border:2px solid rgba(230,57,70,.12);animation:cardIn .4s ease both;}
-.sc-head{padding:12px 16px;display:flex;align-items:center;gap:10px;background:linear-gradient(135deg,#f4845f,#e63946);color:#fff;}
-.sc-av{width:40px;height:40px;border-radius:11px;background:rgba(255,255,255,.2);display:flex;align-items:center;justify-content:center;font-size:19px;flex-shrink:0;}
-.sc-info{flex:1;}
-.sc-nm{font-size:13.5px;font-weight:700;}
-.sc-tl{font-size:10.5px;opacity:.75;}
-.ruling-dot{width:10px;height:10px;border-radius:50%;flex-shrink:0;}
-.dot-halal{background:#22c55e;}
-.dot-haram{background:#ef4444;}
-.dot-makruh{background:#f97316;}
-.dot-khilaf{background:#94a3b8;}
-.src-btn{background:rgba(255,255,255,.25);border:1px solid rgba(255,255,255,.4);border-radius:8px;padding:4px 8px;color:#fff;font-size:11px;cursor:pointer;text-decoration:none;display:inline-flex;align-items:center;gap:3px;white-space:nowrap;flex-shrink:0;}
-.no-src{color:#ef4444;font-size:11px;flex-shrink:0;padding:4px 8px;border:1px solid rgba(239,68,68,.3);border-radius:8px;background:rgba(239,68,68,.08);}
-.sc-body{padding:14px 16px;}
-.sc-ans{font-size:14px;line-height:1.9;color:#2a2a2a;margin-bottom:10px;}
-.sc-ev{border-radius:12px;padding:10px 14px;background:rgba(230,57,70,.05);border:1px solid rgba(230,57,70,.12);font-size:12.5px;line-height:1.7;display:flex;gap:8px;}
-.sc-ev-icon{font-size:14px;flex-shrink:0;margin-top:2px;}
-.sc-ev-ref{font-weight:700;display:block;margin-bottom:2px;color:#c1121f;}
-.sum-card{background:linear-gradient(135deg,#e63946,#c1121f);border-radius:18px;padding:18px;box-shadow:0 8px 24px rgba(230,57,70,.3);color:#fff;}
-.sum-top{display:flex;align-items:center;gap:8px;margin-bottom:10px;}
-.sum-badge{background:rgba(255,255,255,.2);border-radius:8px;padding:4px 10px;font-size:12px;font-weight:700;border:1px solid rgba(255,255,255,.3);}
-.sum-text{font-size:13.5px;line-height:1.85;}
-.new-btn{background:linear-gradient(135deg,#f4845f,#e63946);color:#fff;border:none;border-radius:14px;padding:15px;font-family:'Tajawal',sans-serif;font-size:15px;font-weight:700;cursor:pointer;box-shadow:0 6px 20px rgba(230,57,70,.3);display:flex;align-items:center;justify-content:center;gap:8px;}
-.disc{background:#fff;border:1.5px solid rgba(230,57,70,.15);border-radius:14px;padding:16px;font-size:13px;color:#555;line-height:1.8;display:flex;flex-direction:column;gap:10px;}
-.contact-link{display:inline-flex;align-items:center;gap:8px;color:#e63946;font-size:14px;font-weight:700;text-decoration:none;padding:10px 16px;background:rgba(230,57,70,.08);border-radius:10px;border:1px solid rgba(230,57,70,.2);width:100%;justify-content:center;}
-@keyframes cardIn{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:translateY(0)}}
-@keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-14px)}}
-@keyframes bounce{0%,80%,100%{transform:scale(.7);opacity:.4}40%{transform:scale(1);opacity:1}}
+.dots b{width:5px;height:5px;background:rgba(139,0,0,.3);border-radius:50%;display:block;animation:bnc 1s infinite;}
+.dots b:nth-child(2){animation-delay:.15s;}
+.dots b:nth-child(3){animation-delay:.3s;}
+.bar-w{width:100%;max-width:240px;height:3px;background:rgba(139,0,0,.1);border-radius:10px;overflow:hidden;}
+.bar{height:100%;background:var(--mg);border-radius:10px;width:0%;transition:width .3s;}
+
+#results{background:#f9f6f6;}
+.rh{background:linear-gradient(135deg,#A80000,#6B0000);padding:16px 14px 18px;color:#fff;box-shadow:0 4px 16px rgba(139,0,0,.3);flex-shrink:0;}
+.rh-top{display:flex;align-items:center;gap:9px;margin-bottom:7px;}
+.back{width:34px;height:34px;background:rgba(255,255,255,.18);border-radius:9px;border:1px solid rgba(255,255,255,.28);color:#fff;font-size:19px;cursor:pointer;display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+.rh-top h2{font-size:12.5px;font-weight:700;flex:1;line-height:1.4;}
+.rbadge{font-size:10.5px;font-weight:700;background:var(--sg);color:#5C0000;border-radius:18px;padding:3px 9px;white-space:nowrap;flex-shrink:0;}
+.rq{background:rgba(255,255,255,.13);border-radius:9px;padding:7px 11px;font-size:12.5px;color:rgba(255,255,255,.93);line-height:1.6;border:1px solid rgba(255,255,255,.22);}
+.rbody{padding:14px;display:flex;flex-direction:column;gap:11px;flex:1;overflow-y:auto;-webkit-overflow-scrolling:touch;}
+
+.sc{background:#fff;border-radius:16px;overflow:hidden;border:1px solid rgba(139,0,0,.1);box-shadow:0 3px 14px rgba(139,0,0,.07);animation:up .38s ease both;}
+.sc-h{padding:11px 14px;display:flex;align-items:center;gap:9px;background:linear-gradient(135deg,#8B0000,#5C0000);}
+.av{width:38px;height:38px;border-radius:10px;background:rgba(255,255,255,.13);display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0;}
+.si{flex:1;}
+.sn{font-size:13px;font-weight:700;color:#fff;}
+.st{font-size:10px;color:rgba(255,220,220,.65);}
+.dot{width:9px;height:9px;border-radius:50%;flex-shrink:0;}
+.dh{background:#22c55e;}.dr{background:#ef4444;}.dm{background:#f97316;}.dk{background:#9ca3af;}
+.src{background:var(--sg);border:none;border-radius:7px;padding:4px 9px;color:#4A0000;font-size:10.5px;font-weight:700;cursor:pointer;text-decoration:none;display:inline-flex;align-items:center;gap:2px;white-space:nowrap;flex-shrink:0;}
+.sc-b{padding:13px 14px;}
+.ans{font-size:13.5px;line-height:1.85;color:#1a1a1a;margin-bottom:9px;}
+.ev{border-radius:11px;padding:9px 13px;background:rgba(139,0,0,.04);border:1px solid rgba(139,0,0,.1);font-size:12px;line-height:1.7;display:flex;gap:7px;color:#333;}
+.ev-i{font-size:13px;flex-shrink:0;margin-top:2px;}
+.ev-r{font-weight:700;display:block;margin-bottom:2px;color:var(--m);}
+
+.sum{background:var(--mg);border-radius:16px;padding:16px;box-shadow:0 6px 20px rgba(139,0,0,.22);color:#fff;}
+.sum-t{display:flex;align-items:center;gap:7px;margin-bottom:8px;}
+.sbadge{background:var(--sg);color:#5C0000;border-radius:7px;padding:3px 9px;font-size:11.5px;font-weight:700;}
+.sum-x{font-size:13px;line-height:1.8;color:rgba(255,240,240,.93);}
+
+.newbtn{background:var(--mg);color:#fff;border:none;border-radius:13px;padding:14px;font-family:'Tajawal',sans-serif;font-size:14px;font-weight:700;cursor:pointer;box-shadow:0 5px 18px rgba(139,0,0,.22);display:flex;align-items:center;justify-content:center;gap:7px;}
+.disc{background:#fff;border:1px solid rgba(139,0,0,.1);border-radius:13px;padding:14px;font-size:12.5px;color:#666;line-height:1.8;display:flex;flex-direction:column;gap:9px;}
+.clink{display:inline-flex;align-items:center;gap:7px;color:var(--m);font-size:13px;font-weight:700;text-decoration:none;padding:9px 14px;background:rgba(139,0,0,.05);border-radius:9px;border:1px solid rgba(139,0,0,.13);width:100%;justify-content:center;}
+
+@keyframes up{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}
+@keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-13px)}}
+@keyframes bnc{0%,80%,100%{transform:scale(.6);opacity:.35}40%{transform:scale(1);opacity:1}}
 </style>
 </head>
 <body>
 
-<div class="page active" id="p-home">
-  <div class="top-half">
-    <img src="https://raw.githubusercontent.com/ahmed-alfailakawi/fatwa-bot/main/logo.png" class="logo-img" onerror="this.style.display='none';document.getElementById('logo-text').style.display='block'" alt="سَل العلماء">
-    <div id="logo-text" style="display:none;font-family:'Amiri',serif;font-size:52px;color:#fff;font-weight:700;">سَل</div>
-    <div class="logo-sub">سَل العُلماء بالذكاء الاصطناعي</div>
+<div class="pg on" id="home">
+  <div class="logo-area">
+    <svg viewBox="0 0 100 108" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M50 5 C44 13 26 28 24 46 C22 58 28 65 37 68 L63 68 C72 65 78 58 76 46 C74 28 56 13 50 5Z" stroke="#8B0000" stroke-width="5.5" stroke-linejoin="round"/>
+      <path d="M24 46 C16 48 10 56 13 65" stroke="#8B0000" stroke-width="5.5" stroke-linecap="round"/>
+      <path d="M76 46 C84 48 90 56 87 65" stroke="#8B0000" stroke-width="5.5" stroke-linecap="round"/>
+      <rect x="26" y="68" width="48" height="34" rx="2" stroke="#8B0000" stroke-width="5.5"/>
+      <path d="M37 102 L37 83 Q50 72 63 83 L63 102" stroke="#8B0000" stroke-width="4.5" stroke-linejoin="round"/>
+    </svg>
+    <div class="site-name">سَل العلماء</div>
+    <div class="divider"></div>
+    <div class="tagline">سَل العُلماء بالذكاء الاصطناعي</div>
   </div>
-  <div class="bottom-half">
-    <div class="card">
-      <div class="tabs-wrap">
-        <button class="tab-btn active" id="tab-fatwa" onclick="switchTab('fatwa')">📚 الفتاوى</button>
-        <button class="tab-btn" id="tab-hadith" onclick="switchTab('hadith')">🔍 تخريج الأحاديث</button>
-      </div>
-      <div id="fatwa-section">
-        <span class="search-label">البحث عن الإجابة على ضوء منهج أهل السنة والجماعة</span>
-        <div class="search-box">
-          <input class="search-input" id="mainInput" type="text" placeholder="ما حكم...؟" onkeydown="if(event.key==='Enter')doSearch('fatwa')">
-          <button class="search-go" id="goBtn" onclick="doSearch('fatwa')">🔍</button>
-        </div>
-      </div>
-      <div id="hadith-section" style="display:none">
-        <span class="search-label">البحث عن صحة الأحاديث الواردة في الصحيحين</span>
-        <div class="search-box">
-          <input class="search-input" id="hadithInput" type="text" placeholder="نص الحديث..." onkeydown="if(event.key==='Enter')doSearch('hadith')">
-          <button class="search-go" id="hadithBtn" onclick="doSearch('hadith')">🔍</button>
-        </div>
-      </div>
-      <div class="credits">جميع الإجابات من منهج أهل السنة والجماعة</div>
+
+  <div class="search-card">
+    <div class="tabs">
+      <button class="tab on" id="t-fatwa"   onclick="sw('fatwa')">📚 الفتاوى</button>
+      <button class="tab"    id="t-hadith"  onclick="sw('hadith')">🔍 الأحاديث</button>
+      <button class="tab"    id="t-general" onclick="sw('general')">💬 سؤال ديني</button>
     </div>
+    <div id="s-fatwa">
+      <span class="lbl">البحث على ضوء منهج أهل السنة والجماعة</span>
+      <div class="sbox">
+        <input class="sinput" id="i-fatwa" type="text" placeholder="ما حكم...؟" onkeydown="if(event.key==='Enter')go('fatwa')">
+        <button class="sgo" id="b-fatwa" onclick="go('fatwa')">🔍</button>
+      </div>
+    </div>
+    <div id="s-hadith" style="display:none">
+      <span class="lbl">البحث عن صحة الأحاديث النبوية</span>
+      <div class="sbox">
+        <input class="sinput" id="i-hadith" type="text" placeholder="نص الحديث..." onkeydown="if(event.key==='Enter')go('hadith')">
+        <button class="sgo" id="b-hadith" onclick="go('hadith')">🔍</button>
+      </div>
+    </div>
+    <div id="s-general" style="display:none">
+      <span class="lbl">أي سؤال ديني يطري في بالك</span>
+      <div class="sbox">
+        <input class="sinput" id="i-general" type="text" placeholder="اسأل أي سؤال ديني..." onkeydown="if(event.key==='Enter')go('general')">
+        <button class="sgo" id="b-general" onclick="go('general')">🔍</button>
+      </div>
+    </div>
+    <div class="foot">جميع الإجابات من منهج أهل السنة والجماعة</div>
   </div>
 </div>
 
-<div class="page" id="p-loading">
-  <div class="ld-mosque">🕌</div>
-  <div class="ld-title" id="ldTitle">جاري البحث...</div>
-  <div class="ld-sub" id="ldSub">سبحان الله</div>
-  <div class="dots"><span></span><span></span><span></span></div>
-  <div class="ld-bar-wrap"><div class="ld-bar" id="ldBar"></div></div>
+<div class="pg" id="loading">
+  <div class="mosque">🕌</div>
+  <div class="ld-t" id="ld-title">جاري البحث...</div>
+  <div class="ld-s" id="ld-sub">سبحان الله</div>
+  <div class="dots"><b></b><b></b><b></b></div>
+  <div class="bar-w"><div class="bar" id="bar"></div></div>
 </div>
 
-<div class="page" id="p-results">
-  <div class="res-header">
-    <div class="res-header-top">
-      <button class="back-btn" onclick="goTo('home')">←</button>
-      <h2 id="resTitle">جميع الإجابات على ضوء منهج أهل السنة والجماعة</h2>
-      <span class="res-badge" id="resBadge">فتوى</span>
+<div class="pg" id="results">
+  <div class="rh">
+    <div class="rh-top">
+      <button class="back" onclick="show('home')">←</button>
+      <h2 id="r-title">جميع الإجابات على ضوء منهج أهل السنة والجماعة</h2>
+      <span class="rbadge" id="r-badge">فتوى</span>
     </div>
-    <div class="res-q-box" id="resQ"></div>
+    <div class="rq" id="r-q"></div>
   </div>
-  <div class="res-body" id="resBody"></div>
+  <div class="rbody" id="r-body"></div>
 </div>
 
 <script>
-const SCHOLARS=[
-  {id:'alkamees',  name:'الشيخ د. عثمان الخميس',    title:'حفظه الله', icon:'▶️', hasSource:true},
-  {id:'aljaser',   name:'الشيخ د. مطلق الجاسر',     title:'حفظه الله', icon:'▶️', hasSource:true},
-  {id:'albani',    name:'الشيخ الألباني',            title:'رحمه الله', icon:'📖', hasSource:false},
-  {id:'binbaz',    name:'الشيخ ابن باز',             title:'رحمه الله', icon:'📚', hasSource:false},
-  {id:'uthaymeen', name:'الشيخ ابن عثيمين',          title:'رحمه الله', icon:'📜', hasSource:false},
-  {id:'alshikh',   name:'الشيخ صالح آل الشيخ',      title:'حفظه الله', icon:'🎓', hasSource:false},
-  {id:'fawzan',    name:'الشيخ الفوزان',             title:'حفظه الله', icon:'📋', hasSource:false},
-  {id:'abdulaziz', name:'الشيخ عبدالعزيز آل الشيخ', title:'حفظه الله', icon:'🏛',  hasSource:false},
-  {id:'albader',   name:'الشيخ عبدالرزاق البدر',    title:'حفظه الله', icon:'📗', hasSource:false},
+const SCH=[
+  {id:'alkamees',  n:'الشيخ د. عثمان الخميس',    t:'حفظه الله', ic:'▶️', src:true},
+  {id:'aljaser',   n:'الشيخ د. مطلق الجاسر',     t:'حفظه الله', ic:'▶️', src:true},
+  {id:'albani',    n:'الشيخ الألباني',            t:'رحمه الله', ic:'📖', src:true},
+  {id:'binbaz',    n:'الشيخ ابن باز',             t:'رحمه الله', ic:'📚', src:true},
+  {id:'uthaymeen', n:'الشيخ ابن عثيمين',          t:'رحمه الله', ic:'📜', src:true},
+  {id:'alshikh',   n:'الشيخ صالح آل الشيخ',      t:'حفظه الله', ic:'🎓', src:true},
+  {id:'fawzan',    n:'الشيخ الفوزان',             t:'حفظه الله', ic:'📋', src:true},
+  {id:'abdulaziz', n:'الشيخ عبدالعزيز آل الشيخ', t:'حفظه الله', ic:'🏛',  src:true},
+  {id:'albader',   n:'الشيخ عبدالرزاق البدر',    t:'حفظه الله', ic:'📗', src:true},
 ];
+const DH=['سبحان الله','الحمد لله','الله أكبر','اللهم صلِّ على محمد','لا إله إلا الله','لا حول ولا قوة إلا بالله'];
+let dhT=null,barT=null,mode='fatwa';
 
-const DHIKR=['سبحان الله','الحمد لله','الله أكبر','اللهم صلِّ على محمد','لا إله إلا الله','لا حول ولا قوة إلا بالله'];
-let dhikrTimer=null,currentMode='fatwa',barTimer=null;
-
-function goTo(id){
-  document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
-  document.getElementById('p-'+id).classList.add('active');
-  document.getElementById('p-'+id).scrollTop=0;
+function show(id){
+  document.querySelectorAll('.pg').forEach(p=>p.classList.remove('on'));
+  const el=document.getElementById(id);
+  el.classList.add('on');
+  el.scrollTop=0;
 }
 
-function switchTab(mode){
-  currentMode=mode;
-  document.getElementById('tab-fatwa').classList.toggle('active',mode==='fatwa');
-  document.getElementById('tab-hadith').classList.toggle('active',mode==='hadith');
-  document.getElementById('fatwa-section').style.display=mode==='fatwa'?'block':'none';
-  document.getElementById('hadith-section').style.display=mode==='hadith'?'block':'none';
+function sw(m){
+  mode=m;
+  ['fatwa','hadith','general'].forEach(x=>{
+    document.getElementById('t-'+x).classList.toggle('on',x===m);
+    document.getElementById('s-'+x).style.display=x===m?'block':'none';
+  });
 }
 
-function startDhikr(){
-  let i=0;
-  document.getElementById('ldSub').textContent=DHIKR[0];
-  dhikrTimer=setInterval(()=>{i=(i+1)%DHIKR.length;document.getElementById('ldSub').textContent=DHIKR[i];},1500);
+function startD(){
+  let i=0;document.getElementById('ld-sub').textContent=DH[0];
+  dhT=setInterval(()=>{i=(i+1)%DH.length;document.getElementById('ld-sub').textContent=DH[i];},1500);
 }
-function stopDhikr(){clearInterval(dhikrTimer);}
-
+function stopD(){clearInterval(dhT);}
 function startBar(){
-  const b=document.getElementById('ldBar');
-  b.style.width='0%';let p=0;
-  clearInterval(barTimer);
-  barTimer=setInterval(()=>{p=Math.min(p+(p<40?3:p<70?1.5:.4),90);b.style.width=p+'%';if(p>=90)clearInterval(barTimer);},150);
+  const b=document.getElementById('bar');b.style.width='0%';let p=0;
+  clearInterval(barT);
+  barT=setInterval(()=>{p=Math.min(p+(p<40?3:p<70?1.5:.4),90);b.style.width=p+'%';if(p>=90)clearInterval(barT);},150);
 }
-function finishBar(){clearInterval(barTimer);document.getElementById('ldBar').style.width='100%';}
+function doneBar(){clearInterval(barT);document.getElementById('bar').style.width='100%';}
 
-function getRulingDot(r){
-  if(!r)return 'dot-khilaf';
+function dotClass(r){
+  if(!r)return 'dk';
   const v=r.toLowerCase();
-  if(v.includes('halal'))return 'dot-halal';
-  if(v.includes('haram'))return 'dot-haram';
-  if(v.includes('makruh'))return 'dot-makruh';
-  return 'dot-khilaf';
+  if(v.includes('halal'))return 'dh';
+  if(v.includes('haram'))return 'dr';
+  if(v.includes('makruh'))return 'dm';
+  return 'dk';
 }
 
-async function doSearch(mode){
-  const q=mode==='fatwa'?document.getElementById('mainInput').value.trim():document.getElementById('hadithInput').value.trim();
+async function go(m){
+  const q=document.getElementById('i-'+m).value.trim();
   if(!q)return;
-  const btn=mode==='fatwa'?document.getElementById('goBtn'):document.getElementById('hadithBtn');
+  const btn=document.getElementById('b-'+m);
   btn.disabled=true;
-  goTo('loading');startBar();startDhikr();
+  show('loading');startBar();startD();
   try{
-    const r=await fetch('/api/ask',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({question:q,mode:mode})});
-    const data=await r.json();
-    finishBar();stopDhikr();
-    if(data.error)throw new Error(data.error);
-    mode==='fatwa'?renderFatwa(q,data):renderHadith(q,data);
-    goTo('results');
-  }catch(err){
-    finishBar();stopDhikr();
-    renderError(q,String(err));
-    goTo('results');
+    const r=await fetch('/api/ask',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({question:q,mode:m})});
+    const d=await r.json();
+    doneBar();stopD();
+    if(d.error)throw new Error(d.error);
+    if(m==='fatwa')drawFatwa(q,d);
+    else if(m==='hadith')drawHadith(q,d);
+    else drawGeneral(q,d);
+    show('results');
+  }catch(e){
+    doneBar();stopD();
+    drawErr(q);
+    show('results');
   }
   btn.disabled=false;
 }
 
-function renderFatwa(q,data){
-  document.getElementById('resQ').textContent=q;
-  document.getElementById('resTitle').textContent='جميع الإجابات على ضوء منهج أهل السنة والجماعة';
-  document.getElementById('resBadge').textContent='📚 فتوى';
-  const body=document.getElementById('resBody');
+function drawFatwa(q,d){
+  document.getElementById('r-q').textContent=q;
+  document.getElementById('r-title').textContent='جميع الإجابات على ضوء منهج أهل السنة والجماعة';
+  document.getElementById('r-badge').textContent='📚 فتوى';
+  const body=document.getElementById('r-body');
   body.innerHTML='';
-  SCHOLARS.forEach((sc,i)=>{
-    const d=data[sc.id];if(!d)return;
-    const dot=getRulingDot(d.ruling||'');
+  SCH.forEach((s,i)=>{
+    const x=d[s.id];if(!x)return;
+    const dc=dotClass(x.ruling||'');
     const card=document.createElement('div');
-    card.className='sc-card';
-    card.style.animationDelay=(i*.08)+'s';
-    let srcHtml='';
-    if(sc.hasSource&&d.sourceUrl){
-      srcHtml='<a href="'+d.sourceUrl+'" target="_blank" class="src-btn">▶ مشاهدة</a>';
-    } else if(!sc.hasSource){
-      srcHtml='<span class="no-src">لا يوجد مصدر</span>';
-    }
-    card.innerHTML='<div class="sc-head"><div class="sc-av">'+sc.icon+'</div><div class="sc-info"><div class="sc-nm">'+sc.name+'</div><div class="sc-tl">'+sc.title+'</div></div>'+srcHtml+'<div class="ruling-dot '+dot+'"></div></div><div class="sc-body"><div class="sc-ans">'+d.answer+'</div>'+(d.evidence?'<div class="sc-ev"><div class="sc-ev-icon">📌</div><div><span class="sc-ev-ref">الدليل</span>'+d.evidence+'</div></div>':'')+'</div>';
+    card.className='sc';card.style.animationDelay=(i*.07)+'s';
+    const srcH=s.src&&x.sourceUrl?`<a href="${x.sourceUrl}" target="_blank" class="src">▶ مشاهدة</a>`:'';
+    card.innerHTML=`<div class="sc-h"><div class="av">${s.ic}</div><div class="si"><div class="sn">${s.n}</div><div class="st">${s.t}</div></div>${srcH}<div class="dot ${dc}"></div></div><div class="sc-b"><div class="ans">${x.answer}</div>${x.evidence?`<div class="ev"><div class="ev-i">📌</div><div><span class="ev-r">الدليل</span>${x.evidence}</div></div>`:''}</div>`;
     body.appendChild(card);
   });
-  if(data.summary){
+  if(d.summary){
     const s=document.createElement('div');
-    s.className='sum-card';
-    s.innerHTML='<div class="sum-top"><span style="font-size:20px">✨</span><span class="sum-badge">خلاصة الأقوال</span></div><div class="sum-text">'+data.summary+'</div>';
+    s.className='sum';
+    s.innerHTML=`<div class="sum-t"><span>✨</span><span class="sbadge">خلاصة الأقوال</span></div><div class="sum-x">${d.summary}</div>`;
     body.appendChild(s);
   }
-  appendFooter(body);
+  addFooter(body);
 }
 
-function renderHadith(q,data){
-  document.getElementById('resQ').textContent=q;
-  document.getElementById('resTitle').textContent='تخريج الحديث';
-  document.getElementById('resBadge').textContent='🔍 حديث';
-  const body=document.getElementById('resBody');
+function drawGeneral(q,d){
+  document.getElementById('r-q').textContent=q;
+  document.getElementById('r-title').textContent='إجابة شاملة من المصادر الإسلامية';
+  document.getElementById('r-badge').textContent='💬 ديني';
+  const body=document.getElementById('r-body');
   body.innerHTML='';
-  const grades={sahih:'dot-halal',hasan:'dot-hasan',daif:'dot-makruh',mawdu:'dot-haram'};
-  const g=(data.grade||'').toLowerCase();
-  const dot=g.includes('صحيح')||g.includes('sahih')?'dot-halal':g.includes('حسن')||g.includes('hasan')?'dot-hasan':g.includes('ضعيف')||g.includes('daif')?'dot-makruh':'dot-haram';
   const card=document.createElement('div');
-  card.className='sc-card';
-  const srcBtn=data.sourceUrl?'<a href="'+data.sourceUrl+'" target="_blank" class="src-btn">🔗 المصدر</a>':'';
-  card.innerHTML='<div class="sc-head"><span style="font-size:22px">📜</span><div class="sc-info"><div class="sc-nm">نص الحديث</div><div class="sc-tl">التحقق من الصحة</div></div>'+srcBtn+'<div class="ruling-dot '+dot+'"></div></div><div class="sc-body"><div style="font-family:Amiri,serif;font-size:16px;line-height:2;color:#1a1a1a;padding:12px 14px;background:rgba(230,57,70,.04);border-radius:10px;border-right:3px solid #e63946;margin-bottom:10px">'+(data.text||q)+'</div><div style="display:flex;align-items:center;gap:8px;padding:8px 12px;border-radius:10px;background:#f9f9f9;border:1px solid #eee;margin-bottom:10px"><div class="ruling-dot '+dot+'"></div><span style="font-size:12px;color:#888">درجة الحديث:</span><span style="font-size:13px;font-weight:700">'+(data.grade||'غير محدد')+'</span></div><div style="font-size:12.5px;color:#555;padding:10px 14px;background:rgba(230,57,70,.04);border-radius:10px;border:1px solid rgba(230,57,70,.1)"><span style="font-weight:700;color:#c1121f;display:block;margin-bottom:4px">📚 المصدر</span>'+(data.source||'لم يُعثر على مصدر')+'</div>'+(data.scholars?'<div style="margin-top:8px;font-size:12.5px;color:#555;padding:10px 14px;background:rgba(230,57,70,.04);border-radius:10px;border:1px solid rgba(230,57,70,.1)"><span style="font-weight:700;color:#c1121f;display:block;margin-bottom:4px">👨‍🎓 أقوال العلماء</span>'+data.scholars+'</div>':'')+'</div>';
+  card.className='sc';
+  const srcH=d.sourceUrl?`<a href="${d.sourceUrl}" target="_blank" class="src">🔗 المصدر</a>`:'';
+  card.innerHTML=`<div class="sc-h"><div class="av">🕋</div><div class="si"><div class="sn">إجابة شاملة</div><div class="st">من المصادر الإسلامية</div></div>${srcH}</div><div class="sc-b"><div class="ans">${d.answer||''}</div>${d.quranRef?`<div class="ev"><div class="ev-i">📖</div><div><span class="ev-r">من القرآن</span>${d.quranRef}</div></div>`:''} ${d.hadithRef?`<div class="ev" style="margin-top:8px"><div class="ev-i">📜</div><div><span class="ev-r">من السنة</span>${d.hadithRef}</div></div>`:''} ${d.scholarsRef?`<div class="ev" style="margin-top:8px"><div class="ev-i">👨‍🎓</div><div><span class="ev-r">أقوال العلماء</span>${d.scholarsRef}</div></div>`:''}</div>`;
   body.appendChild(card);
-  appendFooter(body);
+  if(d.summary){
+    const s=document.createElement('div');
+    s.className='sum';
+    s.innerHTML=`<div class="sum-t"><span>✨</span><span class="sbadge">الخلاصة</span></div><div class="sum-x">${d.summary}</div>`;
+    body.appendChild(s);
+  }
+  addFooter(body);
 }
 
-function appendFooter(body){
+function drawHadith(q,d){
+  document.getElementById('r-q').textContent=q;
+  document.getElementById('r-title').textContent='تخريج الحديث';
+  document.getElementById('r-badge').textContent='🔍 حديث';
+  const body=document.getElementById('r-body');
+  body.innerHTML='';
+  const g=(d.grade||'').toLowerCase();
+  const dc=g.includes('صحيح')||g.includes('sahih')?'dh':g.includes('ضعيف')||g.includes('daif')?'dm':'dr';
+  const card=document.createElement('div');
+  card.className='sc';
+  const srcH=d.sourceUrl?`<a href="${d.sourceUrl}" target="_blank" class="src">🔗 المصدر</a>`:'';
+  card.innerHTML=`<div class="sc-h"><span style="font-size:20px;margin-left:8px">📜</span><div class="si"><div class="sn">نص الحديث</div><div class="st">التحقق من الصحة</div></div>${srcH}<div class="dot ${dc}"></div></div><div class="sc-b"><div style="font-family:Amiri,serif;font-size:15px;line-height:2;padding:10px 12px;background:rgba(139,0,0,.04);border-radius:9px;border-right:3px solid #8B0000;margin-bottom:9px">${d.text||q}</div><div style="display:flex;align-items:center;gap:7px;padding:7px 11px;background:#f9f6f6;border-radius:9px;border:1px solid rgba(139,0,0,.09);margin-bottom:9px"><div class="dot ${dc}"></div><span style="font-size:11.5px;color:#888">درجة الحديث:</span><span style="font-size:12.5px;font-weight:700;color:#8B0000">${d.grade||'غير محدد'}</span></div><div style="font-size:12px;color:#555;padding:9px 12px;background:rgba(139,0,0,.04);border-radius:9px;border:1px solid rgba(139,0,0,.09)"><span style="font-weight:700;color:#8B0000;display:block;margin-bottom:3px">📚 المصدر</span>${d.source||'لم يُعثر على مصدر'}</div>${d.scholars?`<div style="margin-top:8px;font-size:12px;color:#555;padding:9px 12px;background:rgba(139,0,0,.04);border-radius:9px;border:1px solid rgba(139,0,0,.09)"><span style="font-weight:700;color:#8B0000;display:block;margin-bottom:3px">👨‍🎓 أقوال العلماء</span>${d.scholars}</div>`:''}</div>`;
+  body.appendChild(card);
+  addFooter(body);
+}
+
+function addFooter(body){
   const btn=document.createElement('button');
-  btn.className='new-btn';
-  btn.innerHTML=currentMode==='fatwa'?'🔍 سؤال جديد':'🔍 بحث جديد';
-  btn.onclick=()=>goTo('home');
+  btn.className='newbtn';btn.innerHTML='🔍 سؤال جديد';
+  btn.onclick=()=>show('home');
   body.appendChild(btn);
   const disc=document.createElement('div');
   disc.className='disc';
-  disc.innerHTML='<div><span style="font-size:18px">⚠️</span> هذا البوت تعليمي استرشادي فقط، ولا يُغني عن مراجعة العلماء مباشرةً في المسائل الشرعية المهمة.</div><a href="mailto:ahmed.fy2015@gmail.com" class="contact-link">✉️ تواصل واقتراحات</a>';
+  disc.innerHTML='<div>⚠️ هذا البوت تعليمي استرشادي فقط، ولا يُغني عن مراجعة العلماء في المسائل الشرعية المهمة.</div><a href="mailto:ahmed.fy2015@gmail.com" class="clink">✉️ تواصل واقتراحات</a>';
   body.appendChild(disc);
 }
 
-function renderError(q,detail){
-  document.getElementById('resQ').textContent=q;
-  document.getElementById('resTitle').textContent='حدث خطأ';
-  document.getElementById('resBadge').textContent='';
-  document.getElementById('resBody').innerHTML='<div style="padding:40px 20px;text-align:center"><div style="font-size:52px;margin-bottom:14px">⚠️</div><div style="font-size:16px;font-weight:700;color:#c1121f;margin-bottom:16px">تعذّر الحصول على الإجابة</div><button class="new-btn" onclick="goTo(\'home\')" style="max-width:220px;margin:0 auto">← حاول مجدداً</button></div>';
+function drawErr(q){
+  document.getElementById('r-q').textContent=q;
+  document.getElementById('r-title').textContent='حدث خطأ';
+  document.getElementById('r-badge').textContent='';
+  document.getElementById('r-body').innerHTML='<div style="padding:40px 16px;text-align:center"><div style="font-size:50px;margin-bottom:12px">⚠️</div><div style="font-size:15px;font-weight:700;color:#A80000;margin-bottom:14px">تعذّر الحصول على الإجابة</div><button class="newbtn" onclick="show(\'home\')" style="max-width:200px;margin:0 auto">← حاول مجدداً</button></div>';
 }
 </script>
 </body>
 </html>
-
