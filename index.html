@@ -664,6 +664,7 @@ async function doSearch(mode){
     apiMode==='fatwa'?renderFatwa(q,data):renderHadith(q,data);
     goTo('results');
   }catch(err){
+    console.error('[fatwa-bot]',err);
     stopDhikr();
     stopDrawAnimation();
     await new Promise(res=>setTimeout(res,300));
@@ -735,7 +736,7 @@ function renderError(q,detail){
   document.getElementById('resQ').textContent=q;
   document.getElementById('resTitle').textContent='حدث خطأ';
   document.getElementById('resBadge').textContent='';
-  document.getElementById('resBody').innerHTML='<div style="padding:48px 20px;text-align:center"><div style="width:56px;height:56px;border-radius:50%;background:rgba(123,28,28,.1);margin:0 auto 18px;display:flex;align-items:center;justify-content:center"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#7B1C1C" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg></div><div style="font-size:15px;font-weight:700;color:#7B1C1C;margin-bottom:8px">تعذّر الحصول على الإجابة</div><div style="font-size:12px;color:#999;margin-bottom:24px">يرجى المحاولة مرة أخرى</div><button class="new-btn" onclick="goTo(\'home\')" style="max-width:200px;margin:0 auto">حاول مجدداً</button></div>';
+  document.getElementById('resBody').innerHTML='<div style="padding:40px 20px;text-align:center"><div style="width:56px;height:56px;border-radius:50%;background:rgba(123,28,28,.1);margin:0 auto 18px;display:flex;align-items:center;justify-content:center"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#7B1C1C" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg></div><div style="font-size:15px;font-weight:700;color:#7B1C1C;margin-bottom:8px">تعذّر الحصول على الإجابة</div><div style="font-size:12px;color:#888;margin-bottom:16px;padding:10px 16px;background:#f5f5f5;border-radius:8px;text-align:right;direction:ltr;word-break:break-all">'+detail+'</div><button class="new-btn" onclick="goTo(\'home\')" style="max-width:200px;margin:0 auto">حاول مجدداً</button></div>';
 }
 </script>
 </body>
