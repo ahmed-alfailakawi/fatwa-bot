@@ -184,12 +184,100 @@ html,body{font-family:'Tajawal',sans-serif;background:var(--bg);min-height:100vh
 .feat-tool-card{background:var(--card);border-radius:20px;padding:28px 12px 22px;display:flex;flex-direction:column;align-items:center;gap:12px;box-shadow:var(--sh);border:none;cursor:pointer;transition:transform .15s,box-shadow .15s,background .15s;font-family:'Tajawal',sans-serif;}
 .feat-tool-card:active{transform:scale(.95);box-shadow:none;background:var(--primary);}
 .feat-tool-card:active .feat-tool-label{color:#fff;}
+.feat-tool-card:active .feat-tool-desc{color:rgba(255,255,255,.75);}
 .feat-tool-card:active svg{stroke:#fff;}
 .feat-tool-icon{width:52px;height:52px;background:rgba(123,28,28,.08);border-radius:16px;display:flex;align-items:center;justify-content:center;}
 .feat-tool-card:active .feat-tool-icon{background:rgba(255,255,255,.18);}
 .feat-tool-icon svg{width:26px;height:26px;stroke:var(--primary);stroke-width:2;fill:none;stroke-linecap:round;stroke-linejoin:round;}
 .feat-tool-label{font-size:13px;font-weight:700;color:var(--text);text-align:center;line-height:1.3;}
 .feat-tool-desc{font-size:11px;color:var(--sub);text-align:center;line-height:1.4;}
+.feat-tool-wide{grid-column:1/-1;flex-direction:row;padding:18px 20px;justify-content:flex-start;gap:16px;background:linear-gradient(135deg,rgba(123,28,28,.07),rgba(123,28,28,.03));border:1.5px solid rgba(123,28,28,.12);}
+.feat-tool-wide .feat-tool-icon{flex-shrink:0;}
+.feat-tool-wide .feat-tool-texts{display:flex;flex-direction:column;align-items:flex-start;gap:3px;}
+.feat-tool-wide .feat-tool-label{font-size:15px;}
+.feat-tool-wide .feat-tool-desc{text-align:right;}
+.feat-tool-wide:active{background:var(--primary);}
+.feat-tool-wide:active .feat-tool-label{color:#fff;}
+.feat-tool-wide:active .feat-tool-desc{color:rgba(255,255,255,.75);}
+
+/* ===== ATHAR PAGE ===== */
+#p-athar{background:var(--bg);}
+.athar-tabs{display:flex;gap:0;flex-shrink:0;background:#fff;border-bottom:1.5px solid rgba(123,28,28,.08);}
+.athar-tab{flex:1;padding:12px 4px;border:none;font-family:'Tajawal',sans-serif;font-size:11px;font-weight:700;cursor:pointer;background:transparent;color:#bbb;border-bottom:2.5px solid transparent;transition:.2s;}
+.athar-tab.on{color:var(--primary);border-bottom-color:var(--primary);}
+.athar-body{flex:1;overflow-y:auto;padding:16px;}
+
+/* Dashboard */
+.athar-streak{background:linear-gradient(135deg,#9B3232,#5C1515);border-radius:20px;padding:20px;color:#fff;text-align:center;margin-bottom:14px;display:flex;align-items:center;gap:16px;}
+.athar-streak-fire{font-size:48px;line-height:1;}
+.athar-streak-info{flex:1;text-align:right;}
+.athar-streak-num{font-size:52px;font-weight:900;line-height:1;}
+.athar-streak-label{font-size:12px;opacity:.8;margin-top:2px;}
+.athar-stats-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:14px;}
+.athar-stat{background:#fff;border-radius:16px;padding:14px 12px;box-shadow:var(--sh);text-align:center;}
+.athar-stat-num{font-size:24px;font-weight:900;color:var(--primary);}
+.athar-stat-label{font-size:10.5px;color:#999;margin-top:3px;line-height:1.3;}
+.athar-sec-title{font-size:12px;font-weight:700;color:#999;margin-bottom:10px;}
+.athar-empty{text-align:center;padding:30px 20px;color:#bbb;font-size:13px;}
+
+/* Wirds */
+.wird-card{background:#fff;border-radius:16px;padding:14px 16px;box-shadow:0 2px 10px rgba(0,0,0,.05);border:1.5px solid rgba(123,28,28,.07);margin-bottom:10px;}
+.wird-top{display:flex;align-items:center;gap:8px;margin-bottom:10px;}
+.wird-badge{font-size:10px;font-weight:700;color:#fff;background:var(--primary);border-radius:6px;padding:2px 8px;flex-shrink:0;}
+.wird-name{font-size:14px;font-weight:700;color:#1a1a1a;flex:1;}
+.wird-del{background:none;border:none;color:#ddd;cursor:pointer;font-size:18px;padding:2px 4px;flex-shrink:0;}
+.wird-del:active{color:#ef4444;}
+.wird-progress{height:7px;background:#f0f0f0;border-radius:4px;overflow:hidden;margin-bottom:6px;}
+.wird-bar{height:100%;background:linear-gradient(90deg,var(--primary-light),var(--primary));border-radius:4px;transition:width .6s ease;}
+.wird-bar.done{background:linear-gradient(90deg,#22c55e,#16a34a);}
+.wird-meta{display:flex;justify-content:space-between;font-size:11px;color:#999;margin-bottom:10px;}
+.wird-actions{display:flex;gap:8px;}
+.wird-inc{flex:1;background:var(--primary);color:#fff;border:none;border-radius:10px;padding:9px;font-family:'Tajawal',sans-serif;font-size:13px;font-weight:700;cursor:pointer;}
+.wird-inc-sm{background:rgba(123,28,28,.08);color:var(--primary);border:none;border-radius:10px;padding:9px 14px;font-family:'Tajawal',sans-serif;font-size:12px;font-weight:700;cursor:pointer;}
+.add-wird-btn{background:var(--primary);color:#fff;border:none;border-radius:14px;padding:14px;font-family:'Tajawal',sans-serif;font-size:15px;font-weight:700;cursor:pointer;box-shadow:0 4px 16px rgba(91,21,21,.2);display:flex;align-items:center;justify-content:center;gap:8px;width:100%;margin-bottom:14px;}
+
+/* Hadiths */
+.hadith-card{background:#fff;border-radius:18px;padding:18px;box-shadow:var(--sh);margin-bottom:12px;}
+.hadith-num-badge{display:inline-block;font-size:11px;font-weight:700;color:var(--primary);background:rgba(123,28,28,.08);border-radius:8px;padding:3px 10px;margin-bottom:12px;}
+.hadith-title{font-size:14px;font-weight:700;color:#1a1a1a;margin-bottom:10px;}
+.hadith-text{font-family:'Amiri',serif;font-size:16px;line-height:2.1;color:#1a1a1a;border-right:3px solid rgba(123,28,28,.25);padding-right:14px;margin-bottom:12px;}
+.hadith-source{font-size:11.5px;color:#888;}
+.hadith-exp{background:rgba(123,28,28,.04);border-radius:12px;padding:13px;border:1px solid rgba(123,28,28,.1);margin-top:12px;}
+.hadith-exp-title{font-size:11px;font-weight:700;color:var(--primary);margin-bottom:6px;}
+.hadith-exp-text{font-size:13px;line-height:1.8;color:#555;}
+.hadith-nav{display:flex;gap:10px;margin-top:14px;}
+.hadith-nav-btn{flex:1;background:rgba(123,28,28,.06);border:1px solid rgba(123,28,28,.15);border-radius:12px;padding:10px;font-family:'Tajawal',sans-serif;font-size:13px;font-weight:700;color:var(--primary);cursor:pointer;}
+.hadith-nav-btn.pri{background:var(--primary);color:#fff;border-color:transparent;}
+.hadith-counter{text-align:center;font-size:12px;color:#bbb;margin-bottom:12px;}
+
+/* Settings */
+.sett-section{margin-bottom:18px;}
+.sett-title{font-size:11.5px;font-weight:700;color:#999;margin-bottom:10px;padding-right:2px;}
+.sett-card{background:#fff;border-radius:16px;box-shadow:var(--sh);overflow:hidden;}
+.sett-row{display:flex;align-items:center;padding:13px 16px;border-bottom:1px solid #f5f5f5;}
+.sett-row:last-child{border-bottom:none;}
+.sett-row-body{flex:1;}
+.sett-row-label{font-size:14px;font-weight:600;color:#1a1a1a;}
+.sett-row-sub{font-size:11px;color:#999;margin-top:1px;}
+.sett-toggle{width:44px;height:24px;background:#e0e0e0;border-radius:12px;cursor:pointer;position:relative;transition:.25s;border:none;flex-shrink:0;}
+.sett-toggle.on{background:var(--primary);}
+.sett-toggle::after{content:'';width:18px;height:18px;background:#fff;border-radius:50%;position:absolute;top:3px;right:3px;transition:.25s;box-shadow:0 1px 4px rgba(0,0,0,.2);}
+.sett-toggle.on::after{right:23px;}
+.sett-select{border:1.5px solid rgba(123,28,28,.2);border-radius:10px;padding:6px 12px;font-family:'Tajawal',sans-serif;font-size:13px;color:var(--primary);background:#fff;cursor:pointer;outline:none;}
+.notif-banner{background:linear-gradient(135deg,#9B3232,#7B1C1C);border-radius:14px;padding:14px 16px;color:#fff;display:flex;align-items:center;gap:12px;margin-bottom:14px;cursor:pointer;}
+.notif-banner-icon{font-size:26px;flex-shrink:0;}
+.notif-banner-text{flex:1;font-size:12.5px;line-height:1.5;}
+.notif-banner-btn{font-size:11px;font-weight:700;background:rgba(255,255,255,.22);border:1px solid rgba(255,255,255,.35);border-radius:8px;padding:5px 12px;color:#fff;cursor:pointer;white-space:nowrap;flex-shrink:0;}
+
+/* Wird modal */
+.wird-modal{position:fixed;top:0;left:0;right:0;bottom:0;background:rgba(0,0,0,.5);z-index:300;display:none;align-items:flex-end;}
+.wird-modal.open{display:flex;animation:fadeIn .2s ease;}
+.wird-sheet{background:#fff;border-radius:24px 24px 0 0;width:100%;padding:8px 20px 44px;animation:slideUp .25s ease;max-height:92vh;overflow-y:auto;}
+.wird-form-label{font-size:12px;font-weight:700;color:#666;margin-bottom:6px;display:block;}
+.wird-form-field{margin-bottom:14px;}
+.wird-form-input,.wird-form-select{width:100%;border:1.5px solid rgba(123,28,28,.2);border-radius:12px;padding:12px 14px;font-family:'Tajawal',sans-serif;font-size:14px;color:#1a1a1a;background:#fff;outline:none;box-sizing:border-box;}
+.wird-form-input:focus,.wird-form-select:focus{border-color:var(--primary);}
+.wird-form-save{background:var(--primary);color:#fff;border:none;border-radius:14px;padding:15px;font-family:'Tajawal',sans-serif;font-size:15px;font-weight:700;cursor:pointer;width:100%;}
 
 /* ===== MENU OVERLAY ===== */
 .menu-overlay{position:fixed;top:0;left:0;right:0;bottom:0;background:rgba(0,0,0,.45);z-index:200;display:none;align-items:flex-end;}
@@ -477,7 +565,179 @@ html,body{font-family:'Tajawal',sans-serif;background:var(--bg);min-height:100vh
         <span class="feat-tool-label">السُّبحة</span>
         <span class="feat-tool-desc">عداد التسبيح الرقمي</span>
       </button>
+      <button class="feat-tool-card feat-tool-wide" onclick="goTo('athar')">
+        <div class="feat-tool-icon" style="background:linear-gradient(135deg,rgba(123,28,28,.15),rgba(123,28,28,.05));">
+          <svg viewBox="0 0 24 24">
+            <path d="M12 20h9"/>
+            <path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"/>
+          </svg>
+        </div>
+        <div class="feat-tool-texts">
+          <span class="feat-tool-label">أثرك</span>
+          <span class="feat-tool-desc">الأوراد اليومية، تذكيرات، الأحاديث النووية</span>
+        </div>
+      </button>
     </div>
+  </div>
+</div>
+
+<!-- ATHAR PAGE -->
+<div class="page" id="p-athar">
+  <div class="sub-hdr">
+    <button class="sub-back" onclick="goTo('features')">←</button>
+    <h2>أثرك ✦</h2>
+  </div>
+  <div class="athar-tabs">
+    <button class="athar-tab on" id="at-tab-dash" onclick="showAtharTab('dash')">لوحتي</button>
+    <button class="athar-tab" id="at-tab-wirds" onclick="showAtharTab('wirds')">أوراد</button>
+    <button class="athar-tab" id="at-tab-hadith" onclick="showAtharTab('hadith')">الأربعون</button>
+    <button class="athar-tab" id="at-tab-sett" onclick="showAtharTab('sett')">إعدادات</button>
+  </div>
+
+  <!-- Dashboard -->
+  <div class="athar-body" id="at-panel-dash">
+    <div class="athar-streak" id="athar-streak-card">
+      <div class="athar-streak-fire">🔥</div>
+      <div class="athar-streak-info">
+        <div class="athar-streak-num" id="at-streak-num">0</div>
+        <div class="athar-streak-label">يوم متتالي</div>
+      </div>
+    </div>
+    <div class="athar-stats-grid">
+      <div class="athar-stat"><div class="athar-stat-num" id="at-stat-today">0</div><div class="athar-stat-label">أوراد مكتملة اليوم</div></div>
+      <div class="athar-stat"><div class="athar-stat-num" id="at-stat-dhikr">0</div><div class="athar-stat-label">مجموع الأذكار</div></div>
+      <div class="athar-stat"><div class="athar-stat-num" id="at-stat-salawat">0</div><div class="athar-stat-label">الصلاة على النبي ﷺ</div></div>
+      <div class="athar-stat"><div class="athar-stat-num" id="at-stat-quran">0</div><div class="athar-stat-label">صفحات القرآن</div></div>
+    </div>
+    <div class="athar-sec-title">تقدم أوراد اليوم</div>
+    <div id="at-dash-wirds"></div>
+  </div>
+
+  <!-- Wirds -->
+  <div class="athar-body" id="at-panel-wirds" style="display:none">
+    <button class="add-wird-btn" onclick="openWirdModal()">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.5" stroke-linecap="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+      إضافة ورد جديد
+    </button>
+    <div id="at-wirds-list"></div>
+  </div>
+
+  <!-- Hadiths (40 Nawawi) -->
+  <div class="athar-body" id="at-panel-hadith" style="display:none">
+    <div class="hadith-counter" id="at-hadith-counter"></div>
+    <div class="hadith-card" id="at-hadith-card"></div>
+    <div class="hadith-nav">
+      <button class="hadith-nav-btn" onclick="navHadith(-1)">السابق ←</button>
+      <button class="hadith-nav-btn pri" onclick="navHadith(1)">→ التالي</button>
+    </div>
+  </div>
+
+  <!-- Settings -->
+  <div class="athar-body" id="at-panel-sett" style="display:none">
+    <div id="at-notif-banner"></div>
+
+    <div class="sett-section">
+      <div class="sett-title">التذكيرات الدورية</div>
+      <div class="sett-card">
+        <div class="sett-row">
+          <div class="sett-row-body"><div class="sett-row-label">تفعيل التذكيرات</div><div class="sett-row-sub">إشعار بذكر عشوائي</div></div>
+          <button class="sett-toggle" id="tog-remind" onclick="toggleSett('remindersEnabled')"></button>
+        </div>
+        <div class="sett-row">
+          <div class="sett-row-body"><div class="sett-row-label">الفترة</div></div>
+          <select class="sett-select" id="sel-interval" onchange="changeSett('reminderInterval',+this.value)">
+            <option value="30">30 دقيقة</option>
+            <option value="60">كل ساعة</option>
+            <option value="120">كل ساعتين</option>
+            <option value="180">كل 3 ساعات</option>
+          </select>
+        </div>
+        <div class="sett-row">
+          <div class="sett-row-body"><div class="sett-row-label">من</div></div>
+          <select class="sett-select" id="sel-start" onchange="changeSett('startHour',+this.value)">
+            <option value="5">5 صباحاً</option>
+            <option value="6">6 صباحاً</option>
+            <option value="7">7 صباحاً</option>
+            <option value="8">8 صباحاً</option>
+            <option value="9">9 صباحاً</option>
+          </select>
+        </div>
+        <div class="sett-row">
+          <div class="sett-row-body"><div class="sett-row-label">إلى</div></div>
+          <select class="sett-select" id="sel-end" onchange="changeSett('endHour',+this.value)">
+            <option value="21">9 مساءً</option>
+            <option value="22">10 مساءً</option>
+            <option value="23">11 مساءً</option>
+            <option value="24">منتصف الليل</option>
+          </select>
+        </div>
+      </div>
+    </div>
+
+    <div class="sett-section">
+      <div class="sett-title">أنواع التذكيرات</div>
+      <div class="sett-card">
+        <div class="sett-row"><div class="sett-row-body"><div class="sett-row-label">التسبيح والتحميد</div></div><button class="sett-toggle" id="tog-tasbih" onclick="toggleSett('typeTasbih')"></button></div>
+        <div class="sett-row"><div class="sett-row-body"><div class="sett-row-label">التهليل والتكبير</div></div><button class="sett-toggle" id="tog-tahlil" onclick="toggleSett('typeTahlil')"></button></div>
+        <div class="sett-row"><div class="sett-row-body"><div class="sett-row-label">الاستغفار</div></div><button class="sett-toggle" id="tog-istighfar" onclick="toggleSett('typeIstighfar')"></button></div>
+        <div class="sett-row"><div class="sett-row-body"><div class="sett-row-label">الصلاة على النبي ﷺ</div></div><button class="sett-toggle" id="tog-salawat" onclick="toggleSett('typeSalawat')"></button></div>
+        <div class="sett-row"><div class="sett-row-body"><div class="sett-row-label">الأذكار القصيرة</div></div><button class="sett-toggle" id="tog-adhkar" onclick="toggleSett('typeAdhkar')"></button></div>
+      </div>
+    </div>
+
+    <div class="sett-section">
+      <div class="sett-title">الأحاديث النووية</div>
+      <div class="sett-card">
+        <div class="sett-row">
+          <div class="sett-row-body"><div class="sett-row-label">تذكير بحديث</div><div class="sett-row-sub">حديث كل 12 ساعة</div></div>
+          <button class="sett-toggle" id="tog-hadith" onclick="toggleSett('hadithEnabled')"></button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- WIRD MODAL -->
+<div class="wird-modal" id="wirdModal" onclick="closeWirdModalOutside(event)">
+  <div class="wird-sheet">
+    <div class="menu-handle"></div>
+    <div style="font-size:17px;font-weight:700;color:#1a1a1a;margin-bottom:18px;text-align:center">ورد جديد</div>
+    <div class="wird-form-field">
+      <label class="wird-form-label">اسم الورد</label>
+      <input class="wird-form-input" id="wf-name" type="text" placeholder="مثال: صلاة على النبي بعد الفجر">
+    </div>
+    <div class="wird-form-field">
+      <label class="wird-form-label">النوع</label>
+      <select class="wird-form-select" id="wf-type">
+        <option value="salawat">الصلاة على النبي ﷺ</option>
+        <option value="quran">قرآن كريم</option>
+        <option value="adhkar">أذكار</option>
+        <option value="istighfar">استغفار</option>
+        <option value="tasbih">تسبيح</option>
+        <option value="other">أخرى</option>
+      </select>
+    </div>
+    <div class="wird-form-field">
+      <label class="wird-form-label">الهدف اليومي</label>
+      <input class="wird-form-input" id="wf-target" type="number" placeholder="مثال: 100" min="1">
+    </div>
+    <div class="wird-form-field">
+      <label class="wird-form-label">الوحدة</label>
+      <select class="wird-form-select" id="wf-unit">
+        <option value="مرة">مرة</option>
+        <option value="صفحة">صفحة</option>
+        <option value="جزء">جزء</option>
+        <option value="ركعة">ركعة</option>
+      </select>
+    </div>
+    <div class="wird-form-field">
+      <label class="wird-form-label">التكرار</label>
+      <select class="wird-form-select" id="wf-period">
+        <option value="daily">يومي</option>
+        <option value="weekly">أسبوعي</option>
+      </select>
+    </div>
+    <button class="wird-form-save" onclick="saveWird()">حفظ الورد</button>
   </div>
 </div>
 
@@ -573,6 +833,7 @@ function goTo(id){
   document.getElementById('p-'+id).classList.add('active');
   document.getElementById('p-'+id).scrollTop=0;
   if(id==='adhkar')showAdhkar('sabah');
+  if(id==='athar'){loadAtharState();showAtharTab('dash');}
 }
 
 function focusSearch(mode){
@@ -814,8 +1075,323 @@ function renderError(q,detail){
   document.getElementById('resBody').innerHTML='<div style="padding:40px 20px;text-align:center"><div style="width:56px;height:56px;border-radius:50%;background:rgba(123,28,28,.1);margin:0 auto 18px;display:flex;align-items:center;justify-content:center"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#7B1C1C" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg></div><div style="font-size:15px;font-weight:700;color:#7B1C1C;margin-bottom:8px">تعذّر الحصول على الإجابة</div><div style="font-size:12px;color:#888;margin-bottom:16px;padding:10px 16px;background:#f5f5f5;border-radius:8px;text-align:right;direction:ltr;word-break:break-all">'+detail+'</div><button class="new-btn" onclick="goTo(\'home\')" style="max-width:200px;margin:0 auto">حاول مجدداً</button></div>';
 }
 
+/* ===== ATHAR DATA ===== */
+const NAWAWI_40=[
+  {num:1,title:'الأعمال بالنيات',text:'إنما الأعمال بالنيات، وإنما لكل امرئٍ ما نوى، فمن كانت هجرته إلى الله ورسوله فهجرته إلى الله ورسوله، ومن كانت هجرته لدنيا يصيبها أو امرأةٍ ينكحها فهجرته إلى ما هاجر إليه.',source:'متفق عليه',exp:'الأعمال لا تُقبل ولا يُثاب عليها إلا بالنية الخالصة لله، وكل امرئ يُجازى على حسب نيته، فالنية هي روح العبادة.'},
+  {num:2,title:'أركان الإسلام والإيمان والإحسان',text:'الإسلامُ أن تشهد أن لا إله إلا الله وأن محمداً رسول الله، وتقيم الصلاة، وتؤتي الزكاة، وتصوم رمضان، وتحج البيت إن استطعت إليه سبيلاً. والإيمانُ أن تؤمن بالله وملائكته وكتبه ورسله واليوم الآخر وتؤمن بالقدر خيره وشره. والإحسانُ أن تعبد الله كأنك تراه فإن لم تكن تراه فإنه يراك.',source:'رواه مسلم',exp:'حديث جبريل الجامع لأصول الدين: الإسلام والإيمان والإحسان — المراتب الثلاث التي تنتظم فيها العقيدة والشريعة والمعاملة.'},
+  {num:3,title:'أركان الإسلام الخمسة',text:'بُني الإسلام على خمس: شهادة أن لا إله إلا الله وأن محمداً رسول الله، وإقام الصلاة، وإيتاء الزكاة، وحج البيت، وصوم رمضان.',source:'متفق عليه',exp:'الأركان الخمسة هي عمود الإسلام وأساسه الذي يقوم عليه الدين، فمن أقامها فقد أقام الإسلام.'},
+  {num:4,title:'خلق الإنسان والقدر',text:'إن أحدكم يُجمع خلقه في بطن أمه أربعين يوماً نطفةً، ثم يكون علقةً مثل ذلك، ثم يكون مضغةً مثل ذلك، ثم يُرسَل إليه الملَك فينفخ فيه الروح، ويؤمر بأربع كلمات: بكتب رزقه وأجله وعمله وشقي أم سعيد.',source:'متفق عليه',exp:'يبين الحديث مراحل خلق الإنسان، ويثبت القدر، وأن الله قدّر لكل إنسان رزقه وأجله وعمله ومصيره.'},
+  {num:5,title:'رد البدع المحدثة',text:'من أحدث في أمرنا هذا ما ليس منه فهو رد.',source:'متفق عليه',exp:'كل عبادة أو عمل لم يشرعه الله ورسوله ﷺ فهو مردود على صاحبه لا يُقبل، وهذا أصل عظيم في الشريعة.'},
+  {num:6,title:'الحلال والحرام والمشتبهات',text:'إن الحلال بيّن، وإن الحرام بيّن، وبينهما أمور مشتبهات لا يعلمهن كثير من الناس. فمن اتقى الشبهات فقد استبرأ لدينه وعرضه، ومن وقع في الشبهات وقع في الحرام، كالراعي يرعى حول الحمى يوشك أن يرتع فيه.',source:'متفق عليه',exp:'الأشياء ثلاثة: حلال بيّن، وحرام بيّن، ومشتبهات. والتقوى تقتضي اجتناب الشبهات صوناً للدين والعرض.'},
+  {num:7,title:'الدين النصيحة',text:'الدين النصيحة. قلنا: لمن؟ قال: لله، ولكتابه، ولرسوله، ولأئمة المسلمين وعامتهم.',source:'رواه مسلم',exp:'النصيحة عماد الدين وجماعه، وهي الإخلاص لله تعالى، والعمل بكتابه، ومحبة الخير للمسلمين.'},
+  {num:8,title:'عصمة الدم بالإسلام',text:'أُمرت أن أقاتل الناس حتى يشهدوا أن لا إله إلا الله وأن محمداً رسول الله، ويقيموا الصلاة ويؤتوا الزكاة، فإذا فعلوا ذلك عصموا مني دماءهم وأموالهم إلا بحق الإسلام وحسابهم على الله.',source:'متفق عليه',exp:'من أظهر الإسلام وجبت عصمة دمه وماله في الظاهر، وحسابه في الباطن على الله وحده.'},
+  {num:9,title:'الأمر والنهي',text:'ما نهيتكم عنه فاجتنبوه، وما أمرتكم به فأتوا منه ما استطعتم، فإنما أهلك الذين من قبلكم كثرة مسائلهم واختلافهم على أنبيائهم.',source:'متفق عليه',exp:'النهي يقتضي الترك المطلق للمنهي عنه، والأمر يُعمل به بحسب الاستطاعة، وترك التعمق والمسائل.'},
+  {num:10,title:'الطيب شرط قبول العمل',text:'إن الله طيب لا يقبل إلا طيباً، وإن الله أمر المؤمنين بما أمر به المرسلين، فقال: ﴿يا أيها الرسل كلوا من الطيبات﴾، ثم ذكر الرجل يطيل السفر أشعث أغبر يمد يديه إلى السماء: يا رب يا رب، ومطعمه حرام ومشربه حرام وغُذي بالحرام فأنى يُستجاب له؟',source:'رواه مسلم',exp:'الله طيب لا يقبل إلا الطيب، فالكسب الحلال شرط لقبول الدعاء والعبادة.'},
+  {num:11,title:'ترك الشبهات',text:'دع ما يريبك إلى ما لا يريبك، فإن الصدق طمأنينة وإن الكذب ريبة.',source:'رواه الترمذي والنسائي',exp:'اترك كل ما يوجب الشك والقلق في نفسك وخذ بما تطمئن إليه نفسك؛ فالصدق يجلب الاطمئنان والكذب يجلب القلق.'},
+  {num:12,title:'ترك ما لا يعني',text:'من حسن إسلام المرء تركه ما لا يعنيه.',source:'رواه الترمذي وابن ماجه',exp:'من علامات حسن إسلام المرء أن يتجنب الخوض فيما لا يعنيه من أقوال وأفعال وأسئلة.'},
+  {num:13,title:'محبة الخير للمسلمين',text:'لا يؤمن أحدكم حتى يحب لأخيه ما يحب لنفسه.',source:'متفق عليه',exp:'كمال الإيمان يستلزم أن تحب لأخيك المسلم ما تحبه لنفسك من الخير والصلاح.'},
+  {num:14,title:'حرمة دم المسلم',text:'لا يحل دم امرئ مسلم يشهد أن لا إله إلا الله وأني رسول الله إلا بإحدى ثلاث: الثيب الزاني، والنفس بالنفس، والتارك لدينه المفارق للجماعة.',source:'متفق عليه',exp:'دم المسلم حرام لا يُباح إلا بإحدى هذه الحالات الثلاث، وهذا أصل عظيم في صون الأرواح.'},
+  {num:15,title:'حسن الجوار وإكرام الضيف',text:'من كان يؤمن بالله واليوم الآخر فليقل خيراً أو ليصمت، ومن كان يؤمن بالله واليوم الآخر فليكرم جاره، ومن كان يؤمن بالله واليوم الآخر فليكرم ضيفه.',source:'متفق عليه',exp:'ثمرة الإيمان تظهر في حسن القول وإكرام الجار والضيف، فمن آمن بالله أكرم خلقه.'},
+  {num:16,title:'كظم الغيظ',text:'جاء رجل إلى النبي ﷺ فقال: أوصني. قال: لا تغضب. فردَّد مراراً. قال: لا تغضب.',source:'رواه البخاري',exp:'ملك النفس عند الغضب من أعظم خصال الخير، وهو جماع مكارم الأخلاق، إذ الغضب مفتاح كل شر.'},
+  {num:17,title:'الإحسان في كل شيء',text:'إن الله كتب الإحسان على كل شيء، فإذا قتلتم فأحسنوا القِتلة، وإذا ذبحتم فأحسنوا الذِّبحة، وليُحِد أحدكم شفرته وليُرِح ذبيحته.',source:'رواه مسلم',exp:'الإحسان واجب في كل عمل حتى في القتل والذبح، فالله يحب الإحسان في كل شيء.'},
+  {num:18,title:'تقوى الله وحسن الخلق',text:'اتق الله حيثما كنت، وأتبع السيئة الحسنة تمحها، وخالق الناس بخلق حسن.',source:'رواه الترمذي',exp:'ثلاث وصايا جامعة: التقوى في السر والعلن، ومحو السيئات بالحسنات، وحسن معاملة الناس.'},
+  {num:19,title:'احفظ الله يحفظك',text:'احفظ الله يحفظك، احفظ الله تجده تجاهك، إذا سألتَ فاسأل الله، وإذا استعنتَ فاستعن بالله، واعلم أن الأمة لو اجتمعت على أن ينفعوك بشيء لم ينفعوك إلا بشيء قد كتبه الله لك.',source:'رواه الترمذي',exp:'من حافظ على حدود الله وأوامره حفظه الله في الدنيا والآخرة، وكفاه ما أهمه.'},
+  {num:20,title:'الاستعانة بالله',text:'استعن بالله ولا تعجز، وإن أصابك شيء فلا تقل: لو أني فعلت كذا كان كذا وكذا، ولكن قل: قدَّر الله وما شاء فعل، فإن لو تفتح عمل الشيطان.',source:'رواه مسلم',exp:'استعن بالله واجتهد ولا تيأس، وعند المكروه أسلم الأمر لقدر الله ولا تفتح باب الندم بـ"لو".'},
+  {num:21,title:'الإيمان والاستقامة',text:'قل آمنت بالله ثم استقم.',source:'رواه مسلم',exp:'الاستقامة على منهج الله بعد الإيمان هي الغاية العليا، وهي أصعب من كل العبادات وأجمعها.'},
+  {num:22,title:'فضل إماطة الأذى',text:'إن مما يوجب المغفرة بذل السلام وحسن الكلام.',source:'رواه الطبراني',exp:'إزالة الأذى ونشر السلام وحسن الكلام من الأعمال التي يُرجى بها المغفرة ودخول الجنة.'},
+  {num:23,title:'فضائل الطهارة والذكر',text:'الطهور شطر الإيمان، والحمد لله تملأ الميزان، وسبحان الله والحمد لله تملآن ما بين السموات والأرض، والصلاة نور، والصدقة برهان، والصبر ضياء، والقرآن حجة لك أو عليك.',source:'رواه مسلم',exp:'فضل الطهارة والذكر والصلاة والصدقة والصبر والقرآن؛ كل منها نور يضيء لصاحبه يوم القيامة.'},
+  {num:24,title:'تحريم الظلم',text:'يا عبادي إني حرمت الظلم على نفسي وجعلته بينكم محرماً فلا تظالموا. يا عبادي كلكم ضال إلا من هديته فاستهدوني أهدكم.',source:'رواه مسلم',exp:'حديث قدسي عظيم يبين تحريم الظلم، وأن الهداية بيد الله وحده فاطلبها منه.'},
+  {num:25,title:'فضل صلة الرحم',text:'الصدقة على المسكين صدقة، وهي على ذي الرحم ثنتان: صدقة وصلة.',source:'رواه الترمذي والنسائي',exp:'الصدقة على الأقارب أعظم أجراً لأنها تجمع بين أجر الصدقة وأجر صلة الرحم.'},
+  {num:26,title:'كل مفصل عليه صدقة',text:'كل سلامى من الناس عليه صدقة كل يوم تطلع فيه الشمس، تعدل بين اثنين صدقة، وتعين الرجل في دابته صدقة، والكلمة الطيبة صدقة، وبكل خطوة تمشيها إلى الصلاة صدقة، وتميط الأذى عن الطريق صدقة.',source:'متفق عليه',exp:'كل مفصل من مفاصل الإنسان يحتاج إلى صدقة يومية، وقد يسّر الله ذلك بأعمال يسيرة طيبة.'},
+  {num:27,title:'البر والإثم',text:'البر حسن الخلق، والإثم ما حاك في صدرك وكرهت أن يطلع عليه الناس.',source:'رواه مسلم',exp:'البر مجمعه حسن الخلق، والإثم ما أقلق نفسك وكرهت اطلاع الناس عليه — فالضمير مرجع عادل.'},
+  {num:28,title:'السنن والفرائض',text:'لا يزال عبدي يتقرب إليّ بالنوافل حتى أحبه، فإذا أحببته كنت سمعه الذي يسمع به وبصره الذي يبصر به ويده التي يبطش بها ورجله التي يمشي بها.',source:'رواه البخاري',exp:'الإكثار من النوافل بعد الفرائض يرقى بالعبد حتى يبلغ مرتبة المحبة الإلهية العظيمة.'},
+  {num:29,title:'الأعمال التي لا تنقطع',text:'إذا مات ابن آدم انقطع عمله إلا من ثلاث: صدقة جارية، أو علم ينتفع به، أو ولد صالح يدعو له.',source:'رواه مسلم',exp:'ثلاثة أعمال يستمر ثوابها بعد الموت: الصدقة الجارية، والعلم النافع، والذرية الصالحة.'},
+  {num:30,title:'حدود الله',text:'إن الله فرض فرائض فلا تضيعوها، وحدّ حدوداً فلا تعتدوها، وحرّم أشياء فلا تنتهكوها، وسكت عن أشياء رحمةً بكم غير نسيان فلا تبحثوا عنها.',source:'رواه الدارقطني',exp:'أداء الفرائض، واجتناب المحرمات، وعدم تجاوز الحدود، وترك البحث عن المسكوت عنه.'},
+  {num:31,title:'الزهد في الدنيا',text:'كن في الدنيا كأنك غريب أو عابر سبيل.',source:'رواه البخاري',exp:'الدنيا ليست دار قرار للمؤمن، فينبغي ألا يتعلق بها قلبه، بل ينظر إليها كمنزل مؤقت في رحلة إلى الآخرة.'},
+  {num:32,title:'لا ضرر ولا ضرار',text:'لا ضرر ولا ضرار.',source:'رواه ابن ماجه والدارقطني',exp:'من أعظم قواعد الفقه الإسلامي: لا يجوز إيقاع الضرر ابتداءً ولا مقابلةً للضرر بضرر.'},
+  {num:33,title:'البينة على المدعي',text:'لو أن الناس أعطوا بدعواهم لادّعى ناس دماء رجال وأموالهم، لكن اليمين على المدعى عليه.',source:'متفق عليه',exp:'قاعدة فقهية كبرى: البينة على المدعي واليمين على من أنكر — أساس العدل في التقاضي.'},
+  {num:34,title:'إنكار المنكر',text:'من رأى منكم منكراً فليغيره بيده، فإن لم يستطع فبلسانه، فإن لم يستطع فبقلبه، وذلك أضعف الإيمان.',source:'رواه مسلم',exp:'إنكار المنكر واجب بحسب الاستطاعة: باليد للمتمكن، وباللسان، وبالقلب أدنى مراتبه.'},
+  {num:35,title:'آداب الأخوة الإسلامية',text:'لا تحاسدوا، ولا تناجشوا، ولا تباغضوا، ولا تدابروا، ولا يبع بعضكم على بيع بعض، وكونوا عباد الله إخواناً.',source:'متفق عليه',exp:'الأخوة الإسلامية تقتضي ترك الحسد والبغض والتدابر والمنافسة المذمومة والتراحم والتآلف.'},
+  {num:36,title:'تفريج الكربات',text:'من نفّس عن مؤمن كربةً من كرب الدنيا نفّس الله عنه كربةً من كرب يوم القيامة، ومن يسّر على معسر يسّر الله عليه في الدنيا والآخرة، والله في عون العبد ما كان العبد في عون أخيه.',source:'رواه مسلم',exp:'الجزاء من جنس العمل: من فرّج كربة أخيه فرّج الله كربته، ومن أعان أعانه الله.'},
+  {num:37,title:'الجزاء من جنس العمل',text:'إن الله كتب على ابن آدم حظه من الزنا أدرك ذلك لا محالة: فزنا العينين النظر، وزنا اللسان النطق، والنفس تمنى وتشتهي، والفرج يصدق ذلك أو يكذبه.',source:'متفق عليه',exp:'لكل جارحة زناها، فالواجب على المؤمن غض البصر وحفظ اللسان وكف الجوارح عن الحرام.'},
+  {num:38,title:'الولاية لله والتقرب بالنوافل',text:'من عادى لي ولياً فقد آذنته بالحرب. وما تقرب إليّ عبدي بشيء أحب إليّ مما افترضته عليه، وما يزال عبدي يتقرب إليّ بالنوافل حتى أحبه.',source:'رواه البخاري',exp:'أحب ما يتقرب به العبد إلى الله الفرائض، ثم النوافل بعدها حتى ينال مرتبة محبة الله.'},
+  {num:39,title:'رفع الحرج عن الأمة',text:'إن الله تجاوز عن أمتي الخطأ والنسيان وما استكرهوا عليه.',source:'رواه ابن ماجه',exp:'رحمة الله بهذه الأمة رفع المؤاخذة عن الخطأ والنسيان والإكراه — تيسير ورحمة.'},
+  {num:40,title:'كن في الدنيا غريباً',text:'كن في الدنيا كأنك غريب أو عابر سبيل، وعُدَّ نفسك من أصحاب القبور.',source:'رواه البخاري',exp:'من وصايا ابن عمر للتزود للآخرة: لا تتعلق بالدنيا واعمل لما بعدها فهي دار ممر لا دار مقر.'},
+  {num:41,title:'اتباع الهوى للشريعة',text:'لا يؤمن أحدكم حتى يكون هواه تبعاً لما جئت به.',source:'رواه النووي في الأربعين',exp:'كمال الإيمان في أن يكون هوى النفس تابعاً للشريعة لا العكس — وهذا جماع الاستقامة.'},
+  {num:42,title:'نضّر الله من سمع حديثه',text:'نضّر الله امرءاً سمع مقالتي فوعاها وأداها كما سمعها، فرُبَّ حامل فقه إلى من هو أفقه منه.',source:'رواه الترمذي وأبو داود',exp:'دعاء النبي ﷺ لمن سمع حديثه ووعاه وبلّغه، فالعلم أمانة ويجب نقله كما ورد.'},
+];
+
+const REMINDER_DHIKR={
+  tasbih:['سبحان الله وبحمده','سبحان الله العظيم','سبحان الله وبحمده سبحان الله العظيم','سبحان الله عدد خلقه وسبحان الله رضا نفسه'],
+  tahlil:['لا إله إلا الله وحده لا شريك له، له الملك وله الحمد وهو على كل شيء قدير','لا إله إلا الله','الحمد لله رب العالمين','الله أكبر'],
+  istighfar:['أستغفر الله وأتوب إليه','أستغفر الله الذي لا إله إلا هو الحي القيوم وأتوب إليه','اللهم إنك عفو تحب العفو فاعفُ عني'],
+  salawat:['اللهم صلِّ وسلم على نبينا محمد','اللهم صلِّ على محمد وعلى آل محمد كما صليت على إبراهيم وعلى آل إبراهيم'],
+  adhkar:['لا حول ولا قوة إلا بالله','حسبي الله لا إله إلا هو عليه توكلت وهو رب العرش العظيم','اللهم إني أسألك العفو والعافية','بسم الله الرحمن الرحيم'],
+};
+
+/* ===== ATHAR STATE ===== */
+let atharSetts={remindersEnabled:false,reminderInterval:60,startHour:8,endHour:22,typeTasbih:true,typeTahlil:true,typeIstighfar:true,typeSalawat:true,typeAdhkar:true,hadithEnabled:true};
+let atharStats={streak:0,lastActive:'',totalDhikr:0,totalSalawat:0,totalQuranPages:0,completedToday:0};
+let atharHadithIdx=0;
+let reminderTimer=null;
+
+function loadAtharState(){
+  const ss=localStorage.getItem('athar-setts');if(ss)try{atharSetts=Object.assign(atharSetts,JSON.parse(ss));}catch(e){}
+  const st=localStorage.getItem('athar-stats');if(st)try{atharStats=Object.assign(atharStats,JSON.parse(st));}catch(e){}
+  const hi=localStorage.getItem('athar-hadith-idx');if(hi)atharHadithIdx=parseInt(hi)||0;
+  checkStreak();
+}
+function saveAtharSetts(){localStorage.setItem('athar-setts',JSON.stringify(atharSetts));}
+function saveAtharStats(){localStorage.setItem('athar-stats',JSON.stringify(atharStats));}
+
+function getToday(){return new Date().toISOString().slice(0,10);}
+function checkStreak(){
+  const today=getToday();
+  if(!atharStats.lastActive){return;}
+  const last=new Date(atharStats.lastActive);
+  const diff=Math.floor((new Date(today)-last)/86400000);
+  if(diff===1){/* yesterday — streak continues */}
+  else if(diff>1){atharStats.streak=0;saveAtharStats();}
+}
+
+/* ===== ATHAR TABS ===== */
+function showAtharTab(tab){
+  ['dash','wirds','hadith','sett'].forEach(t=>{
+    document.getElementById('at-tab-'+t).classList.toggle('on',t===tab);
+    document.getElementById('at-panel-'+t).style.display=t===tab?'block':'none';
+  });
+  if(tab==='dash')renderAtharDash();
+  if(tab==='wirds')renderWirds();
+  if(tab==='hadith')renderHadith();
+  if(tab==='sett')renderSetts();
+}
+
+/* ===== DASHBOARD ===== */
+function renderAtharDash(){
+  document.getElementById('at-streak-num').textContent=atharStats.streak;
+  document.getElementById('at-stat-today').textContent=atharStats.completedToday;
+  document.getElementById('at-stat-dhikr').textContent=fmtNum(atharStats.totalDhikr);
+  document.getElementById('at-stat-salawat').textContent=fmtNum(atharStats.totalSalawat);
+  document.getElementById('at-stat-quran').textContent=fmtNum(atharStats.totalQuranPages);
+  const wirds=getWirds();
+  const el=document.getElementById('at-dash-wirds');el.innerHTML='';
+  if(!wirds.length){el.innerHTML='<div class="athar-empty">أضف ورداً من تبويب "أوراد"</div>';return;}
+  wirds.forEach(w=>{
+    const pct=Math.min(100,Math.round(w.todayCount/w.target*100));
+    const done=pct>=100;
+    const d=document.createElement('div');d.className='wird-card';
+    d.innerHTML='<div class="wird-top"><span class="wird-badge">'+typeLabel(w.type)+'</span><span class="wird-name">'+w.name+'</span></div><div class="wird-progress"><div class="wird-bar'+(done?' done':'')+'\" style="width:'+pct+'%"></div></div><div class="wird-meta"><span>'+w.todayCount+' / '+w.target+' '+w.unit+'</span><span>'+(done?'✓ مكتمل':pct+'%')+'</span></div>';
+    el.appendChild(d);
+  });
+}
+function fmtNum(n){return n>=1000?(n/1000).toFixed(1)+'k':String(n);}
+
+/* ===== WIRDS ===== */
+function getWirds(){
+  const raw=localStorage.getItem('athar-wirds');
+  if(!raw)return[];
+  try{
+    const wirds=JSON.parse(raw);
+    const today=getToday();
+    let changed=false;
+    wirds.forEach(w=>{
+      if(w.period==='daily'&&w.lastReset!==today){w.todayCount=0;w.lastReset=today;changed=true;}
+      else if(w.period==='weekly'){
+        const last=new Date(w.lastReset||'2000-01-01');
+        const now=new Date(today);
+        if((now-last)/86400000>=7){w.todayCount=0;w.lastReset=today;changed=true;}
+      }
+    });
+    if(changed)localStorage.setItem('athar-wirds',JSON.stringify(wirds));
+    return wirds;
+  }catch(e){return[];}
+}
+function saveWirds(arr){localStorage.setItem('athar-wirds',JSON.stringify(arr));}
+function typeLabel(t){return{salawat:'صلاة',quran:'قرآن',adhkar:'أذكار',istighfar:'استغفار',tasbih:'تسبيح',other:'أخرى'}[t]||t;}
+
+function renderWirds(){
+  const wirds=getWirds();
+  const el=document.getElementById('at-wirds-list');el.innerHTML='';
+  if(!wirds.length){el.innerHTML='<div class="athar-empty">لا توجد أوراد بعد.<br>اضغط "إضافة ورد جديد"</div>';return;}
+  wirds.forEach((w,idx)=>{
+    const pct=Math.min(100,Math.round(w.todayCount/w.target*100));
+    const done=pct>=100;
+    const d=document.createElement('div');d.className='wird-card';
+    d.innerHTML=
+      '<div class="wird-top"><span class="wird-badge">'+typeLabel(w.type)+'</span><span class="wird-name">'+w.name+'</span><button class="wird-del" onclick="deleteWird('+idx+')">×</button></div>'+
+      '<div class="wird-progress"><div class="wird-bar'+(done?' done':'')+'\" style="width:'+pct+'%"></div></div>'+
+      '<div class="wird-meta"><span>'+w.todayCount+' / '+w.target+' '+w.unit+(w.period==='weekly'?' (أسبوعي)':'')+'</span><span>'+(done?'✓ مكتمل':pct+'%')+'</span></div>'+
+      '<div class="wird-actions">'+
+        '<button class="wird-inc-sm" onclick="incWird('+idx+',1)">+1</button>'+
+        '<button class="wird-inc-sm" onclick="incWird('+idx+',5)">+5</button>'+
+        '<button class="wird-inc-sm" onclick="incWird('+idx+',10)">+10</button>'+
+        '<button class="wird-inc" onclick="incWirdCustom('+idx+')">إضافة</button>'+
+      '</div>';
+    el.appendChild(d);
+  });
+}
+
+function incWird(idx,amount){
+  const wirds=getWirds();const w=wirds[idx];if(!w)return;
+  const wasNotDone=w.todayCount<w.target;
+  w.todayCount=Math.min(w.target,w.todayCount+amount);
+  if(wasNotDone&&w.todayCount>=w.target){
+    atharStats.completedToday++;
+    const today=getToday();
+    if(atharStats.lastActive!==today){
+      atharStats.streak++;
+      atharStats.lastActive=today;
+    }
+    if(navigator.vibrate)navigator.vibrate([50,30,50]);
+  }
+  if(w.type==='salawat')atharStats.totalSalawat+=amount;
+  else if(w.type==='quran')atharStats.totalQuranPages+=amount;
+  else atharStats.totalDhikr+=amount;
+  saveWirds(wirds);saveAtharStats();
+  renderWirds();
+}
+function incWirdCustom(idx){
+  const v=prompt('كم تريد إضافة؟','1');
+  if(v&&!isNaN(v)&&+v>0)incWird(idx,+v);
+}
+function deleteWird(idx){
+  if(!confirm('حذف هذا الورد؟'))return;
+  const wirds=getWirds();wirds.splice(idx,1);saveWirds(wirds);renderWirds();
+}
+
+function openWirdModal(){
+  document.getElementById('wf-name').value='';
+  document.getElementById('wf-target').value='';
+  document.getElementById('wirdModal').classList.add('open');
+}
+function closeWirdModalOutside(e){if(e.target===document.getElementById('wirdModal'))document.getElementById('wirdModal').classList.remove('open');}
+function saveWird(){
+  const name=document.getElementById('wf-name').value.trim();
+  const target=parseInt(document.getElementById('wf-target').value);
+  if(!name||!target||target<1){alert('الرجاء إدخال اسم الورد والهدف');return;}
+  const wird={id:Date.now(),name,type:document.getElementById('wf-type').value,target,unit:document.getElementById('wf-unit').value,period:document.getElementById('wf-period').value,todayCount:0,lastReset:getToday()};
+  const wirds=getWirds();wirds.push(wird);saveWirds(wirds);
+  document.getElementById('wirdModal').classList.remove('open');
+  renderWirds();
+}
+
+/* ===== HADITHS ===== */
+function renderHadith(){
+  const h=NAWAWI_40[atharHadithIdx]||NAWAWI_40[0];
+  document.getElementById('at-hadith-counter').textContent='الحديث '+(atharHadithIdx+1)+' من '+NAWAWI_40.length;
+  document.getElementById('at-hadith-card').innerHTML=
+    '<div class="hadith-num-badge">الحديث رقم '+h.num+'</div>'+
+    '<div class="hadith-title">'+h.title+'</div>'+
+    '<div class="hadith-text">'+h.text+'</div>'+
+    '<div class="hadith-source">'+h.source+'</div>'+
+    '<div class="hadith-exp"><div class="hadith-exp-title">الفائدة</div><div class="hadith-exp-text">'+h.exp+'</div></div>';
+}
+function navHadith(dir){
+  atharHadithIdx=(atharHadithIdx+dir+NAWAWI_40.length)%NAWAWI_40.length;
+  localStorage.setItem('athar-hadith-idx',atharHadithIdx);
+  renderHadith();
+  document.getElementById('at-panel-hadith').scrollTop=0;
+}
+
+/* ===== SETTINGS ===== */
+function renderSetts(){
+  const tog=(id,val)=>{const el=document.getElementById(id);if(el)el.classList.toggle('on',val);};
+  tog('tog-remind',atharSetts.remindersEnabled);
+  tog('tog-tasbih',atharSetts.typeTasbih);
+  tog('tog-tahlil',atharSetts.typeTahlil);
+  tog('tog-istighfar',atharSetts.typeIstighfar);
+  tog('tog-salawat',atharSetts.typeSalawat);
+  tog('tog-adhkar',atharSetts.typeAdhkar);
+  tog('tog-hadith',atharSetts.hadithEnabled);
+  const setVal=(id,val)=>{const el=document.getElementById(id);if(el)el.value=val;};
+  setVal('sel-interval',atharSetts.reminderInterval);
+  setVal('sel-start',atharSetts.startHour);
+  setVal('sel-end',atharSetts.endHour);
+  renderNotifBanner();
+}
+function toggleSett(key){
+  atharSetts[key]=!atharSetts[key];
+  saveAtharSetts();
+  if(key==='remindersEnabled'){
+    if(atharSetts.remindersEnabled)requestNotifPermission();
+    else stopReminderTimer();
+  }
+  renderSetts();
+}
+function changeSett(key,val){
+  atharSetts[key]=val;
+  saveAtharSetts();
+  if(atharSetts.remindersEnabled)restartReminderTimer();
+}
+
+function renderNotifBanner(){
+  const el=document.getElementById('at-notif-banner');
+  if(!el)return;
+  if(!('Notification' in window)||Notification.permission==='granted'){el.innerHTML='';return;}
+  el.innerHTML='<div class="notif-banner" onclick="requestNotifPermission()"><div class="notif-banner-icon">🔔</div><div class="notif-banner-text">فعّل الإشعارات لتصلك التذكيرات حتى عند إغلاق الشاشة</div><button class="notif-banner-btn">تفعيل</button></div>';
+}
+
+function requestNotifPermission(){
+  if(!('Notification' in window))return;
+  Notification.requestPermission().then(p=>{
+    if(p==='granted'&&atharSetts.remindersEnabled)startReminderTimer();
+    renderNotifBanner();
+  });
+}
+
+/* ===== REMINDER TIMER ===== */
+function getRandDhikr(){
+  const types=[];
+  if(atharSetts.typeTasbih)types.push(...REMINDER_DHIKR.tasbih);
+  if(atharSetts.typeTahlil)types.push(...REMINDER_DHIKR.tahlil);
+  if(atharSetts.typeIstighfar)types.push(...REMINDER_DHIKR.istighfar);
+  if(atharSetts.typeSalawat)types.push(...REMINDER_DHIKR.salawat);
+  if(atharSetts.typeAdhkar)types.push(...REMINDER_DHIKR.adhkar);
+  if(!types.length)return'سبحان الله وبحمده';
+  return types[Math.floor(Math.random()*types.length)];
+}
+function isWithinRemindHours(){
+  const h=new Date().getHours();
+  return h>=atharSetts.startHour&&h<atharSetts.endHour;
+}
+function fireReminder(){
+  if(!isWithinRemindHours())return;
+  const text=getRandDhikr();
+  if('Notification' in window&&Notification.permission==='granted'){
+    new Notification('أثرك 🌙',{body:text,icon:'/favicon.ico'});
+  }
+  const last=localStorage.getItem('athar-last-notif');
+  const now=Date.now();
+  if(!last||now-parseInt(last)>atharSetts.reminderInterval*60000*0.8){
+    localStorage.setItem('athar-last-notif',now);
+  }
+  checkHadithNotif();
+}
+function checkHadithNotif(){
+  if(!atharSetts.hadithEnabled)return;
+  const last=parseInt(localStorage.getItem('athar-last-hadith')||'0');
+  if(Date.now()-last>12*3600*1000){
+    atharHadithIdx=(atharHadithIdx+1)%NAWAWI_40.length;
+    localStorage.setItem('athar-hadith-idx',atharHadithIdx);
+    localStorage.setItem('athar-last-hadith',Date.now());
+    const h=NAWAWI_40[atharHadithIdx];
+    if('Notification' in window&&Notification.permission==='granted'){
+      new Notification('حديث نووي 📖',{body:'الحديث '+(atharHadithIdx+1)+': '+h.text.slice(0,80)+'...'});
+    }
+  }
+}
+function startReminderTimer(){
+  stopReminderTimer();
+  if(!atharSetts.remindersEnabled)return;
+  reminderTimer=setInterval(fireReminder,atharSetts.reminderInterval*60000);
+}
+function stopReminderTimer(){clearInterval(reminderTimer);reminderTimer=null;}
+function restartReminderTimer(){startReminderTimer();}
+
 /* Init */
 showAdhkar('sabah');
+loadAtharState();
+startReminderTimer();
 </script>
 </body>
 </html>
