@@ -373,17 +373,28 @@ html,body{font-family:'Tajawal',sans-serif;background:var(--bg);min-height:100vh
 
 /* ===== ADHKAR PAGE ===== */
 #p-adhkar{background:var(--bg);}
-.adhkar-tabs{display:flex;gap:8px;padding:12px 16px 10px;flex-shrink:0;overflow-x:auto;-webkit-overflow-scrolling:touch;scrollbar-width:none;}
+.adhkar-search-wrap{padding:12px 16px 4px;flex-shrink:0;}
+.adhkar-search-box{display:flex;align-items:center;gap:10px;background:#fff;border-radius:14px;padding:10px 14px;box-shadow:0 2px 10px rgba(0,0,0,.06);border:1.5px solid rgba(123,28,28,.08);}
+.adhkar-search-box svg{width:18px;height:18px;stroke:#bbb;stroke-width:2;fill:none;stroke-linecap:round;stroke-linejoin:round;flex-shrink:0;}
+.adhkar-search-box input{flex:1;border:none;outline:none;font-family:'Tajawal',sans-serif;font-size:14px;color:#1a1a1a;background:transparent;direction:rtl;text-align:right;}
+.adhkar-search-box input::placeholder{color:#ccc;}
+.adhkar-tabs{display:flex;gap:8px;padding:8px 16px 10px;flex-shrink:0;overflow-x:auto;-webkit-overflow-scrolling:touch;scrollbar-width:none;}
 .adhkar-tabs::-webkit-scrollbar{display:none;}
-.adhkar-tab{flex-shrink:0;padding:8px 14px;border:none;border-radius:20px;font-family:'Tajawal',sans-serif;font-size:12.5px;font-weight:700;cursor:pointer;background:#fff;color:#999;box-shadow:0 2px 8px rgba(0,0,0,.06);transition:.2s;white-space:nowrap;}
+.adhkar-tab{flex-shrink:0;padding:7px 14px;border:none;border-radius:20px;font-family:'Tajawal',sans-serif;font-size:12.5px;font-weight:700;cursor:pointer;background:#fff;color:#999;box-shadow:0 2px 8px rgba(0,0,0,.06);transition:.2s;white-space:nowrap;}
 .adhkar-tab.on{background:var(--primary);color:#fff;box-shadow:0 3px 10px rgba(123,28,28,.25);}
-.adhkar-list{flex:1;overflow-y:auto;padding:10px 16px 20px;display:flex;flex-direction:column;gap:10px;}
-.dhikr-card{background:#fff;border-radius:16px;padding:16px;box-shadow:0 2px 10px rgba(0,0,0,.05);border:1.5px solid rgba(123,28,28,.07);}
-.dhikr-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:10px;}
-.dhikr-name{font-size:11.5px;font-weight:700;color:var(--primary);}
-.dhikr-count-badge{background:rgba(123,28,28,.08);border-radius:6px;padding:2px 8px;font-size:11px;color:var(--primary);font-weight:700;flex-shrink:0;}
-.dhikr-text{font-family:'Amiri',serif;font-size:16px;line-height:2.1;color:#1a1a1a;border-right:3px solid rgba(123,28,28,.2);padding-right:12px;margin-bottom:8px;}
-.dhikr-source{font-size:10.5px;color:#aaa;text-align:left;direction:rtl;}
+.adhkar-list{flex:1;overflow-y:auto;padding:8px 16px 24px;display:flex;flex-direction:column;gap:12px;}
+.dhikr-card{background:#fff;border-radius:18px;padding:18px;box-shadow:0 2px 12px rgba(0,0,0,.06);border:1.5px solid rgba(123,28,28,.08);}
+.dhikr-header{display:flex;align-items:flex-start;justify-content:space-between;gap:8px;margin-bottom:12px;}
+.dhikr-header-right{display:flex;flex-direction:column;gap:4px;flex:1;}
+.dhikr-name{font-size:13px;font-weight:700;color:var(--primary);line-height:1.4;}
+.dhikr-source{font-size:11px;color:#aaa;font-weight:600;}
+.dhikr-count-badge{background:rgba(123,28,28,.09);border-radius:8px;padding:4px 10px;font-size:11.5px;color:var(--primary);font-weight:700;flex-shrink:0;white-space:nowrap;}
+.dhikr-text{font-family:'Amiri',serif;font-size:17px;line-height:2.2;color:#1a1a1a;border-right:3px solid rgba(123,28,28,.18);padding-right:14px;margin-bottom:10px;}
+.dhikr-footer{display:flex;align-items:center;justify-content:flex-end;}
+.dhikr-copy-btn{background:rgba(123,28,28,.07);border:none;border-radius:8px;padding:5px 12px;font-family:'Tajawal',sans-serif;font-size:11.5px;color:var(--primary);font-weight:700;cursor:pointer;display:flex;align-items:center;gap:5px;transition:background .15s;}
+.dhikr-copy-btn:active{background:rgba(123,28,28,.18);}
+.dhikr-copy-btn svg{width:13px;height:13px;stroke:var(--primary);stroke-width:2;fill:none;stroke-linecap:round;stroke-linejoin:round;}
+.adhkar-no-results{text-align:center;padding:50px 20px;color:#ccc;font-size:14px;}
 
 /* ===== TASBIH PAGE ===== */
 #p-tasbih{background:var(--bg);}
@@ -732,6 +743,12 @@ html,body{font-family:'Tajawal',sans-serif;background:var(--bg);min-height:100vh
     <button class="sub-back" onclick="goTo('features')">←</button>
     <h2>الأذكار والأدعية</h2>
   </div>
+  <div class="adhkar-search-wrap">
+    <div class="adhkar-search-box">
+      <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+      <input type="search" id="adhkarSearch" placeholder="ابحث عن ذكر أو دعاء..." oninput="filterAdhkar(this.value)">
+    </div>
+  </div>
   <div class="adhkar-tabs" id="adhkarTabs">
     <button class="adhkar-tab on" id="atab-sabah"      onclick="showAdhkar('sabah')">أذكار الصباح</button>
     <button class="adhkar-tab"    id="atab-masaa"      onclick="showAdhkar('masaa')">أذكار المساء</button>
@@ -807,29 +824,15 @@ html,body{font-family:'Tajawal',sans-serif;background:var(--bg);min-height:100vh
         <span class="feat-tool-label">الأذكار والأدعية</span>
         <span class="feat-tool-desc">أذكار الصباح والمساء</span>
       </button>
-      <button class="feat-tool-card" onclick="goTo('tasbih')">
-        <div class="feat-tool-icon">
-          <svg viewBox="0 0 24 24">
-            <circle cx="12" cy="5" r="3"/>
-            <path d="M12 8c0 0-5 3-5 8"/>
-            <path d="M12 8c0 0 5 3 5 8"/>
-            <path d="M7 16a5 5 0 0 0 10 0"/>
-          </svg>
-        </div>
-        <span class="feat-tool-label">السُّبحة</span>
-        <span class="feat-tool-desc">عداد التسبيح الرقمي</span>
-      </button>
-      <button class="feat-tool-card feat-tool-wide" onclick="goTo('athar')">
-        <div class="feat-tool-icon" style="background:linear-gradient(135deg,rgba(123,28,28,.15),rgba(123,28,28,.05));">
+      <button class="feat-tool-card" onclick="goTo('athar')">
+        <div class="feat-tool-icon" style="background:linear-gradient(135deg,rgba(123,28,28,.14),rgba(123,28,28,.04));">
           <svg viewBox="0 0 24 24">
             <path d="M12 20h9"/>
             <path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"/>
           </svg>
         </div>
-        <div class="feat-tool-texts">
-          <span class="feat-tool-label">أثرك</span>
-          <span class="feat-tool-desc">الأوراد اليومية، تذكيرات، الأحاديث النووية</span>
-        </div>
+        <span class="feat-tool-label">أثرك</span>
+        <span class="feat-tool-desc">الأوراد اليومية والتذكيرات</span>
       </button>
     </div>
   </div>
@@ -1366,16 +1369,63 @@ async function loadPrayer(){
 }
 
 /* ===== ADHKAR ===== */
+let adhkarCurrentCat='sabah';
 function showAdhkar(cat){
+  adhkarCurrentCat=cat;
+  document.getElementById('adhkarSearch').value='';
   ['sabah','masaa','nawm','istiyqaz','ba3d','kunuz','ruqya','karb','tawba','marad'].forEach(c=>{
     document.getElementById('atab-'+c).classList.toggle('on',c===cat);
   });
-  const list=document.getElementById('adhkarList');list.innerHTML='';
-  (ADHKAR_DATA[cat]||[]).forEach(item=>{
-    const card=document.createElement('div');card.className='dhikr-card';
-    card.innerHTML='<div class="dhikr-header"><span class="dhikr-name">'+item.name+'</span>'+(item.count?'<span class="dhikr-count-badge">'+item.count+'</span>':'')+'</div><div class="dhikr-text">'+item.text+'</div>'+(item.src?'<div class="dhikr-source">'+item.src+'</div>':'');
+  renderAdhkarItems(ADHKAR_DATA[cat]||[]);
+}
+function renderAdhkarItems(items){
+  const list=document.getElementById('adhkarList');
+  list.innerHTML='';
+  if(!items.length){
+    list.innerHTML='<div class="adhkar-no-results">لا توجد نتائج</div>';
+    return;
+  }
+  items.forEach((item,i)=>{
+    const card=document.createElement('div');
+    card.className='dhikr-card';
+    card.innerHTML=
+      '<div class="dhikr-header">'+
+        '<div class="dhikr-header-right">'+
+          '<span class="dhikr-name">'+item.name+'</span>'+
+          (item.src?'<span class="dhikr-source">'+item.src+'</span>':'')+
+        '</div>'+
+        (item.count?'<span class="dhikr-count-badge">'+item.count+'</span>':'')+
+      '</div>'+
+      '<div class="dhikr-text">'+item.text+'</div>'+
+      '<div class="dhikr-footer">'+
+        '<button class="dhikr-copy-btn" onclick="copyDhikr(this,\''+i+'\')">'+
+          '<svg viewBox="0 0 24 24"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>'+
+          'نسخ'+
+        '</button>'+
+      '</div>';
     list.appendChild(card);
   });
+}
+function filterAdhkar(q){
+  const v=q.trim();
+  if(!v){renderAdhkarItems(ADHKAR_DATA[adhkarCurrentCat]||[]);return;}
+  const all=Object.values(ADHKAR_DATA).flat();
+  const res=all.filter(it=>(it.name+it.text+(it.src||'')).includes(v));
+  ['sabah','masaa','nawm','istiyqaz','ba3d','kunuz','ruqya','karb','tawba','marad'].forEach(c=>{
+    document.getElementById('atab-'+c).classList.remove('on');
+  });
+  renderAdhkarItems(res);
+}
+function copyDhikr(btn,idxStr){
+  const all=(ADHKAR_DATA[adhkarCurrentCat]||[]);
+  const q=document.getElementById('adhkarSearch').value.trim();
+  const items=q?Object.values(ADHKAR_DATA).flat().filter(it=>(it.name+it.text+(it.src||'')).includes(q)):all;
+  const item=items[+idxStr];
+  if(!item)return;
+  navigator.clipboard.writeText(item.text).then(()=>{
+    btn.textContent='✓ تم النسخ';
+    setTimeout(()=>{btn.innerHTML='<svg viewBox="0 0 24 24" style="width:13px;height:13px;stroke:currentColor;stroke-width:2;fill:none;stroke-linecap:round;stroke-linejoin:round"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>نسخ';},1500);
+  }).catch(()=>{});
 }
 
 /* ===== TASBIH ===== */
