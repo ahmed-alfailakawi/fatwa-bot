@@ -177,6 +177,20 @@ html,body{font-family:'Tajawal',sans-serif;background:var(--bg);min-height:100vh
 .tasbih-actions{display:flex;gap:12px;}
 .tasbih-action{background:transparent;border:1.5px solid rgba(123,28,28,.2);color:var(--primary);border-radius:12px;padding:10px 20px;font-family:'Tajawal',sans-serif;font-size:13px;font-weight:700;cursor:pointer;}
 
+/* ===== FEATURES PAGE ===== */
+#p-features{background:var(--bg);}
+.features-body{flex:1;overflow-y:auto;padding:24px 20px;display:flex;flex-direction:column;gap:14px;}
+.features-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px;}
+.feat-tool-card{background:var(--card);border-radius:20px;padding:28px 12px 22px;display:flex;flex-direction:column;align-items:center;gap:12px;box-shadow:var(--sh);border:none;cursor:pointer;transition:transform .15s,box-shadow .15s,background .15s;font-family:'Tajawal',sans-serif;}
+.feat-tool-card:active{transform:scale(.95);box-shadow:none;background:var(--primary);}
+.feat-tool-card:active .feat-tool-label{color:#fff;}
+.feat-tool-card:active svg{stroke:#fff;}
+.feat-tool-icon{width:52px;height:52px;background:rgba(123,28,28,.08);border-radius:16px;display:flex;align-items:center;justify-content:center;}
+.feat-tool-card:active .feat-tool-icon{background:rgba(255,255,255,.18);}
+.feat-tool-icon svg{width:26px;height:26px;stroke:var(--primary);stroke-width:2;fill:none;stroke-linecap:round;stroke-linejoin:round;}
+.feat-tool-label{font-size:13px;font-weight:700;color:var(--text);text-align:center;line-height:1.3;}
+.feat-tool-desc{font-size:11px;color:var(--sub);text-align:center;line-height:1.4;}
+
 /* ===== MENU OVERLAY ===== */
 .menu-overlay{position:fixed;top:0;left:0;right:0;bottom:0;background:rgba(0,0,0,.45);z-index:200;display:none;align-items:flex-end;}
 .menu-overlay.open{display:flex;animation:fadeIn .2s ease;}
@@ -257,43 +271,6 @@ html,body{font-family:'Tajawal',sans-serif;background:var(--bg);min-height:100vh
       </button>
     </div>
 
-    <!-- Row 2: Islamic tools (additional) -->
-    <div class="feat-row-2">
-      <button class="feat-card-2" onclick="goTo('qibla')">
-        <svg viewBox="0 0 24 24" fill="none" stroke="#7B1C1C" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-          <circle cx="12" cy="12" r="9"/>
-          <polygon points="12,3 14.5,10 12,12 9.5,10" fill="#7B1C1C" stroke="none"/>
-          <polygon points="12,21 9.5,14 12,12 14.5,14" fill="rgba(123,28,28,0.3)" stroke="none"/>
-        </svg>
-        <span class="feat-label-2">القبلة</span>
-      </button>
-      <button class="feat-card-2" onclick="goTo('prayer')">
-        <svg viewBox="0 0 24 24" fill="none" stroke="#7B1C1C" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-          <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>
-        </svg>
-        <span class="feat-label-2">أوقات الصلاة</span>
-      </button>
-      <button class="feat-card-2" onclick="goTo('adhkar')">
-        <svg viewBox="0 0 24 24" fill="none" stroke="#7B1C1C" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-          <path d="M18 8h1a4 4 0 0 1 0 8h-1"/>
-          <path d="M2 8h16v9a4 4 0 0 1-4 4H6a4 4 0 0 1-4-4V8z"/>
-          <line x1="6" y1="1" x2="6" y2="4"/>
-          <line x1="10" y1="1" x2="10" y2="4"/>
-          <line x1="14" y1="1" x2="14" y2="4"/>
-        </svg>
-        <span class="feat-label-2">الأذكار</span>
-      </button>
-      <button class="feat-card-2" onclick="goTo('tasbih')">
-        <svg viewBox="0 0 24 24" fill="none" stroke="#7B1C1C" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-          <circle cx="12" cy="5" r="3"/>
-          <path d="M12 8c0 0-5 3-5 8"/>
-          <path d="M12 8c0 0 5 3 5 8"/>
-          <path d="M7 16a5 5 0 0 0 10 0"/>
-        </svg>
-        <span class="feat-label-2">السُّبحة</span>
-      </button>
-    </div>
-
     <!-- Search -->
     <div class="search-wrap">
       <div class="search-box">
@@ -333,7 +310,7 @@ html,body{font-family:'Tajawal',sans-serif;background:var(--bg);min-height:100vh
         <span class="nav-side-btn-dots">•••</span>
       </button>
       <div style="width:72px"></div>
-      <button class="nav-side-btn">
+      <button class="nav-side-btn" onclick="goTo('features')">
         <svg viewBox="0 0 24 24">
           <rect x="3" y="3" width="7" height="7" rx="1.5"/>
           <rect x="14" y="3" width="7" height="7" rx="1.5"/>
@@ -380,7 +357,7 @@ html,body{font-family:'Tajawal',sans-serif;background:var(--bg);min-height:100vh
 <!-- QIBLA PAGE -->
 <div class="page" id="p-qibla">
   <div class="sub-hdr">
-    <button class="sub-back" onclick="goTo('home')">←</button>
+    <button class="sub-back" onclick="goTo('features')">←</button>
     <h2>القبلة</h2>
   </div>
   <div class="qibla-body">
@@ -403,7 +380,7 @@ html,body{font-family:'Tajawal',sans-serif;background:var(--bg);min-height:100vh
 <!-- PRAYER TIMES PAGE -->
 <div class="page" id="p-prayer">
   <div class="sub-hdr">
-    <button class="sub-back" onclick="goTo('home')">←</button>
+    <button class="sub-back" onclick="goTo('features')">←</button>
     <h2>أوقات الصلاة</h2>
   </div>
   <div class="prayer-body" id="prayerBody">
@@ -417,7 +394,7 @@ html,body{font-family:'Tajawal',sans-serif;background:var(--bg);min-height:100vh
 <!-- ADHKAR PAGE -->
 <div class="page" id="p-adhkar">
   <div class="sub-hdr">
-    <button class="sub-back" onclick="goTo('home')">←</button>
+    <button class="sub-back" onclick="goTo('features')">←</button>
     <h2>الأذكار والأدعية</h2>
   </div>
   <div class="adhkar-tabs">
@@ -431,7 +408,7 @@ html,body{font-family:'Tajawal',sans-serif;background:var(--bg);min-height:100vh
 <!-- TASBIH PAGE -->
 <div class="page" id="p-tasbih">
   <div class="sub-hdr">
-    <button class="sub-back" onclick="goTo('home')">←</button>
+    <button class="sub-back" onclick="goTo('features')">←</button>
     <h2>السُّبحة</h2>
   </div>
   <div class="tasbih-body">
@@ -443,6 +420,63 @@ html,body{font-family:'Tajawal',sans-serif;background:var(--bg);min-height:100vh
     <div class="tasbih-actions">
       <button class="tasbih-action" onclick="tasbihReset()">إعادة</button>
       <button class="tasbih-action" onclick="tasbihSetTarget()">الهدف: <span id="tasbihTarget">33</span></button>
+    </div>
+  </div>
+</div>
+
+<!-- FEATURES PAGE -->
+<div class="page" id="p-features">
+  <div class="sub-hdr">
+    <button class="sub-back" onclick="goTo('home')">←</button>
+    <h2>المزايا</h2>
+  </div>
+  <div class="features-body">
+    <div class="features-grid">
+      <button class="feat-tool-card" onclick="goTo('qibla')">
+        <div class="feat-tool-icon">
+          <svg viewBox="0 0 24 24">
+            <circle cx="12" cy="12" r="9"/>
+            <polygon points="12,3 14.5,10 12,12 9.5,10" fill="#7B1C1C" stroke="none"/>
+            <polygon points="12,21 9.5,14 12,12 14.5,14" fill="rgba(123,28,28,0.3)" stroke="none"/>
+          </svg>
+        </div>
+        <span class="feat-tool-label">القبلة</span>
+        <span class="feat-tool-desc">اتجاه الكعبة المشرفة</span>
+      </button>
+      <button class="feat-tool-card" onclick="goTo('prayer')">
+        <div class="feat-tool-icon">
+          <svg viewBox="0 0 24 24">
+            <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>
+          </svg>
+        </div>
+        <span class="feat-tool-label">أوقات الصلاة</span>
+        <span class="feat-tool-desc">مواقيت الصلوات الخمس</span>
+      </button>
+      <button class="feat-tool-card" onclick="goTo('adhkar')">
+        <div class="feat-tool-icon">
+          <svg viewBox="0 0 24 24">
+            <path d="M18 8h1a4 4 0 0 1 0 8h-1"/>
+            <path d="M2 8h16v9a4 4 0 0 1-4 4H6a4 4 0 0 1-4-4V8z"/>
+            <line x1="6" y1="1" x2="6" y2="4"/>
+            <line x1="10" y1="1" x2="10" y2="4"/>
+            <line x1="14" y1="1" x2="14" y2="4"/>
+          </svg>
+        </div>
+        <span class="feat-tool-label">الأذكار والأدعية</span>
+        <span class="feat-tool-desc">أذكار الصباح والمساء</span>
+      </button>
+      <button class="feat-tool-card" onclick="goTo('tasbih')">
+        <div class="feat-tool-icon">
+          <svg viewBox="0 0 24 24">
+            <circle cx="12" cy="5" r="3"/>
+            <path d="M12 8c0 0-5 3-5 8"/>
+            <path d="M12 8c0 0 5 3 5 8"/>
+            <path d="M7 16a5 5 0 0 0 10 0"/>
+          </svg>
+        </div>
+        <span class="feat-tool-label">السُّبحة</span>
+        <span class="feat-tool-desc">عداد التسبيح الرقمي</span>
+      </button>
     </div>
   </div>
 </div>
