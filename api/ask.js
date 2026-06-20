@@ -4,7 +4,7 @@ async function findYT(name, query) {
   try {
     const r = await fetch(
       "https://www.youtube.com/results?search_query=" + encodeURIComponent(query + " " + name),
-      { headers: { "User-Agent": "Mozilla/5.0" }, signal: AbortSignal.timeout(5000) }
+      { headers: { "User-Agent": "Mozilla/5.0" }, signal: AbortSignal.timeout(3000) }
     );
     const h = await r.text();
     const videoMatch = h.match(/"videoId":"([^"]{11})"/);
@@ -23,7 +23,7 @@ async function fetchSource(url) {
   try {
     const r = await fetch(url, {
       headers: { "User-Agent": "Mozilla/5.0", "Accept-Language": "ar,en;q=0.9" },
-      signal: AbortSignal.timeout(8000)
+      signal: AbortSignal.timeout(5000)
     });
     if (!r.ok) return null;
     const html = await r.text();
