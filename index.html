@@ -29,32 +29,47 @@ html,body{font-family:'Tajawal',sans-serif;background:var(--bg);min-height:100vh
 .mosque-svg{width:100px;height:118px;margin-bottom:10px;}
 .brand-title{font-family:'Tajawal',sans-serif;font-size:34px;font-weight:900;color:var(--primary);letter-spacing:6px;margin-bottom:5px;}
 .brand-sub{font-size:13px;color:var(--sub);font-weight:400;}
-.orn-div{display:flex;align-items:center;gap:10px;width:100%;max-width:260px;margin:16px 0 28px;}
+
+.orn-div{display:flex;align-items:center;gap:10px;width:100%;max-width:260px;margin:16px 0 24px;}
 .orn-line{flex:1;height:1px;background:var(--primary);opacity:.35;}
 .orn-icon{color:var(--primary);font-size:15px;opacity:.65;}
-.feat-row{display:flex;gap:10px;width:100%;max-width:390px;margin-bottom:16px;}
+
+/* Feature cards - Row 1 */
+.feat-row{display:flex;gap:10px;width:100%;max-width:390px;margin-bottom:10px;}
 .feat-card{flex:1;background:var(--card);border-radius:18px;padding:16px 6px 14px;display:flex;flex-direction:column;align-items:center;gap:9px;box-shadow:var(--sh);border:none;cursor:pointer;transition:transform .15s,box-shadow .15s;font-family:'Tajawal',sans-serif;}
-.feat-card:active{transform:scale(.95);box-shadow:none;}
+.feat-card:active{transform:scale(.95);box-shadow:none;background:var(--primary);}
+.feat-card:active .feat-label{color:#fff;}
+.feat-card:active svg{stroke:#fff;}
 .feat-card svg{width:26px;height:26px;}
-.feat-label{font-size:11px;font-weight:700;color:var(--text);text-align:center;line-height:1.35;}
-.mode-chips{display:flex;gap:8px;width:100%;max-width:390px;margin-bottom:10px;}
-.mode-chip{flex:1;padding:9px;border:1.5px solid rgba(123,28,28,.15);border-radius:12px;font-family:'Tajawal',sans-serif;font-size:13px;font-weight:700;cursor:pointer;background:#fff;color:#999;transition:.2s;}
-.mode-chip.active{background:var(--primary);color:#fff;border-color:transparent;}
+.feat-label{font-size:10.5px;font-weight:700;color:var(--text);text-align:center;line-height:1.35;}
+
+/* Feature cards - Row 2 (tools) */
+.feat-row-2{display:flex;gap:10px;width:100%;max-width:390px;margin-bottom:22px;}
+.feat-card-2{flex:1;background:rgba(123,28,28,.06);border-radius:16px;padding:13px 4px 11px;display:flex;flex-direction:column;align-items:center;gap:7px;border:1px solid rgba(123,28,28,.1);cursor:pointer;transition:transform .15s;font-family:'Tajawal',sans-serif;}
+.feat-card-2:active{transform:scale(.95);background:var(--primary);border-color:var(--primary);}
+.feat-card-2:active .feat-label-2{color:#fff;}
+.feat-card-2:active svg{stroke:#fff;}
+.feat-card-2 svg{width:22px;height:22px;}
+.feat-label-2{font-size:10px;font-weight:700;color:var(--primary);text-align:center;line-height:1.3;}
+
+/* Search */
 .search-wrap{width:100%;max-width:390px;margin-bottom:20px;}
-.search-box{display:flex;background:var(--card);border-radius:16px;box-shadow:var(--sh);overflow:visible;align-items:center;}
-.search-input{flex:1;border:none;outline:none;padding:14px 16px;font-family:'Tajawal',sans-serif;font-size:14px;color:var(--text);background:transparent;min-width:0;direction:rtl;border-radius:16px 0 0 16px;}
-.search-input::placeholder{color:#ccc;}
-.search-go{background:var(--primary);border:none;width:52px;height:52px;cursor:pointer;border-radius:12px;margin:4px;flex-shrink:0;display:flex;align-items:center;justify-content:center;transition:opacity .2s;}
+.search-box{display:flex;background:var(--card);border-radius:16px;box-shadow:var(--sh);overflow:hidden;align-items:center;}
+.search-go{background:var(--primary);border:none;width:56px;height:56px;cursor:pointer;flex-shrink:0;display:flex;align-items:center;justify-content:center;transition:opacity .2s;}
 .search-go:disabled{opacity:.4;cursor:not-allowed;}
 .search-go svg{width:22px;height:22px;stroke:#fff;stroke-width:2.5;fill:none;stroke-linecap:round;stroke-linejoin:round;}
+.search-input{flex:1;border:none;outline:none;padding:14px 16px;font-family:'Tajawal',sans-serif;font-size:14px;color:var(--text);background:transparent;min-width:0;direction:rtl;}
+.search-input::placeholder{color:#ccc;}
+
 .home-tagline{display:flex;align-items:center;gap:8px;font-size:12px;color:var(--sub);text-align:center;padding:0 8px;}
 .home-tagline-icon{font-size:15px;color:var(--primary);opacity:.6;flex-shrink:0;}
 
 /* Bottom Nav */
 .bottom-nav-wrapper{position:relative;flex-shrink:0;}
 .bottom-nav-bar{height:74px;background:var(--primary);display:flex;align-items:center;justify-content:space-between;padding:0 36px;border-radius:28px 28px 0 0;}
-.nav-side-btn{background:transparent;border:none;cursor:pointer;padding:8px;display:flex;align-items:center;justify-content:center;color:rgba(255,255,255,.75);font-size:22px;letter-spacing:2px;font-weight:700;}
+.nav-side-btn{background:transparent;border:none;cursor:pointer;padding:8px;display:flex;align-items:center;justify-content:center;}
 .nav-side-btn svg{width:24px;height:24px;stroke:rgba(255,255,255,.75);stroke-width:2;fill:none;stroke-linecap:round;stroke-linejoin:round;}
+.nav-side-btn-dots{font-size:22px;letter-spacing:2px;font-weight:700;color:rgba(255,255,255,.75);}
 .nav-center-float{position:absolute;top:-32px;left:50%;transform:translateX(-50%);display:flex;flex-direction:column;align-items:center;}
 .nav-home-btn{width:62px;height:62px;background:var(--card);border-radius:50%;display:flex;align-items:center;justify-content:center;box-shadow:0 6px 20px rgba(0,0,0,.18);border:none;cursor:pointer;}
 .nav-home-btn svg{width:30px;height:36px;}
@@ -103,7 +118,7 @@ html,body{font-family:'Tajawal',sans-serif;background:var(--bg);min-height:100vh
 .contact-link{display:inline-flex;align-items:center;gap:8px;color:var(--primary);font-size:14px;font-weight:700;text-decoration:none;padding:10px 16px;background:rgba(123,28,28,.06);border-radius:10px;border:1px solid rgba(123,28,28,.18);width:100%;justify-content:center;}
 
 /* ===== SUB PAGES SHARED ===== */
-.sub-hdr{background:linear-gradient(160deg,#9B3232,#7B1C1C,#4A1010);padding:16px 16px;color:#fff;display:flex;align-items:center;gap:12px;flex-shrink:0;box-shadow:0 4px 20px rgba(74,16,16,.25);}
+.sub-hdr{background:linear-gradient(160deg,#9B3232,#7B1C1C,#4A1010);padding:16px;color:#fff;display:flex;align-items:center;gap:12px;flex-shrink:0;box-shadow:0 4px 20px rgba(74,16,16,.25);}
 .sub-hdr h2{font-size:17px;font-weight:700;flex:1;text-align:center;margin-right:-36px;}
 .sub-back{width:36px;height:36px;background:rgba(255,255,255,.18);border-radius:10px;border:none;color:#fff;font-size:20px;cursor:pointer;display:flex;align-items:center;justify-content:center;}
 
@@ -208,25 +223,57 @@ html,body{font-family:'Tajawal',sans-serif;background:var(--bg);min-height:100vh
       <div class="orn-line"></div>
     </div>
 
-    <!-- Feature Cards -->
+    <!-- Row 1: Search functions (original) -->
     <div class="feat-row">
-      <button class="feat-card" onclick="goTo('qibla')">
+      <button class="feat-card" onclick="focusSearch('fatwa')">
+        <svg viewBox="0 0 24 24" fill="none" stroke="#7B1C1C" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>
+          <path d="M8 9h8M8 13h5"/>
+        </svg>
+        <span class="feat-label">ابحث عن فتوى</span>
+      </button>
+      <button class="feat-card" onclick="focusSearch('hadith')">
+        <svg viewBox="0 0 24 24" fill="none" stroke="#7B1C1C" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/>
+          <path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/>
+        </svg>
+        <span class="feat-label">استخراج الاحاديث</span>
+      </button>
+      <button class="feat-card" onclick="focusSearch('general')">
+        <svg viewBox="0 0 24 24" fill="none" stroke="#7B1C1C" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>
+          <circle cx="12" cy="10" r="1.5" fill="#7B1C1C" stroke="none"/>
+          <path d="M12 7a2 2 0 0 1 1.5 3.3L12 12"/>
+        </svg>
+        <span class="feat-label">سؤال ديني عام</span>
+      </button>
+      <button class="feat-card" onclick="showHistory()">
+        <svg viewBox="0 0 24 24" fill="none" stroke="#7B1C1C" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <polyline points="1 4 1 10 7 10"/>
+          <path d="M3.51 15a9 9 0 1 0 .49-4.49"/>
+          <polyline points="12 7 12 12 15 14"/>
+        </svg>
+        <span class="feat-label">تاريخ البحث</span>
+      </button>
+    </div>
+
+    <!-- Row 2: Islamic tools (additional) -->
+    <div class="feat-row-2">
+      <button class="feat-card-2" onclick="goTo('qibla')">
         <svg viewBox="0 0 24 24" fill="none" stroke="#7B1C1C" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
           <circle cx="12" cy="12" r="9"/>
           <polygon points="12,3 14.5,10 12,12 9.5,10" fill="#7B1C1C" stroke="none"/>
-          <polygon points="12,21 9.5,14 12,12 14.5,14" fill="rgba(123,28,28,0.25)" stroke="none"/>
-          <line x1="12" y1="3" x2="12" y2="21" stroke-width="0"/>
+          <polygon points="12,21 9.5,14 12,12 14.5,14" fill="rgba(123,28,28,0.3)" stroke="none"/>
         </svg>
-        <span class="feat-label">القبلة</span>
+        <span class="feat-label-2">القبلة</span>
       </button>
-      <button class="feat-card" onclick="goTo('prayer')">
+      <button class="feat-card-2" onclick="goTo('prayer')">
         <svg viewBox="0 0 24 24" fill="none" stroke="#7B1C1C" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
           <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>
-          <circle cx="17" cy="4" r="1" fill="#7B1C1C" stroke="none"/>
         </svg>
-        <span class="feat-label">أوقات الصلاة</span>
+        <span class="feat-label-2">أوقات الصلاة</span>
       </button>
-      <button class="feat-card" onclick="goTo('adhkar')">
+      <button class="feat-card-2" onclick="goTo('adhkar')">
         <svg viewBox="0 0 24 24" fill="none" stroke="#7B1C1C" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
           <path d="M18 8h1a4 4 0 0 1 0 8h-1"/>
           <path d="M2 8h16v9a4 4 0 0 1-4 4H6a4 4 0 0 1-4-4V8z"/>
@@ -234,32 +281,26 @@ html,body{font-family:'Tajawal',sans-serif;background:var(--bg);min-height:100vh
           <line x1="10" y1="1" x2="10" y2="4"/>
           <line x1="14" y1="1" x2="14" y2="4"/>
         </svg>
-        <span class="feat-label">الأذكار</span>
+        <span class="feat-label-2">الأذكار</span>
       </button>
-      <button class="feat-card" onclick="goTo('tasbih')">
+      <button class="feat-card-2" onclick="goTo('tasbih')">
         <svg viewBox="0 0 24 24" fill="none" stroke="#7B1C1C" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
           <circle cx="12" cy="5" r="3"/>
           <path d="M12 8c0 0-5 3-5 8"/>
           <path d="M12 8c0 0 5 3 5 8"/>
           <path d="M7 16a5 5 0 0 0 10 0"/>
         </svg>
-        <span class="feat-label">السُّبحة</span>
+        <span class="feat-label-2">السُّبحة</span>
       </button>
-    </div>
-
-    <!-- Mode chips -->
-    <div class="mode-chips">
-      <button class="mode-chip active" id="chip-fatwa" onclick="setMode('fatwa')">فتوى</button>
-      <button class="mode-chip" id="chip-hadith" onclick="setMode('hadith')">تخريج حديث</button>
     </div>
 
     <!-- Search -->
     <div class="search-wrap">
       <div class="search-box">
-        <input class="search-input" id="mainInput" type="text" placeholder="ما حكم...؟" onkeydown="if(event.key==='Enter')doSearch(currentMode)">
         <button class="search-go" id="goBtn" onclick="doSearch(currentMode)">
           <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
         </button>
+        <input class="search-input" id="mainInput" type="text" placeholder="ما حكم...؟" onkeydown="if(event.key==='Enter')doSearch(currentMode)">
       </div>
     </div>
 
@@ -289,11 +330,16 @@ html,body{font-family:'Tajawal',sans-serif;background:var(--bg);min-height:100vh
     </div>
     <div class="bottom-nav-bar">
       <button class="nav-side-btn" onclick="openMenu()">
-        <svg viewBox="0 0 24 24"><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+        <span class="nav-side-btn-dots">•••</span>
       </button>
       <div style="width:72px"></div>
-      <button class="nav-side-btn" onclick="showHistory()">
-        <svg viewBox="0 0 24 24"><polyline points="1 4 1 10 7 10"/><path d="M3.51 15a9 9 0 1 0 .49-4.49"/><polyline points="12 7 12 12 15 14"/></svg>
+      <button class="nav-side-btn">
+        <svg viewBox="0 0 24 24">
+          <rect x="3" y="3" width="7" height="7" rx="1.5"/>
+          <rect x="14" y="3" width="7" height="7" rx="1.5"/>
+          <rect x="3" y="14" width="7" height="7" rx="1.5"/>
+          <rect x="14" y="14" width="7" height="7" rx="1.5"/>
+        </svg>
       </button>
     </div>
   </div>
@@ -345,9 +391,9 @@ html,body{font-family:'Tajawal',sans-serif;background:var(--bg);min-height:100vh
       </div>
       <div class="qibla-dot"></div>
     </div>
-    <div>
+    <div style="text-align:center">
       <div class="qibla-deg-text" id="qiblaDeg">--°</div>
-      <div class="qibla-dir-label" style="text-align:center">اتجاه القبلة</div>
+      <div class="qibla-dir-label">اتجاه القبلة</div>
     </div>
     <div class="qibla-status" id="qiblaStatus">اضغط الزر لتحديد اتجاه القبلة بناءً على موقعك</div>
     <button class="qibla-start-btn" onclick="getQibla()">تحديد القبلة</button>
@@ -402,7 +448,7 @@ html,body{font-family:'Tajawal',sans-serif;background:var(--bg);min-height:100vh
 </div>
 
 <!-- MENU OVERLAY -->
-<div class="menu-overlay" id="menuOverlay" onclick="closeMenu(event)">
+<div class="menu-overlay" id="menuOverlay" onclick="closeMenuOutside(event)">
   <div class="menu-sheet">
     <div class="menu-handle"></div>
     <div class="menu-item" onclick="menuContact()">
@@ -460,20 +506,20 @@ const ADHKAR_DATA={
   sabah:[
     {name:'أذكار الصباح',text:'أَصْبَحْنَا وَأَصْبَحَ الْمُلْكُ لِلَّهِ، وَالْحَمْدُ لِلَّهِ، لاَ إِلَـهَ إِلاَّ اللهُ وَحْدَهُ لاَ شَرِيكَ لَهُ، لَهُ الْمُلْكُ وَلَهُ الْحَمْدُ وَهُوَ عَلَى كُلِّ شَيْءٍ قَدِيرٌ.',count:'1'},
     {name:'آية الكرسي',text:'اللَّهُ لَا إِلَهَ إِلَّا هُوَ الْحَيُّ الْقَيُّومُ ۚ لَا تَأْخُذُهُ سِنَةٌ وَلَا نَوْمٌ ۚ لَّهُ مَا فِي السَّمَاوَاتِ وَمَا فِي الْأَرْضِ.',count:'1 مرة'},
-    {name:'التسبيح والتحميد والتكبير',text:'سُبْحَانَ اللهِ وَبِحَمْدِهِ',count:'100 مرة'},
+    {name:'التسبيح والتحميد',text:'سُبْحَانَ اللهِ وَبِحَمْدِهِ',count:'100 مرة'},
     {name:'سيد الاستغفار',text:'اللَّهُمَّ أَنْتَ رَبِّي لَا إِلَهَ إِلَّا أَنْتَ، خَلَقْتَنِي وَأَنَا عَبْدُكَ، وَأَنَا عَلَى عَهْدِكَ وَوَعْدِكَ مَا اسْتَطَعْتُ.',count:'1 مرة'},
     {name:'الصلاة على النبي',text:'اللَّهُمَّ صَلِّ وَسَلِّمْ عَلَى نَبِيِّنَا مُحَمَّدٍ',count:'10 مرات'},
-    {name:'الإخلاص والمعوذتان',text:'قُلْ هُوَ اللَّهُ أَحَدٌ ۝ اللَّهُ الصَّمَدُ ۝ لَمْ يَلِدْ وَلَمْ يُولَدْ ۝ وَلَمْ يَكُن لَّهُ كُفُوًا أَحَدٌ',count:'3 مرات'},
+    {name:'المعوذات',text:'قُلْ هُوَ اللَّهُ أَحَدٌ ۝ اللَّهُ الصَّمَدُ ۝ لَمْ يَلِدْ وَلَمْ يُولَدْ ۝ وَلَمْ يَكُن لَّهُ كُفُوًا أَحَدٌ',count:'3 مرات'},
   ],
   masaa:[
-    {name:'أذكار المساء',text:'أَمْسَيْنَا وَأَمْسَى الْمُلْكُ لِلَّهِ، وَالْحَمْدُ لِلَّهِ، لاَ إِلَـهَ إِلاَّ اللهُ وَحْدَهُ لاَ شَرِيكَ لَهُ، لَهُ الْمُلْكُ وَلَهُ الْحَمْدُ وَهُوَ عَلَى كُلِّ شَيْءٍ قَدِيرٌ.',count:'1'},
+    {name:'أذكار المساء',text:'أَمْسَيْنَا وَأَمْسَى الْمُلْكُ لِلَّهِ، وَالْحَمْدُ لِلَّهِ، لاَ إِلَـهَ إِلاَّ اللهُ وَحْدَهُ لاَ شَرِيكَ لَهُ.',count:'1'},
     {name:'دعاء المساء',text:'اللَّهُمَّ بِكَ أَمْسَيْنَا، وَبِكَ أَصْبَحْنَا، وَبِكَ نَحْيَا، وَبِكَ نَمُوتُ وَإِلَيْكَ الْمَصِيرُ.',count:'1 مرة'},
     {name:'التسبيح',text:'سُبْحَانَ اللهِ وَبِحَمْدِهِ',count:'100 مرة'},
     {name:'الاستغفار',text:'أَسْتَغْفِرُ اللهَ وَأَتُوبُ إِلَيْهِ',count:'100 مرة'},
     {name:'دعاء العافية',text:'اللَّهُمَّ إِنِّي أَسْأَلُكَ الْعَفْوَ وَالْعَافِيَةَ فِي الدُّنْيَا وَالآخِرَةِ.',count:'1 مرة'},
   ],
   adiya:[
-    {name:'دعاء الكرب',text:'لَا إِلَهَ إِلَّا اللَّهُ الْعَظِيمُ الْحَلِيمُ، لَا إِلَهَ إِلَّا اللَّهُ رَبُّ الْعَرْشِ الْعَظِيمِ، لَا إِلَهَ إِلَّا اللَّهُ رَبُّ السَّمَاوَاتِ وَرَبُّ الْأَرْضِ وَرَبُّ الْعَرْشِ الْكَرِيمِ.',count:''},
+    {name:'دعاء الكرب',text:'لَا إِلَهَ إِلَّا اللَّهُ الْعَظِيمُ الْحَلِيمُ، لَا إِلَهَ إِلَّا اللَّهُ رَبُّ الْعَرْشِ الْعَظِيمِ، لَا إِلَهَ إِلَّا اللَّهُ رَبُّ السَّمَاوَاتِ وَرَبُّ الْأَرْضِ.',count:''},
     {name:'دعاء الهم والحزن',text:'اللَّهُمَّ إِنِّي عَبْدُكَ، ابْنُ عَبْدِكَ، ابْنُ أَمَتِكَ، نَاصِيَتِي بِيَدِكَ، مَاضٍ فِيَّ حُكْمُكَ، عَدْلٌ فِيَّ قَضَاؤُكَ.',count:''},
     {name:'دعاء الاستخارة',text:'اللَّهُمَّ إِنِّي أَسْتَخِيرُكَ بِعِلْمِكَ، وَأَسْتَقْدِرُكَ بِقُدْرَتِكَ، وَأَسْأَلُكَ مِنْ فَضْلِكَ الْعَظِيمِ.',count:''},
     {name:'دعاء السفر',text:'اللَّهُمَّ إِنَّا نَسْأَلُكَ فِي سَفَرِنَا هَذَا الْبِرَّ وَالتَّقْوَى، وَمِنَ الْعَمَلِ مَا تَرْضَى.',count:''},
@@ -481,7 +527,7 @@ const ADHKAR_DATA={
   ]
 };
 
-const PLACEHOLDERS={fatwa:'ما حكم...؟',hadith:'نص الحديث...'};
+const PLACEHOLDERS={fatwa:'ما حكم...؟',hadith:'نص الحديث...',general:'اكتب سؤالك الديني...'};
 let dhikrTimer=null,dhikrIdx=0,currentMode='fatwa';
 let drawAnimFrame=null,drawCycleStart=0,isDrawComplete=false,pathLengths=[];
 let tasbihCount=0,tasbihTotal=0,tasbihTarget=33;
@@ -495,35 +541,34 @@ function goTo(id){
   if(id==='adhkar')showAdhkar('sabah');
 }
 
-function setMode(m){
-  currentMode=m;
-  document.getElementById('chip-fatwa').classList.toggle('active',m==='fatwa');
-  document.getElementById('chip-hadith').classList.toggle('active',m==='hadith');
-  document.getElementById('mainInput').placeholder=PLACEHOLDERS[m];
-  document.getElementById('mainInput').focus();
+function focusSearch(mode){
+  currentMode=mode==='general'?'fatwa':mode;
+  const input=document.getElementById('mainInput');
+  input.placeholder=PLACEHOLDERS[mode]||PLACEHOLDERS.fatwa;
+  input.focus();
+  input.scrollIntoView({behavior:'smooth',block:'center'});
 }
 
 function showHistory(){
   const h=JSON.parse(localStorage.getItem('fatwa-history')||'[]');
   if(!h.length){alert('لا يوجد تاريخ بحث بعد');return;}
   document.getElementById('mainInput').value=h[h.length-1];
-  goTo('home');
-  setTimeout(()=>document.getElementById('mainInput').focus(),100);
+  document.getElementById('mainInput').focus();
 }
 
 /* ===== MENU ===== */
 function openMenu(){document.getElementById('menuOverlay').classList.add('open');}
-function closeMenu(e){if(e.target===document.getElementById('menuOverlay'))document.getElementById('menuOverlay').classList.remove('open');}
-function closeMenuSheet(){document.getElementById('menuOverlay').classList.remove('open');}
-function menuContact(){closeMenuSheet();window.location.href='mailto:ahmed.fy2015@gmail.com';}
+function closeMenuOutside(e){if(e.target===document.getElementById('menuOverlay'))document.getElementById('menuOverlay').classList.remove('open');}
+function closeMenu(){document.getElementById('menuOverlay').classList.remove('open');}
+function menuContact(){closeMenu();window.location.href='mailto:ahmed.fy2015@gmail.com';}
 function menuLang(){
-  closeMenuSheet();
+  closeMenu();
   currentLang=currentLang==='ar'?'en':'ar';
   document.getElementById('menuLangDesc').textContent='الحالية: '+(currentLang==='ar'?'العربية':'English');
   alert(currentLang==='ar'?'تم التبديل إلى العربية':'Switched to English (coming soon)');
 }
 function menuAbout(){
-  closeMenuSheet();
+  closeMenu();
   alert('FATWA — فتوى موثوقة\nتطبيق لاستعراض أقوال علماء أهل السنة في المسائل الشرعية.\nالنسخة 1.0');
 }
 
@@ -565,8 +610,8 @@ async function loadPrayer(){
       const hijri=json.data.date.hijri.date+' '+json.data.date.hijri.month.ar+' '+json.data.date.hijri.year+'هـ';
       const now=new Date();
       const nowMin=now.getHours()*60+now.getMinutes();
-      let nextIdx=-1;
       const mins=PRAYER_ORDER.map(k=>{const[h,m]=t[k].split(':').map(Number);return h*60+m;});
+      let nextIdx=-1;
       for(let i=0;i<mins.length;i++){if(mins[i]>nowMin){nextIdx=i;break;}}
       body.innerHTML='';
       const info=document.createElement('div');
@@ -576,29 +621,20 @@ async function loadPrayer(){
       PRAYER_ORDER.forEach((k,i)=>{
         const row=document.createElement('div');
         row.className='prayer-row'+(i===nextIdx?' now':'');
-        const icons=['☾','☀','☀','☀','☾','☾'];
         row.innerHTML='<div class="prayer-icon-box"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg></div><span class="prayer-name-text">'+PRAYER_NAMES[k]+'</span>'+(i===nextIdx?'<span class="prayer-next-tag">التالية</span>':'')+'<span class="prayer-time-text">'+t[k]+'</span>';
         body.appendChild(row);
       });
-      const refreshBtn=document.createElement('button');
-      refreshBtn.className='prayer-load-btn';
-      refreshBtn.innerHTML='تحديث';
-      refreshBtn.onclick=loadPrayer;
-      body.appendChild(refreshBtn);
+      const rb=document.createElement('button');rb.className='prayer-load-btn';rb.innerHTML='تحديث';rb.onclick=loadPrayer;body.appendChild(rb);
     }catch(e){body.innerHTML='<div style="text-align:center;padding:40px;color:#999">تعذّر تحميل أوقات الصلاة</div>';}
   },()=>{body.innerHTML='<div style="text-align:center;padding:40px;color:#999">تعذّر تحديد الموقع</div>';});
 }
 
 /* ===== ADHKAR ===== */
 function showAdhkar(cat){
-  ['sabah','masaa','adiya'].forEach(c=>{
-    document.getElementById('tab-'+c).classList.toggle('on',c===cat);
-  });
-  const list=document.getElementById('adhkarList');
-  list.innerHTML='';
+  ['sabah','masaa','adiya'].forEach(c=>{document.getElementById('tab-'+c).classList.toggle('on',c===cat);});
+  const list=document.getElementById('adhkarList');list.innerHTML='';
   (ADHKAR_DATA[cat]||[]).forEach(item=>{
-    const card=document.createElement('div');
-    card.className='dhikr-card';
+    const card=document.createElement('div');card.className='dhikr-card';
     card.innerHTML='<div class="dhikr-header"><span class="dhikr-name">'+item.name+'</span>'+(item.count?'<span class="dhikr-count-badge">'+item.count+'</span>':'')+'</div><div class="dhikr-text">'+item.text+'</div>';
     list.appendChild(card);
   });
@@ -606,15 +642,10 @@ function showAdhkar(cat){
 
 /* ===== TASBIH ===== */
 function tasbihTap(){
-  tasbihCount++;
-  tasbihTotal++;
+  tasbihCount++;tasbihTotal++;
   document.getElementById('tasbihNum').textContent=tasbihCount;
   document.getElementById('tasbihCycle').textContent='المجموع: '+tasbihTotal;
-  if(tasbihCount>=tasbihTarget){
-    tasbihCount=0;
-    document.getElementById('tasbihNum').textContent='0';
-    if(navigator.vibrate)navigator.vibrate(100);
-  }
+  if(tasbihCount>=tasbihTarget){tasbihCount=0;document.getElementById('tasbihNum').textContent='0';if(navigator.vibrate)navigator.vibrate(100);}
 }
 function tasbihReset(){tasbihCount=0;tasbihTotal=0;document.getElementById('tasbihNum').textContent='0';document.getElementById('tasbihCycle').textContent='المجموع: 0';}
 function tasbihSetTarget(){
@@ -626,18 +657,11 @@ function tasbihSetTarget(){
 function initPaths(){
   const paths=[...document.querySelectorAll('#p-loading .ld-path')];
   pathLengths=[];
-  paths.forEach(p=>{
-    let len=200;try{len=p.getTotalLength();}catch(e){}
-    pathLengths.push(len);
-    p.style.strokeDasharray=len;p.style.strokeDashoffset=len;p.style.opacity='0';
-  });
+  paths.forEach(p=>{let len=200;try{len=p.getTotalLength();}catch(e){}pathLengths.push(len);p.style.strokeDasharray=len;p.style.strokeDashoffset=len;p.style.opacity='0';});
   return paths;
 }
-
 function startDrawAnimation(){
-  isDrawComplete=false;
-  const paths=initPaths();
-  const N=paths.length;
+  isDrawComplete=false;const paths=initPaths();const N=paths.length;
   const DRAW=13600,HOLD=2800,FADE=2000,TOTAL=DRAW+HOLD+FADE;
   drawCycleStart=performance.now();
   function tick(now){
@@ -645,17 +669,11 @@ function startDrawAnimation(){
     const elapsed=(now-drawCycleStart)%TOTAL;
     if(elapsed<DRAW){
       const t=elapsed/DRAW;
-      paths.forEach((p,i)=>{
-        const start=i/N;
-        const prog=Math.max(0,Math.min(1,(t-start)*N));
-        p.style.strokeDashoffset=pathLengths[i]*(1-prog);
-        p.style.opacity=prog>0?'1':'0';
-      });
+      paths.forEach((p,i)=>{const start=i/N;const prog=Math.max(0,Math.min(1,(t-start)*N));p.style.strokeDashoffset=pathLengths[i]*(1-prog);p.style.opacity=prog>0?'1':'0';});
     }else if(elapsed<DRAW+HOLD){
       paths.forEach(p=>{p.style.strokeDashoffset='0';p.style.opacity='1';});
     }else{
-      const ft=(elapsed-DRAW-HOLD)/FADE;
-      const op=Math.max(0,1-ft).toFixed(2);
+      const ft=(elapsed-DRAW-HOLD)/FADE;const op=Math.max(0,1-ft).toFixed(2);
       paths.forEach((p,i)=>{p.style.opacity=op;if(ft>0.8)p.style.strokeDashoffset=pathLengths[i];});
       if(ft>=1)drawCycleStart=now;
     }
@@ -665,15 +683,14 @@ function startDrawAnimation(){
 }
 function stopDrawAnimation(){isDrawComplete=true;setTimeout(()=>{cancelAnimationFrame(drawAnimFrame);drawAnimFrame=null;},150);}
 
-/* ===== DHIKR ROTATION ===== */
+/* ===== DHIKR ===== */
 function startDhikr(){
   const el=document.getElementById('ldDhikr');
   dhikrIdx=0;el.textContent=DHIKR_LIST[0];el.style.opacity='1';el.style.transform='translateY(0)';
   dhikrTimer=setInterval(()=>{
     el.style.opacity='0';el.style.transform='translateY(-6px)';
     setTimeout(()=>{
-      dhikrIdx=(dhikrIdx+1)%DHIKR_LIST.length;
-      el.textContent=DHIKR_LIST[dhikrIdx];
+      dhikrIdx=(dhikrIdx+1)%DHIKR_LIST.length;el.textContent=DHIKR_LIST[dhikrIdx];
       el.style.transform='translateY(6px)';el.style.opacity='0';
       requestAnimationFrame(()=>requestAnimationFrame(()=>{el.style.opacity='1';el.style.transform='translateY(0)';}));
     },700);
@@ -683,27 +700,21 @@ function stopDhikr(){clearInterval(dhikrTimer);}
 
 /* ===== SEARCH ===== */
 function getRulingDot(r){
-  if(!r)return 'dot-khilaf';
-  const v=r.toLowerCase();
-  if(v.includes('halal'))return 'dot-halal';
-  if(v.includes('haram'))return 'dot-haram';
-  if(v.includes('makruh'))return 'dot-makruh';
-  return 'dot-khilaf';
+  if(!r)return 'dot-khilaf';const v=r.toLowerCase();
+  if(v.includes('halal'))return 'dot-halal';if(v.includes('haram'))return 'dot-haram';
+  if(v.includes('makruh'))return 'dot-makruh';return 'dot-khilaf';
 }
 
 async function doSearch(mode){
-  const q=document.getElementById('mainInput').value.trim();
-  if(!q)return;
+  const q=document.getElementById('mainInput').value.trim();if(!q)return;
   const btn=document.getElementById('goBtn');btn.disabled=true;
   const h=JSON.parse(localStorage.getItem('fatwa-history')||'[]');
-  h.push(q);if(h.length>20)h.shift();
-  localStorage.setItem('fatwa-history',JSON.stringify(h));
+  h.push(q);if(h.length>20)h.shift();localStorage.setItem('fatwa-history',JSON.stringify(h));
   goTo('loading');startDrawAnimation();startDhikr();
   try{
     const apiMode=mode==='general'?'fatwa':mode;
     const r=await fetch('/api/ask',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({question:q,mode:apiMode})});
-    const text=await r.text();
-    let data;
+    const text=await r.text();let data;
     try{data=JSON.parse(text);}catch(e){throw new Error('خطأ في الخادم ('+r.status+'): '+text.slice(0,150));}
     stopDhikr();stopDrawAnimation();
     if(data.error)throw new Error(data.error);
@@ -711,11 +722,8 @@ async function doSearch(mode){
     apiMode==='fatwa'?renderFatwa(q,data):renderHadith(q,data);
     goTo('results');
   }catch(err){
-    console.error('[fatwa-bot]',err);
-    stopDhikr();stopDrawAnimation();
-    await new Promise(res=>setTimeout(res,300));
-    renderError(q,String(err));
-    goTo('results');
+    console.error('[fatwa-bot]',err);stopDhikr();stopDrawAnimation();
+    await new Promise(res=>setTimeout(res,300));renderError(q,String(err));goTo('results');
   }
   btn.disabled=false;
 }
@@ -728,8 +736,7 @@ function renderFatwa(q,data){
   SCHOLARS.forEach((sc,i)=>{
     const d=data[sc.id];if(!d)return;
     const dot=getRulingDot(d.ruling||'');
-    const card=document.createElement('div');
-    card.className='sc-card';card.style.animationDelay=(i*.08)+'s';
+    const card=document.createElement('div');card.className='sc-card';card.style.animationDelay=(i*.08)+'s';
     let srcHtml='';
     if(sc.hasSource&&d.sourceUrl)srcHtml='<a href="'+d.sourceUrl+'" target="_blank" class="src-btn">مشاهدة</a>';
     else if(!sc.hasSource)srcHtml='<span class="no-src">غير متاح</span>';
@@ -754,15 +761,12 @@ function renderHadith(q,data){
   const card=document.createElement('div');card.className='sc-card';
   const srcBtn=data.sourceUrl?'<a href="'+data.sourceUrl+'" target="_blank" class="src-btn">المصدر</a>':'';
   card.innerHTML='<div class="sc-head"><div class="sc-info"><div class="sc-nm">نص الحديث</div><div class="sc-tl">التحقق من الصحة</div></div>'+srcBtn+'<div class="ruling-dot '+dot+'"></div></div><div class="sc-body"><div style="font-family:Amiri,serif;font-size:16px;line-height:2;color:#1a1a1a;padding:12px 14px;background:rgba(123,28,28,.04);border-radius:10px;border-right:3px solid #7B1C1C;margin-bottom:10px">'+(data.text||q)+'</div><div style="display:flex;align-items:center;gap:8px;padding:8px 12px;border-radius:10px;background:#f9f9f9;border:1px solid #eee;margin-bottom:10px"><div class="ruling-dot '+dot+'"></div><span style="font-size:12px;color:#888">درجة الحديث:</span><span style="font-size:13px;font-weight:700">'+(data.grade||'غير محدد')+'</span></div><div style="font-size:12.5px;color:#555;padding:10px 14px;background:rgba(123,28,28,.04);border-radius:10px;border:1px solid rgba(123,28,28,.1)"><span style="font-weight:700;color:#7B1C1C;display:block;margin-bottom:4px">المصدر</span>'+(data.source||'لم يُعثر على مصدر')+'</div>'+(data.scholars?'<div style="margin-top:8px;font-size:12.5px;color:#555;padding:10px 14px;background:rgba(123,28,28,.04);border-radius:10px;border:1px solid rgba(123,28,28,.1)"><span style="font-weight:700;color:#7B1C1C;display:block;margin-bottom:4px">أقوال العلماء</span>'+data.scholars+'</div>':'')+'</div>';
-  body.appendChild(card);
-  appendFooter(body);
+  body.appendChild(card);appendFooter(body);
 }
 
 function appendFooter(body){
-  const btn=document.createElement('button');
-  btn.className='new-btn';
-  btn.textContent=currentMode==='hadith'?'بحث جديد':'سؤال جديد';
-  btn.onclick=()=>goTo('home');
+  const btn=document.createElement('button');btn.className='new-btn';
+  btn.textContent=currentMode==='hadith'?'بحث جديد':'سؤال جديد';btn.onclick=()=>goTo('home');
   body.appendChild(btn);
   const disc=document.createElement('div');disc.className='disc';
   disc.innerHTML='<div style="color:#666;font-size:13px">تنبيه: هذه الأداة استرشادية تعليمية فقط، ولا تُغني عن مراجعة العلماء مباشرةً في المسائل الشرعية المهمة.</div><a href="mailto:ahmed.fy2015@gmail.com" class="contact-link">تواصل معنا واقتراحاتكم</a>';
