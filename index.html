@@ -279,6 +279,19 @@ html,body{font-family:'Tajawal',sans-serif;background:var(--bg);min-height:100vh
 .wird-form-input:focus,.wird-form-select:focus{border-color:var(--primary);}
 .wird-form-save{background:var(--primary);color:#fff;border:none;border-radius:14px;padding:15px;font-family:'Tajawal',sans-serif;font-size:15px;font-weight:700;cursor:pointer;width:100%;}
 
+/* ===== LANGUAGE PICKER ===== */
+.lang-overlay{position:fixed;top:0;left:0;right:0;bottom:0;background:rgba(0,0,0,.45);z-index:250;display:none;align-items:flex-end;}
+.lang-overlay.open{display:flex;animation:fadeIn .2s ease;}
+.lang-sheet{background:#fff;border-radius:24px 24px 0 0;width:100%;padding:8px 0 36px;animation:slideUp .25s ease;max-height:80vh;overflow-y:auto;}
+.lang-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;padding:4px 20px 0;}
+.lang-item{display:flex;align-items:center;gap:10px;padding:12px 14px;border-radius:14px;background:#f8f8f8;cursor:pointer;border:1.5px solid transparent;transition:.15s;}
+.lang-item.active{background:rgba(123,28,28,.07);border-color:rgba(123,28,28,.2);}
+.lang-item:active{background:rgba(123,28,28,.12);}
+.lang-flag{font-size:22px;flex-shrink:0;line-height:1;}
+.lang-names{display:flex;flex-direction:column;}
+.lang-native{font-size:13px;font-weight:700;color:#1a1a1a;}
+.lang-english{font-size:10.5px;color:#999;}
+
 /* ===== MENU OVERLAY ===== */
 .menu-overlay{position:fixed;top:0;left:0;right:0;bottom:0;background:rgba(0,0,0,.45);z-index:200;display:none;align-items:flex-end;}
 .menu-overlay.open{display:flex;animation:fadeIn .2s ease;}
@@ -316,7 +329,7 @@ html,body{font-family:'Tajawal',sans-serif;background:var(--bg);min-height:100vh
         <line x1="12" y1="82" x2="68" y2="82" stroke-width="2.8"/>
       </svg>
       <div class="brand-title">FATWA</div>
-      <div class="brand-sub">فتوى موثوقة... من مصادر معتمدة</div>
+      <div class="brand-sub" id="i18n-sub">فتوى موثوقة... من مصادر معتمدة</div>
     </div>
 
     <div class="orn-div">
@@ -332,14 +345,14 @@ html,body{font-family:'Tajawal',sans-serif;background:var(--bg);min-height:100vh
           <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>
           <path d="M8 9h8M8 13h5"/>
         </svg>
-        <span class="feat-label">ابحث عن فتوى</span>
+        <span class="feat-label" id="i18n-c1">ابحث عن فتوى</span>
       </button>
       <button class="feat-card" onclick="focusSearch('hadith')">
         <svg viewBox="0 0 24 24" fill="none" stroke="#7B1C1C" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
           <path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/>
           <path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/>
         </svg>
-        <span class="feat-label">استخراج الاحاديث</span>
+        <span class="feat-label" id="i18n-c2">استخراج الاحاديث</span>
       </button>
       <button class="feat-card" onclick="focusSearch('general')">
         <svg viewBox="0 0 24 24" fill="none" stroke="#7B1C1C" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
@@ -347,7 +360,7 @@ html,body{font-family:'Tajawal',sans-serif;background:var(--bg);min-height:100vh
           <circle cx="12" cy="10" r="1.5" fill="#7B1C1C" stroke="none"/>
           <path d="M12 7a2 2 0 0 1 1.5 3.3L12 12"/>
         </svg>
-        <span class="feat-label">سؤال ديني عام</span>
+        <span class="feat-label" id="i18n-c3">سؤال ديني عام</span>
       </button>
       <button class="feat-card" onclick="showHistory()">
         <svg viewBox="0 0 24 24" fill="none" stroke="#7B1C1C" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
@@ -355,7 +368,7 @@ html,body{font-family:'Tajawal',sans-serif;background:var(--bg);min-height:100vh
           <path d="M3.51 15a9 9 0 1 0 .49-4.49"/>
           <polyline points="12 7 12 12 15 14"/>
         </svg>
-        <span class="feat-label">تاريخ البحث</span>
+        <span class="feat-label" id="i18n-c4">تاريخ البحث</span>
       </button>
     </div>
 
@@ -371,7 +384,7 @@ html,body{font-family:'Tajawal',sans-serif;background:var(--bg);min-height:100vh
 
     <div class="home-tagline">
       <span class="home-tagline-icon">❋</span>
-      <span>البحث عن الإجابة على ضوء منهج أهل السنة والجماعة</span>
+      <span id="i18n-tagline">البحث عن الإجابة على ضوء منهج أهل السنة والجماعة</span>
     </div>
 
   </div>
@@ -391,7 +404,7 @@ html,body{font-family:'Tajawal',sans-serif;background:var(--bg);min-height:100vh
           <line x1="12" y1="82" x2="68" y2="82" stroke-width="2.8"/>
         </svg>
       </button>
-      <span class="nav-home-label">الرئيسية</span>
+      <span class="nav-home-label" id="i18n-home">الرئيسية</span>
     </div>
     <div class="bottom-nav-bar">
       <button class="nav-side-btn" onclick="openMenu()">
@@ -741,6 +754,15 @@ html,body{font-family:'Tajawal',sans-serif;background:var(--bg);min-height:100vh
   </div>
 </div>
 
+<!-- LANGUAGE PICKER -->
+<div class="lang-overlay" id="langOverlay" onclick="closeLangOutside(event)">
+  <div class="lang-sheet">
+    <div class="menu-handle"></div>
+    <div style="font-size:16px;font-weight:700;color:#1a1a1a;text-align:center;margin-bottom:16px">اختر لغة / Select Language</div>
+    <div class="lang-grid" id="langGrid"></div>
+  </div>
+</div>
+
 <!-- MENU OVERLAY -->
 <div class="menu-overlay" id="menuOverlay" onclick="closeMenuOutside(event)">
   <div class="menu-sheet">
@@ -856,11 +878,103 @@ function openMenu(){document.getElementById('menuOverlay').classList.add('open')
 function closeMenuOutside(e){if(e.target===document.getElementById('menuOverlay'))document.getElementById('menuOverlay').classList.remove('open');}
 function closeMenu(){document.getElementById('menuOverlay').classList.remove('open');}
 function menuContact(){closeMenu();window.location.href='mailto:ahmed.fy2015@gmail.com';}
-function menuLang(){
-  closeMenu();
-  currentLang=currentLang==='ar'?'en':'ar';
-  document.getElementById('menuLangDesc').textContent='الحالية: '+(currentLang==='ar'?'العربية':'English');
-  alert(currentLang==='ar'?'تم التبديل إلى العربية':'Switched to English (coming soon)');
+function menuLang(){closeMenu();openLangPicker();}
+
+/* ===== LANGUAGES ===== */
+const LANGS=[
+  {code:'ar',flag:'🇸🇦',native:'العربية',en:'Arabic',dir:'rtl',
+   sub:'فتوى موثوقة... من مصادر معتمدة',ph:'ما حكم...؟',
+   tagline:'البحث عن الإجابة على ضوء منهج أهل السنة والجماعة',
+   c1:'ابحث عن فتوى',c2:'استخراج الأحاديث',c3:'سؤال ديني عام',c4:'تاريخ البحث',home:'الرئيسية'},
+  {code:'en',flag:'🇬🇧',native:'English',en:'English',dir:'ltr',
+   sub:'Reliable rulings... from trusted sources',ph:'What is the ruling on...?',
+   tagline:'Searching for answers according to Ahl al-Sunnah wal-Jama\'ah',
+   c1:'Find a Fatwa',c2:'Hadith Search',c3:'General Question',c4:'Search History',home:'Home'},
+  {code:'hi',flag:'🇮🇳',native:'हिन्दी',en:'Hindi',dir:'ltr',
+   sub:'विश्वसनीय फ़त्वा... प्रमाणित स्रोतों से',ph:'का हुक्म क्या है...?',
+   tagline:'अहल अस-सुन्नह के मनहज के अनुसार जवाब',
+   c1:'फ़त्वा खोजें',c2:'हदीस खोज',c3:'सामान्य प्रश्न',c4:'खोज इतिहास',home:'होम'},
+  {code:'ur',flag:'🇵🇰',native:'اردو',en:'Urdu',dir:'rtl',
+   sub:'قابلِ اعتماد فتوٰی... مستند ذرائع سے',ph:'حکم کیا ہے...؟',
+   tagline:'اہل سنت و جماعت کے منہج کے مطابق جواب',
+   c1:'فتوٰی تلاش کریں',c2:'حدیث تلاش',c3:'عمومی سوال',c4:'تاریخِ تلاش',home:'ہوم'},
+  {code:'bn',flag:'🇧🇩',native:'বাংলা',en:'Bengali',dir:'ltr',
+   sub:'নির্ভরযোগ্য ফতওয়া... বিশ্বস্ত উৎস থেকে',ph:'বিধান কী...?',
+   tagline:'আহলুস সুন্নাহ ওয়াল জামাআহর মানহাজ অনুযায়ী উত্তর',
+   c1:'ফতওয়া খুঁজুন',c2:'হাদীস অনুসন্ধান',c3:'সাধারণ প্রশ্ন',c4:'অনুসন্ধান ইতিহাস',home:'হোম'},
+  {code:'ne',flag:'🇳🇵',native:'नेपाली',en:'Nepali',dir:'ltr',
+   sub:'विश्वसनीय फतवा... प्रमाणित स्रोतहरूबाट',ph:'के को हुकुम छ...?',
+   tagline:'अहलुस सुन्नाहको मार्गदर्शन अनुसार उत्तर',
+   c1:'फतवा खोज्नुहोस्',c2:'हदीस खोज',c3:'सामान्य प्रश्न',c4:'खोज इतिहास',home:'होम'},
+  {code:'si',flag:'🇱🇰',native:'සිංහල',en:'Sinhala',dir:'ltr',
+   sub:'විශ්වාසදායක ෆත්වා... විශ්වාසනීය මූලාශ්‍රවලින්',ph:'නීතිය කුමක්ද...?',
+   tagline:'අහ්ලු සුන්නාහ්ගේ ක්‍රමවේදය අනුව පිළිතුරු',
+   c1:'ෆත්වාවක් සොයන්න',c2:'හදීස් සොයන්න',c3:'සාමාන්‍ය ප්‍රශ්නය',c4:'සෙවුම් ඉතිහාසය',home:'මුල් පිටුව'},
+  {code:'ms',flag:'🇲🇾',native:'Bahasa Melayu',en:'Malay',dir:'ltr',
+   sub:'Fatwa dipercayai... dari sumber yang sahih',ph:'Apakah hukumnya...?',
+   tagline:'Mencari jawapan berdasarkan manhaj Ahlus Sunnah wal Jama\'ah',
+   c1:'Cari Fatwa',c2:'Cari Hadis',c3:'Soalan Agama',c4:'Sejarah Carian',home:'Utama'},
+  {code:'id',flag:'🇮🇩',native:'Bahasa Indonesia',en:'Indonesian',dir:'ltr',
+   sub:'Fatwa terpercaya... dari sumber yang shahih',ph:'Apa hukumnya...?',
+   tagline:'Mencari jawaban berdasarkan manhaj Ahlus Sunnah wal Jama\'ah',
+   c1:'Cari Fatwa',c2:'Cari Hadits',c3:'Pertanyaan Umum',c4:'Riwayat Pencarian',home:'Beranda'},
+  {code:'tr',flag:'🇹🇷',native:'Türkçe',en:'Turkish',dir:'ltr',
+   sub:'Güvenilir fetva... güvenilir kaynaklardan',ph:'Hükmü nedir...?',
+   tagline:'Ehli Sünnet vel Cemaat\'in metoduna göre cevap',
+   c1:'Fetva Ara',c2:'Hadis Ara',c3:'Genel Soru',c4:'Arama Geçmişi',home:'Ana Sayfa'},
+  {code:'fr',flag:'🇫🇷',native:'Français',en:'French',dir:'ltr',
+   sub:'Fatwas fiables... de sources certifiées',ph:'Quel est le jugement...?',
+   tagline:'Réponses selon la méthode d\'Ahl as-Sunnah wal-Jama\'ah',
+   c1:'Chercher une Fatwa',c2:'Recherche de Hadith',c3:'Question Générale',c4:'Historique',home:'Accueil'},
+  {code:'so',flag:'🇸🇴',native:'Soomaali',en:'Somali',dir:'ltr',
+   sub:'Fatwaда la aamin karo... isha la xaqiijiyay',ph:'Maxaa xukunka...?',
+   tagline:'Raadinta jawaabta Manhajka Ahlus Sunnah',
+   c1:'Raadi Fatwa',c2:'Raadi Xadiith',c3:'Su\'aal Guud',c4:'Taariikh Raadinta',home:'Guriga'},
+  {code:'tl',flag:'🇵🇭',native:'Filipino',en:'Filipino',dir:'ltr',
+   sub:'Mapagkakatiwalaang fatwa... mula sa mapagkakatiwalaang pinagkukunan',ph:'Ano ang utos nito...?',
+   tagline:'Naghahanap ng sagot ayon sa Ahl al-Sunnah wal Jama\'ah',
+   c1:'Hanapin ang Fatwa',c2:'Hanapin ang Hadith',c3:'Pangkalahatang Tanong',c4:'Kasaysayan',home:'Tahanan'},
+  {code:'sw',flag:'🇹🇿',native:'Kiswahili',en:'Swahili',dir:'ltr',
+   sub:'Fatwa ya kuaminika... kutoka vyanzo vilivyothibitishwa',ph:'Hukumu ni nini...?',
+   tagline:'Kutafuta majibu kulingana na Manhaj ya Ahlus Sunnah',
+   c1:'Tafuta Fatwa',c2:'Tafuta Hadithi',c3:'Swali la Jumla',c4:'Historia ya Utafutaji',home:'Nyumbani'},
+  {code:'ha',flag:'🇳🇬',native:'Hausa',en:'Hausa',dir:'ltr',
+   sub:'Fatawa amintacce... daga tushe abin dogaro',ph:'Mene ne hukuminsa...?',
+   tagline:'Neman amsa bisa hanyar Ahlus Sunnah',
+   c1:'Nemi Fatawa',c2:'Nemi Hadisi',c3:'Tambaya Ta Gaba Ɗaya',c4:'Tarihin Neman',home:'Gida'},
+];
+
+function openLangPicker(){
+  const grid=document.getElementById('langGrid');grid.innerHTML='';
+  LANGS.forEach(l=>{
+    const el=document.createElement('div');
+    el.className='lang-item'+(currentLang===l.code?' active':'');
+    el.innerHTML='<span class="lang-flag">'+l.flag+'</span><div class="lang-names"><div class="lang-native">'+l.native+'</div><div class="lang-english">'+l.en+'</div></div>';
+    el.onclick=()=>setLang(l.code);
+    grid.appendChild(el);
+  });
+  document.getElementById('langOverlay').classList.add('open');
+}
+function closeLangOutside(e){if(e.target===document.getElementById('langOverlay'))document.getElementById('langOverlay').classList.remove('open');}
+function setLang(code){
+  const l=LANGS.find(x=>x.code===code);if(!l)return;
+  currentLang=code;
+  localStorage.setItem('fatwa-lang',code);
+  document.documentElement.lang=code;
+  document.documentElement.dir=l.dir;
+  const set=(id,txt)=>{const el=document.getElementById(id);if(el)el.textContent=txt;};
+  const setAttr=(id,attr,val)=>{const el=document.getElementById(id);if(el)el.setAttribute(attr,val);};
+  set('i18n-sub',l.sub);
+  setAttr('mainInput','placeholder',l.ph);
+  set('i18n-tagline',l.tagline);
+  set('i18n-c1',l.c1);set('i18n-c2',l.c2);set('i18n-c3',l.c3);set('i18n-c4',l.c4);
+  set('i18n-home',l.home);
+  document.getElementById('menuLangDesc').textContent=(code==='ar'?'الحالية':'Current')+': '+l.native;
+  document.getElementById('langOverlay').classList.remove('open');
+}
+function initLang(){
+  const saved=localStorage.getItem('fatwa-lang')||'ar';
+  setLang(saved);
 }
 function menuAbout(){
   closeMenu();
@@ -1392,6 +1506,7 @@ function restartReminderTimer(){startReminderTimer();}
 showAdhkar('sabah');
 loadAtharState();
 startReminderTimer();
+initLang();
 </script>
 </body>
 </html>
