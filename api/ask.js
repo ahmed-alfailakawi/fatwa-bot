@@ -131,14 +131,21 @@ ${ctx || "لم نجد نتائج."}
 }`;
     }
 
+    // For hadith/general: prefill assistant with "{" to guarantee JSON output
+    const prefill = (mode === "hadith" || mode === "general");
+    const messages = prefill
+      ? [{ role: "user", content: question }, { role: "assistant", content: "{" }]
+      : [{ role: "user", content: question }];
+
     const msg = await client.messages.create({
-      model: "claude-sonnet-4-6",
+      model: "claude-sonnet-4-5",
       max_tokens: 3000,
       system,
-      messages: [{ role: "user", content: question }],
+      messages,
     });
 
-    const parsed = parseJSON(msg.content[0].text);
+    const rawText = prefill ? "{" + msg.content[0].text : msg.content[0].text;
+    const parsed = parseJSON(rawText);
     return res.status(200).json(parsed);
   } catch (err) {
     return res.status(500).json({ error: err.message });

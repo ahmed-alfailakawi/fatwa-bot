@@ -1494,10 +1494,9 @@ async function doSearch(mode){
     const r=await fetch('/api/ask',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({question:q,mode})});
     const text=await r.text();
     let data;
-    try{data=JSON.parse(text);}catch(e){throw new Error('خطأ في الخادم ('+r.status+'): '+text.slice(0,150));}
-    stopDhikr();
-    stopDrawAnimation();
-    if(data.error)throw new Error(data.error);
+    try{data=JSON.parse(text);}catch(e){throw new Error('خطأ في الخادم ('+r.status+'): '+text.slice(0,200));}
+    stopDhikr();stopDrawAnimation();
+    if(data.error)throw new Error(data.error+(data.raw?'\n\n'+String(data.raw).slice(0,300):''));
     await new Promise(res=>setTimeout(res,550));
     if(mode==='fatwa')renderFatwa(q,data);
     else if(mode==='hadith')renderHadith(q,data);
@@ -1505,10 +1504,9 @@ async function doSearch(mode){
     goTo('results');
   }catch(err){
     console.error('[fatwa-bot]',err);
-    stopDhikr();
-    stopDrawAnimation();
+    stopDhikr();stopDrawAnimation();
     await new Promise(res=>setTimeout(res,300));
-    renderError(q,String(err));
+    try{renderError(q,String(err));}catch(e2){document.getElementById('resBody').innerHTML='<div style="padding:32px;text-align:center;color:#7B1C1C">'+String(err)+'</div>';}
     goTo('results');
   }
   btn.disabled=false;
