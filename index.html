@@ -207,6 +207,39 @@ html,body{font-family:'Tajawal',sans-serif;background:var(--bg);min-height:100vh
 .tasbih-actions{display:flex;gap:12px;}
 .tasbih-action{background:transparent;border:1.5px solid rgba(123,28,28,.2);color:var(--primary);border-radius:12px;padding:10px 20px;font-family:'Tajawal',sans-serif;font-size:13px;font-weight:700;cursor:pointer;touch-action:manipulation;}
 
+/* ===== LEADERBOARD ===== */
+#p-leaderboard,#p-admin{background:var(--bg);}
+.lb-tabs-row{display:flex;border-bottom:1px solid rgba(123,28,28,.09);background:#fff;flex-shrink:0;}
+.lb-tab-btn{flex:1;padding:12px;border:none;background:transparent;font-family:'Tajawal',sans-serif;font-size:14px;font-weight:700;color:#bbb;cursor:pointer;border-bottom:2.5px solid transparent;touch-action:manipulation;}
+.lb-tab-btn.on{color:var(--primary);border-bottom-color:var(--primary);}
+.lb-body{flex:1;overflow-y:auto;padding:14px 16px 28px;}
+.lb-entry{background:#fff;border-radius:16px;padding:14px 16px;display:flex;align-items:center;gap:12px;box-shadow:0 2px 8px rgba(0,0,0,.06);margin-bottom:10px;border:1.5px solid rgba(123,28,28,.07);}
+.lb-entry.lb-me{border-color:var(--primary);background:rgba(123,28,28,.03);}
+.lb-rank{font-size:20px;width:34px;text-align:center;flex-shrink:0;}
+.lb-logo-wrap{width:38px;height:38px;border-radius:50%;background:linear-gradient(135deg,rgba(123,28,28,.12),rgba(123,28,28,.04));display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+.lb-name{flex:1;font-family:'Tajawal',sans-serif;font-size:14px;font-weight:700;color:#1a1a1a;}
+.lb-me-tag{font-size:10px;color:var(--primary);display:block;}
+.lb-streak-wrap{text-align:center;flex-shrink:0;}
+.lb-streak-num{font-size:26px;font-weight:900;color:var(--primary);line-height:1;}
+.lb-streak-lbl{font-size:10px;color:#bbb;}
+.lb-info-strip{background:rgba(123,28,28,.05);border-radius:10px;padding:8px 12px;text-align:center;font-size:11.5px;color:#888;margin-bottom:14px;}
+.lb-join-btn{width:100%;background:var(--primary);color:#fff;border:none;border-radius:14px;padding:14px;font-family:'Tajawal',sans-serif;font-size:15px;font-weight:700;cursor:pointer;margin-top:8px;touch-action:manipulation;}
+.admin-body{flex:1;overflow-y:auto;padding:14px 16px 28px;}
+.admin-row{background:#fff;border-radius:13px;padding:12px 14px;display:flex;align-items:center;gap:10px;margin-bottom:8px;border:1.5px solid rgba(123,28,28,.08);}
+.admin-del{background:none;border:1.5px solid #fcc;border-radius:8px;color:#c33;font-size:12px;font-weight:700;cursor:pointer;padding:5px 10px;touch-action:manipulation;}
+.overlay-bg{position:fixed;inset:0;background:rgba(0,0,0,.55);z-index:9000;display:none;align-items:flex-end;justify-content:center;}
+.overlay-bg.open{display:flex;}
+.bottom-sheet{background:#fff;border-radius:24px 24px 0 0;padding:28px 24px 40px;width:100%;max-width:480px;text-align:center;}
+.sheet-title{font-family:'Tajawal',sans-serif;font-size:18px;font-weight:900;color:var(--primary);margin-bottom:8px;}
+.sheet-sub{font-size:13px;color:#888;margin-bottom:20px;line-height:1.7;}
+.sheet-input{width:100%;padding:13px 16px;border:1.5px solid rgba(123,28,28,.22);border-radius:13px;font-family:'Tajawal',sans-serif;font-size:16px;text-align:center;outline:none;box-sizing:border-box;margin-bottom:6px;}
+.sheet-input:focus{border-color:var(--primary);}
+.sheet-btns{display:flex;gap:10px;margin-top:12px;}
+.sheet-btn-pri{flex:1;background:var(--primary);color:#fff;border:none;border-radius:13px;padding:14px;font-family:'Tajawal',sans-serif;font-size:15px;font-weight:700;cursor:pointer;touch-action:manipulation;}
+.sheet-btn-sec{flex:1;background:transparent;color:#aaa;border:1.5px solid #eee;border-radius:13px;padding:14px;font-family:'Tajawal',sans-serif;font-size:14px;cursor:pointer;touch-action:manipulation;}
+.hbook-row{display:flex;gap:6px;flex-wrap:wrap;padding-bottom:12px;border-bottom:1px solid rgba(123,28,28,.08);margin-bottom:12px;}
+.hbook-btn{flex:1;min-width:58px;padding:7px 4px;border:1.5px solid rgba(123,28,28,.2);border-radius:10px;font-family:'Tajawal',sans-serif;font-size:11px;font-weight:700;color:var(--primary);background:transparent;cursor:pointer;touch-action:manipulation;white-space:nowrap;text-align:center;}
+.hbook-btn.on{background:var(--primary);color:#fff;border-color:var(--primary);}
 /* ===== FEATURES PAGE ===== */
 #p-features{background:var(--bg);}
 .features-body{flex:1;overflow-y:auto;padding:24px 20px;display:flex;flex-direction:column;gap:14px;}
@@ -645,6 +678,20 @@ html,body{font-family:'Tajawal',sans-serif;background:var(--bg);min-height:100vh
         <span class="feat-tool-label">السُّبحة</span>
         <span class="feat-tool-desc">عدّاد التسبيح الرقمي</span>
       </button>
+      <button class="feat-tool-card" onclick="showLeaderboard()">
+        <div class="feat-tool-icon">
+          <svg viewBox="0 0 24 24"><polyline points="18 20 18 10"/><polyline points="12 20 12 4"/><polyline points="6 20 6 14"/></svg>
+        </div>
+        <span class="feat-tool-label">لوحة الشرف</span>
+        <span class="feat-tool-desc">تصنيف الستريك</span>
+      </button>
+      <button class="feat-tool-card" onclick="openPinOverlay()">
+        <div class="feat-tool-icon">
+          <svg viewBox="0 0 24 24"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+        </div>
+        <span class="feat-tool-label">لوحة التحكم</span>
+        <span class="feat-tool-desc">للمشرف — رمز سري</span>
+      </button>
     </div>
   </div>
 </div>
@@ -656,6 +703,56 @@ html,body{font-family:'Tajawal',sans-serif;background:var(--bg);min-height:100vh
     <h2>تاريخ البحث</h2>
   </div>
   <div id="historyBody" style="flex:1;overflow-y:auto;padding:12px 16px 24px;display:flex;flex-direction:column;gap:10px;"></div>
+</div>
+
+<!-- LEADERBOARD PAGE -->
+<div class="page" id="p-leaderboard">
+  <div class="sub-hdr">
+    <button class="sub-back" onclick="goTo('features')">←</button>
+    <h2>لوحة الشرف</h2>
+  </div>
+  <div class="lb-tabs-row">
+    <button class="lb-tab-btn on" id="lb-tab-local" onclick="switchLbTab('local')">محلي 📱</button>
+    <button class="lb-tab-btn" id="lb-tab-global" onclick="switchLbTab('global')">عالمي 🌍</button>
+  </div>
+  <div class="lb-body" id="lb-body"></div>
+</div>
+
+<!-- ADMIN PAGE -->
+<div class="page" id="p-admin">
+  <div class="sub-hdr">
+    <button class="sub-back" onclick="goTo('features')">←</button>
+    <h2>لوحة التحكم</h2>
+  </div>
+  <div class="admin-body" id="admin-body"></div>
+</div>
+
+<!-- Registration Sheet -->
+<div class="overlay-bg" id="lbRegOverlay">
+  <div class="bottom-sheet">
+    <div class="sheet-title">🏆 انضم للوحة الشرف</div>
+    <div class="sheet-sub">ستريكك يستحق أن يُرى<br>أضف اسمك لتظهر في التصنيف</div>
+    <input class="sheet-input" id="lbNameInput" type="text" placeholder="اسمك أو لقبك" maxlength="20" onkeydown="if(event.key==='Enter')joinLeaderboard()">
+    <div style="color:#c33;font-size:12px;min-height:16px" id="lbNameErr"></div>
+    <div class="sheet-btns">
+      <button class="sheet-btn-pri" onclick="joinLeaderboard()">انضم</button>
+      <button class="sheet-btn-sec" onclick="skipLbReg()">لا شكراً</button>
+    </div>
+  </div>
+</div>
+
+<!-- PIN Sheet -->
+<div class="overlay-bg" id="pinOverlay">
+  <div class="bottom-sheet">
+    <div class="sheet-title">🔒 لوحة التحكم</div>
+    <div class="sheet-sub">أدخل الرمز السري للمشرف</div>
+    <input class="sheet-input" id="pinInput" type="password" placeholder="••••" maxlength="4" style="letter-spacing:8px;font-size:22px" onkeydown="if(event.key==='Enter')checkPin()">
+    <div style="color:#c33;font-size:12px;min-height:16px" id="pinErr"></div>
+    <div class="sheet-btns">
+      <button class="sheet-btn-pri" onclick="checkPin()">دخول</button>
+      <button class="sheet-btn-sec" onclick="closePinOverlay()">إلغاء</button>
+    </div>
+  </div>
 </div>
 
 <!-- ATHAR PAGE -->
@@ -673,7 +770,7 @@ html,body{font-family:'Tajawal',sans-serif;background:var(--bg);min-height:100vh
 
   <!-- Dashboard -->
   <div class="athar-body" id="at-panel-dash">
-    <div class="athar-streak" id="athar-streak-card">
+    <div class="athar-streak" id="athar-streak-card" onclick="showLeaderboard()" style="cursor:pointer">
       <svg class="athar-streak-fire" viewBox="0 0 80 100" xmlns="http://www.w3.org/2000/svg" fill="none" stroke="#fff" stroke-linecap="round" stroke-linejoin="round">
         <path d="M18,60 C5,52 6,33 18,25" stroke-width="2.8"/>
         <path d="M62,60 C75,52 74,33 62,25" stroke-width="2.8"/>
@@ -708,8 +805,14 @@ html,body{font-family:'Tajawal',sans-serif;background:var(--bg);min-height:100vh
     <div id="at-wirds-list"></div>
   </div>
 
-  <!-- Hadiths (40 Nawawi) -->
+  <!-- Hadiths -->
   <div class="athar-body" id="at-panel-hadith" style="display:none">
+    <div class="hbook-row">
+      <button class="hbook-btn on" id="hbook-nawawi" onclick="selectHBook('nawawi')">الأربعون النووية</button>
+      <button class="hbook-btn" id="hbook-bulugh" onclick="selectHBook('bulugh')">بلوغ المرام</button>
+      <button class="hbook-btn" id="hbook-iman" onclick="selectHBook('iman')">الإيمانية</button>
+      <button class="hbook-btn" id="hbook-qudsi" onclick="selectHBook('qudsi')">القدسية</button>
+    </div>
     <div class="hadith-counter" id="at-hadith-counter"></div>
     <div class="hadith-card" id="at-hadith-card"></div>
     <div class="hadith-nav">
@@ -1621,6 +1724,75 @@ const NAWAWI_40=[
   {num:42,title:'نضّر الله من سمع حديثه',text:'نضّر الله امرءاً سمع مقالتي فوعاها وأداها كما سمعها، فرُبَّ حامل فقه إلى من هو أفقه منه.',source:'رواه الترمذي وأبو داود',exp:'دعاء النبي ﷺ لمن سمع حديثه ووعاه وبلّغه، فالعلم أمانة ويجب نقله كما ورد.'},
 ];
 
+const BULUGH_SELECT=[
+  {num:1,title:'النية في العبادات',text:'إنما الأعمال بالنيات، وإنما لكل امرئٍ ما نوى.',source:'متفق عليه — بلوغ المرام',exp:'أصل عظيم: لا يُقبل عمل إلا بنية خالصة، وهو أول ما يُذكر في بلوغ المرام لأهميته.'},
+  {num:2,title:'الماء الطهور',text:'الماء طهور لا ينجسه شيء.',source:'رواه أحمد والنسائي — بلوغ المرام',exp:'الماء الكثير الذي لم يتغير لونه أو طعمه أو ريحه طهور يصح التطهر به.'},
+  {num:3,title:'الوضوء شرط الصلاة',text:'لا تقبل صلاة بغير طهور.',source:'رواه مسلم — بلوغ المرام',exp:'الطهارة شرط لصحة الصلاة، ولا تصح الصلاة بدون وضوء لمن لا عذر له.'},
+  {num:4,title:'السواك',text:'السواك مطهرة للفم مرضاة للرب.',source:'رواه أحمد والنسائي — بلوغ المرام',exp:'السواك سنة مؤكدة مطهرة للفم ومرضية لله تعالى.'},
+  {num:5,title:'وقت الصلاة',text:'وقت الظهر إذا زالت الشمس وكان ظل الرجل كطوله ما لم يحضر العصر.',source:'رواه مسلم — بلوغ المرام',exp:'بيان أوقات الصلوات الخمس التي حددها جبريل لرسول الله ﷺ.'},
+  {num:6,title:'فضل الأذان',text:'لو يعلم الناس ما في النداء والصف الأول ثم لم يجدوا إلا أن يستهموا عليه لاستهموا.',source:'متفق عليه — بلوغ المرام',exp:'الأذان والصف الأول من أعظم الفضائل، حتى إن الناس لو عرفوا ذلك لتنافسوا عليهما بالقرعة.'},
+  {num:7,title:'استقبال القبلة',text:'إذا قمتَ إلى الصلاة فأسبغ الوضوء ثم استقبل القبلة وكبِّر.',source:'متفق عليه — بلوغ المرام',exp:'استقبال القبلة ركن من أركان الصلاة.'},
+  {num:8,title:'فرض الزكاة',text:'أعلمهم أن الله افترض عليهم صدقةً في أموالهم تؤخذ من أغنيائهم وتردّ على فقرائهم.',source:'متفق عليه — بلوغ المرام',exp:'الزكاة ركن من أركان الإسلام واجبة على كل مسلم بلغت نصاباً وحال عليه الحول.'},
+  {num:9,title:'نصاب الزكاة',text:'ليس فيما دون خمسة أوسق صدقة، ولا في أقل من خمس ذود صدقة، ولا في أقل من خمس أواق صدقة.',source:'متفق عليه — بلوغ المرام',exp:'حدد الشرع نصب الزكاة في الزروع والحيوان والنقود لتحقيق العدل في أخذها.'},
+  {num:10,title:'الصيام برؤية الهلال',text:'صوموا لرؤيته وأفطروا لرؤيته، فإن غُم عليكم فأكملوا شعبان ثلاثين يوماً.',source:'متفق عليه — بلوغ المرام',exp:'الصيام مرتبط برؤية الهلال، فإن تعذرت الرؤية أُكمل الشهر ثلاثين يوماً.'},
+  {num:11,title:'ليلة القدر',text:'التمسوا ليلة القدر في الوتر من العشر الأواخر من رمضان.',source:'متفق عليه — بلوغ المرام',exp:'ليلة القدر خير من ألف شهر، وتُطلب في الأوتار من العشر الأواخر من رمضان.'},
+  {num:12,title:'الحج فريضة',text:'من ملك زاداً وراحلة تبلغه إلى بيت الله ولم يحجج فلا عليه أن يموت يهودياً أو نصرانياً.',source:'رواه الترمذي — بلوغ المرام',exp:'الحج واجب على المستطيع، والتهاون به مع الاستطاعة ذنب عظيم.'},
+  {num:13,title:'البيع بالخيار',text:'البيعان بالخيار ما لم يتفرقا، فإن صدقا وبيّنا بورك لهما في بيعهما، وإن كتما وكذبا مُحقت بركة بيعهما.',source:'متفق عليه — بلوغ المرام',exp:'الصدق في البيع بركة والكذب والغش يمحقان البركة منه.'},
+  {num:14,title:'تحريم الربا',text:'لعن الله آكل الربا وموكله وكاتبه وشاهديه، وقال: هم سواء.',source:'رواه مسلم — بلوغ المرام',exp:'الربا من الكبائر، واللعن يشمل جميع المشاركين في معاملة الربا.'},
+  {num:15,title:'شرط الولي في النكاح',text:'لا نكاح إلا بولي.',source:'رواه أبو داود والترمذي — بلوغ المرام',exp:'الولي شرط في عقد النكاح عند جمهور العلماء.'},
+  {num:16,title:'المهر',text:'التمس ولو خاتماً من حديد.',source:'متفق عليه — بلوغ المرام',exp:'يجوز أن يكون المهر قليلاً، والمهر حق للمرأة لا يُسقط.'},
+  {num:17,title:'درء الحدود بالشبهات',text:'ادرؤوا الحدود عن المسلمين ما استطعتم، فإن كان له مخرج فخلوا سبيله.',source:'رواه الترمذي — بلوغ المرام',exp:'الشبهات تدرأ الحدود؛ فإذا وُجد مخرج شرعي فلا تُقام الحدود.'},
+  {num:18,title:'العدل في القضاء',text:'من ابتلي بالقضاء بين المسلمين فليعدل بينهم في لحظه وإشارته ومقعده.',source:'رواه أحمد — بلوغ المرام',exp:'العدل واجب على القاضي في كل شيء حتى في النظر واللفتة والجلسة.'},
+  {num:19,title:'تحريم دم المسلم',text:'لا يحل دم امرئ مسلم يشهد أن لا إله إلا الله وأني رسول الله إلا بإحدى ثلاث.',source:'متفق عليه — بلوغ المرام',exp:'دم المسلم حرام إلا بثلاثة أسباب محددة شرعاً.'},
+  {num:20,title:'لا ضرر ولا ضرار',text:'لا ضرر ولا ضرار.',source:'رواه ابن ماجه والدارقطني — بلوغ المرام',exp:'من أعظم قواعد الفقه الإسلامي: لا يجوز إيقاع الضرر ابتداءً ولا مقابلةً.'},
+];
+
+const FORTY_IMAN=[
+  {num:1,title:'شعب الإيمان',text:'الإيمان بضع وسبعون شعبة، فأفضلها قول لا إله إلا الله، وأدناها إماطة الأذى عن الطريق، والحياء شعبة من الإيمان.',source:'متفق عليه',exp:'الإيمان ليس مجرد تصديق بل هو مراتب متعددة من الأقوال والأفعال والأخلاق.'},
+  {num:2,title:'حلاوة الإيمان',text:'ثلاث من كنّ فيه وجد حلاوة الإيمان: أن يكون الله ورسوله أحب إليه مما سواهما، وأن يحب المرء لا يحبه إلا لله، وأن يكره أن يعود في الكفر كما يكره أن يُقذف في النار.',source:'متفق عليه',exp:'حلاوة الإيمان ثمرة تُوجد بمحبة الله ورسوله فوق كل شيء.'},
+  {num:3,title:'اليقين شرط الجنة',text:'أشهد أن لا إله إلا الله وأني رسول الله، لا يلقى الله بهما عبد غير شاك فيُحجب عن الجنة.',source:'رواه مسلم',exp:'اليقين التام بالشهادتين بلا شك شرط لدخول الجنة.'},
+  {num:4,title:'الإيمان بالقدر',text:'الإيمان أن تؤمن بالله وملائكته وكتبه ورسله واليوم الآخر وتؤمن بالقدر خيره وشره.',source:'رواه مسلم — حديث جبريل',exp:'الإيمان بالقضاء والقدر ركن من أركان الإيمان الستة.'},
+  {num:5,title:'تجديد الإيمان',text:'جددوا إيمانكم. قيل: وكيف نجدد إيماننا؟ قال: أكثروا من قول لا إله إلا الله.',source:'رواه أحمد',exp:'الإيمان يزيد وينقص، فينبغي تجديده بالإكثار من ذكر التوحيد.'},
+  {num:6,title:'المؤمن القوي',text:'المؤمن القوي خير وأحب إلى الله من المؤمن الضعيف، وفي كل خير.',source:'رواه مسلم',exp:'الإيمان يستلزم القوة: قوة العزيمة والإرادة والتوكل على الله.'},
+  {num:7,title:'الإيمان والأمانة',text:'لا إيمان لمن لا أمانة له، ولا دين لمن لا عهد له.',source:'رواه أحمد',exp:'الأمانة من شعب الإيمان الأساسية، فمن لا أمانة له لا إيمان كامل له.'},
+  {num:8,title:'الإيمان والحياء',text:'الإيمان والحياء قُرنا جميعاً، فإذا رُفع أحدهما رُفع الآخر.',source:'رواه الحاكم',exp:'الحياء من الإيمان، ومن رفع الحياء نقص إيمانه، فهما مترابطان.'},
+  {num:9,title:'كمال الإيمان بحب الخير',text:'لا يؤمن أحدكم حتى يحب لأخيه ما يحب لنفسه.',source:'متفق عليه',exp:'محبة الخير للمسلمين شرط كمال الإيمان.'},
+  {num:10,title:'الوسواس علامة الإيمان',text:'ذلك صريح الإيمان — أي كراهية الوسواس والاستعاذة منه.',source:'رواه مسلم',exp:'كراهية الوسواس ورده علامة على صحة الإيمان وقوته في القلب.'},
+  {num:11,title:'الرضا بالإسلام',text:'رضيت بالله رباً وبالإسلام ديناً وبمحمد نبياً، وجبت له الجنة.',source:'رواه أبو داود',exp:'من قال هذا صادقاً من قلبه وجبت له الجنة بضمان نبوي.'},
+  {num:12,title:'الإيمان وحسن الخلق',text:'أكمل المؤمنين إيماناً أحسنهم خلقاً.',source:'رواه أبو داود والترمذي',exp:'حسن الخلق ثمرة الإيمان وعلامته، وكلما كمل الإيمان حسن الخلق.'},
+  {num:13,title:'الإيمان والتواضع',text:'من تواضع لله رفعه الله.',source:'رواه مسلم',exp:'التواضع من علامات الإيمان الصادق، والمتكبر يُذل والمتواضع يُرفع.'},
+  {num:14,title:'الإيمان والصبر',text:'عجباً لأمر المؤمن: إن أصابته سراء شكر فكان خيراً له، وإن أصابته ضراء صبر فكان خيراً له.',source:'رواه مسلم',exp:'المؤمن في حالتيه رابح: يشكر في السراء ويصبر في الضراء.'},
+  {num:15,title:'الإيمان والصدق',text:'عليكم بالصدق فإن الصدق يهدي إلى البر وإن البر يهدي إلى الجنة.',source:'متفق عليه',exp:'الصدق من أعلى مراتب الإيمان وهو باب البر كله.'},
+  {num:16,title:'التوكل من الإيمان',text:'لو أنكم توكلون على الله حق توكله لرزقكم كما يرزق الطير تغدو خماصاً وتروح بطاناً.',source:'رواه الترمذي',exp:'التوكل الحقيقي على الله مع الأخذ بالأسباب من أعلى مراتب الإيمان.'},
+  {num:17,title:'الإيمان ومحبة اللقاء',text:'من أحب لقاء الله أحب الله لقاءه، ومن كره لقاء الله كره الله لقاءه.',source:'متفق عليه',exp:'محبة لقاء الله علامة إيمان صادق، وهي تكون عند الاطمئنان إلى رحمته.'},
+  {num:18,title:'الإيمان والاستقامة',text:'قل آمنت بالله ثم استقم.',source:'رواه مسلم',exp:'الاستقامة على منهج الله بعد الإيمان هي الغاية العليا وأجمع العبادات.'},
+  {num:19,title:'الإيمان وذكر الموت',text:'أكثروا ذكر هاذم اللذات — يعني الموت.',source:'رواه الترمذي والنسائي',exp:'ذكر الموت يُرقق القلب ويقوي الإيمان ويزهد في الدنيا.'},
+  {num:20,title:'الإيمان يهدي لليوم الآخر',text:'من كان يؤمن بالله واليوم الآخر فليقل خيراً أو ليصمت.',source:'متفق عليه',exp:'الإيمان باليوم الآخر يضبط أقوال المؤمن وأفعاله فيلتزم الخير.'},
+];
+
+const FORTY_QUDSI=[
+  {num:1,title:'رحمة الله سبقت غضبه',text:'قال الله تعالى: إن رحمتي سبقت غضبي.',source:'متفق عليه — حديث قدسي',exp:'رحمة الله واسعة تسبق غضبه، وهذا بشرى لكل تائب مستغفر.'},
+  {num:2,title:'أنا عند ظن عبدي بي',text:'أنا عند ظن عبدي بي، وأنا معه إذا ذكرني؛ فإن ذكرني في نفسه ذكرته في نفسي، وإن ذكرني في ملأ ذكرته في ملأ خير منه.',source:'متفق عليه — حديث قدسي',exp:'حسن الظن بالله واجب، ومن ذكر الله ذكره الله في ملأ أشرف وأعلى.'},
+  {num:3,title:'تحريم الظلم',text:'يا عبادي إني حرمت الظلم على نفسي وجعلته بينكم محرماً فلا تظالموا.',source:'رواه مسلم — حديث قدسي',exp:'الله حرّم الظلم على نفسه سبحانه وعلى عباده، فالظلم من أعظم المحرمات.'},
+  {num:4,title:'المتحابون في الله',text:'المتحابون في جلالي لهم منابر من نور يغبطهم النبيون والشهداء.',source:'رواه الترمذي — حديث قدسي',exp:'المحبة في الله تبلغ بأصحابها مرتبة يغبطها الأنبياء والشهداء.'},
+  {num:5,title:'من عادى وليّ الله',text:'من عادى لي ولياً فقد آذنته بالحرب.',source:'رواه البخاري — حديث قدسي',exp:'أولياء الله تحت رعايته وحمايته، فمن عاداهم فقد أعلن الحرب على الله.'},
+  {num:6,title:'النوافل والمحبة الإلهية',text:'وما يزال عبدي يتقرب إليّ بالنوافل حتى أحبه، فإذا أحببته كنت سمعه الذي يسمع به وبصره الذي يبصر به.',source:'رواه البخاري — حديث قدسي',exp:'الإكثار من النوافل يُورث محبة الله ويُبارك في الجوارح.'},
+  {num:7,title:'الكبرياء رداء الله',text:'الكبرياء ردائي والعظمة إزاري، فمن نازعني واحداً منهما عذبته.',source:'رواه أبو داود — حديث قدسي',exp:'الكبرياء الحقيقية لله وحده، والتكبر على الناس ذنب يستوجب العقوبة.'},
+  {num:8,title:'الصيام لله',text:'كل عمل ابن آدم له إلا الصوم فإنه لي وأنا أجزي به.',source:'متفق عليه — حديث قدسي',exp:'الصيام عبادة خالصة لله، ولذا فالله يتولى جزاءه بنفسه بلا حساب محدد.'},
+  {num:9,title:'التوبة باب مفتوح',text:'يا عبادي إنكم تخطئون بالليل والنهار وأنا أغفر الذنوب جميعاً فاستغفروني أغفر لكم.',source:'رواه مسلم — حديث قدسي',exp:'باب التوبة مفتوح في كل وقت، ومن طلب المغفرة بصدق وجد الله غفاراً رحيماً.'},
+  {num:10,title:'لو لم تذنبوا',text:'لو لم تذنبوا لذهب الله بكم وجاء بقوم يذنبون فيستغفرون الله فيغفر لهم.',source:'رواه مسلم — حديث قدسي',exp:'الله يحب التوابين، وخلق الإنسان يُخطئ ليتوب ويستغفر فيتجلى اسمه الغفور.'},
+  {num:11,title:'المغفرة لمن لقي الله موحداً',text:'لو أن عبدي أتى بذنوب الأرض ثم لقيني لا يشرك بي شيئاً لأتيته بمغفرة قدرها.',source:'رواه الترمذي — حديث قدسي',exp:'رحمة الله أوسع من كل ذنب، فالتوبة الصادقة مقبولة مهما كثرت الذنوب.'},
+  {num:12,title:'يد الله مبسوطة',text:'يد الله ملأى لا تغيضها نفقة، سحّاء الليل والنهار.',source:'متفق عليه — حديث قدسي',exp:'خزائن الله لا تنضب وكرمه لا ينقطع، فاطلب من الكريم ولا تقنط.'},
+  {num:13,title:'أنفق أُنفق عليك',text:'يا ابن آدم أنفق أُنفق عليك.',source:'متفق عليه — حديث قدسي',exp:'من أنفق في سبيل الله أخلف الله عليه، وخزائن الله لا تنقص بالإنفاق.'},
+  {num:14,title:'فرحة الله بالتائب',text:'لله أشد فرحاً بتوبة عبده من أحدكم بضالته إذا وجدها.',source:'متفق عليه — حديث قدسي',exp:'فرح الله بتوبة العبد تدل على رحمته الواسعة وحبه لأن يتوب عباده إليه.'},
+  {num:15,title:'الله جليس من ذكره',text:'أنا جليس من ذكرني.',source:'رواه ابن حبان — حديث قدسي',exp:'من ذكر الله في كل أحواله فالله جليسه وقريبه، والذكر أعلى مراتب العبادة.'},
+  {num:16,title:'الهداية بيد الله',text:'يا عبادي كلكم ضال إلا من هديته فاستهدوني أهدكم.',source:'رواه مسلم — حديث قدسي',exp:'الهداية كلها بيد الله، فاطلبها منه وحده دون توقف.'},
+  {num:17,title:'الشكر الموجب للزيادة',text:'لئن شكرتم لأزيدنكم ولئن كفرتم إن عذابي لشديد.',source:'إبراهيم:7 — حديث قدسي',exp:'شكر النعمة سبب زيادتها، وكفران النعمة سبب زوالها.'},
+  {num:18,title:'كل إنسان ضيف على الله',text:'يا ابن آدم قم وأنا أمشي معك؛ اطلب الأجر فإنما هو لك.',source:'رواه الطبراني — حديث قدسي',exp:'الله يدعو عبده إلى الطاعة ويعده بالأجر، فمن جاء سعياً وجد الله معه.'},
+  {num:19,title:'الصبر عند المصيبة',text:'ما لعبدي المؤمن عندي جزاء إذا قبضت صفيّه من أهل الدنيا ثم احتسبه إلا الجنة.',source:'رواه البخاري — حديث قدسي',exp:'من صبر على فقد أحبابه واحتسب عند الله كان جزاؤه الجنة.'},
+  {num:20,title:'لقاء الله بالإيمان',text:'عبدي أنا عنده حين يذكرني، فإن ذكرني في نفسه ذكرته في نفسي وإن ذكرني في ملأ ذكرته في ملأ خير من ملئه.',source:'متفق عليه — حديث قدسي',exp:'المداومة على الذكر تجعل الله معك في كل أحوالك وفي أشرف الملأ.'},
+];
+
 const REMINDER_DHIKR={
   tasbih:['سبحان الله وبحمده','سبحان الله العظيم','سبحان الله وبحمده سبحان الله العظيم','سبحان الله عدد خلقه وسبحان الله رضا نفسه'],
   tahlil:['لا إله إلا الله وحده لا شريك له، له الملك وله الحمد وهو على كل شيء قدير','لا إله إلا الله','الحمد لله رب العالمين','الله أكبر'],
@@ -1633,12 +1805,14 @@ const REMINDER_DHIKR={
 let atharSetts={remindersEnabled:false,reminderInterval:60,startHour:8,endHour:22,typeTasbih:true,typeTahlil:true,typeIstighfar:true,typeSalawat:true,typeAdhkar:true,hadithEnabled:true};
 let atharStats={streak:0,lastActive:'',totalDhikr:0,totalSalawat:0,totalQuranPages:0,completedToday:0};
 let atharHadithIdx=0;
+let _hbook='nawawi';
 let reminderTimer=null;
 
 function loadAtharState(){
   const ss=localStorage.getItem('athar-setts');if(ss)try{atharSetts=Object.assign(atharSetts,JSON.parse(ss));}catch(e){}
   const st=localStorage.getItem('athar-stats');if(st)try{atharStats=Object.assign(atharStats,JSON.parse(st));}catch(e){}
   const hi=localStorage.getItem('athar-hadith-idx');if(hi)atharHadithIdx=parseInt(hi)||0;
+  const hb=localStorage.getItem('athar-hbook');if(hb)_hbook=hb;
   checkStreak();
 }
 function saveAtharSetts(){localStorage.setItem('athar-setts',JSON.stringify(atharSetts));}
@@ -1662,7 +1836,7 @@ function showAtharTab(tab){
   });
   if(tab==='dash')renderAtharDash();
   if(tab==='wirds')renderWirds();
-  if(tab==='hadith')renderHadith();
+  if(tab==='hadith')renderHadithAthar();
   if(tab==='sett')renderSetts();
 }
 
@@ -1741,6 +1915,8 @@ function incWird(idx,amount){
     if(atharStats.lastActive!==today){
       atharStats.streak++;
       atharStats.lastActive=today;
+      updateMyLB();
+      lbMaybePrompt();
     }
     if(navigator.vibrate)navigator.vibrate([50,30,50]);
   }
@@ -1776,9 +1952,10 @@ function saveWird(){
 }
 
 /* ===== HADITHS ===== */
-function renderHadith(){
-  const h=NAWAWI_40[atharHadithIdx]||NAWAWI_40[0];
-  document.getElementById('at-hadith-counter').textContent='الحديث '+(atharHadithIdx+1)+' من '+NAWAWI_40.length;
+function renderHadithAthar(){
+  const book=getHBook();
+  const h=book[atharHadithIdx]||book[0];
+  document.getElementById('at-hadith-counter').textContent='الحديث '+(atharHadithIdx+1)+' من '+book.length;
   document.getElementById('at-hadith-card').innerHTML=
     '<div class="hadith-num-badge">الحديث رقم '+h.num+'</div>'+
     '<div class="hadith-title">'+h.title+'</div>'+
@@ -1787,9 +1964,10 @@ function renderHadith(){
     '<div class="hadith-exp"><div class="hadith-exp-title">الفائدة</div><div class="hadith-exp-text">'+h.exp+'</div></div>';
 }
 function navHadith(dir){
-  atharHadithIdx=(atharHadithIdx+dir+NAWAWI_40.length)%NAWAWI_40.length;
+  const book=getHBook();
+  atharHadithIdx=(atharHadithIdx+dir+book.length)%book.length;
   localStorage.setItem('athar-hadith-idx',atharHadithIdx);
-  renderHadith();
+  renderHadithAthar();
   document.getElementById('at-panel-hadith').scrollTop=0;
 }
 
@@ -1871,12 +2049,13 @@ function checkHadithNotif(){
   if(!atharSetts.hadithEnabled)return;
   const last=parseInt(localStorage.getItem('athar-last-hadith')||'0');
   if(Date.now()-last>12*3600*1000){
-    atharHadithIdx=(atharHadithIdx+1)%NAWAWI_40.length;
+    const book=getHBook();
+    atharHadithIdx=(atharHadithIdx+1)%book.length;
     localStorage.setItem('athar-hadith-idx',atharHadithIdx);
     localStorage.setItem('athar-last-hadith',Date.now());
-    const h=NAWAWI_40[atharHadithIdx];
+    const h=book[atharHadithIdx];
     if('Notification' in window&&Notification.permission==='granted'){
-      new Notification('حديث نووي 📖',{body:'الحديث '+(atharHadithIdx+1)+': '+h.text.slice(0,80)+'...'});
+      new Notification('حديث 📖',{body:'الحديث '+(atharHadithIdx+1)+': '+h.text.slice(0,80)+'...'});
     }
   }
 }
@@ -1887,6 +2066,157 @@ function startReminderTimer(){
 }
 function stopReminderTimer(){clearInterval(reminderTimer);reminderTimer=null;}
 function restartReminderTimer(){startReminderTimer();}
+
+/* ===== HADITH BOOK SELECTOR ===== */
+function getHBook(){
+  if(_hbook==='bulugh')return BULUGH_SELECT;
+  if(_hbook==='iman')return FORTY_IMAN;
+  if(_hbook==='qudsi')return FORTY_QUDSI;
+  return NAWAWI_40;
+}
+function selectHBook(book){
+  _hbook=book;
+  localStorage.setItem('athar-hbook',book);
+  atharHadithIdx=0;
+  localStorage.setItem('athar-hadith-idx',0);
+  ['nawawi','bulugh','iman','qudsi'].forEach(b=>{
+    const el=document.getElementById('hbook-'+b);
+    if(el)el.classList.toggle('on',b===book);
+  });
+  renderHadithAthar();
+  document.getElementById('at-panel-hadith').scrollTop=0;
+}
+
+/* ===== LEADERBOARD ===== */
+const LB_KEY='fatwa-lb',LB_MYNAME='fatwa-lb-name',LB_SKIP='fatwa-lb-skip',LB_RESET='fatwa-lb-reset';
+let _lbTab='local';
+
+function getLBPeriod(){const d=new Date();return d.getMonth()<6?d.getFullYear()+'-a':d.getFullYear()+'-b';}
+function nextLBReset(){const d=new Date();const y=d.getFullYear();return d.getMonth()<6?'1 يونيو '+y:'1 يناير '+(y+1);}
+function getLB(){try{return JSON.parse(localStorage.getItem(LB_KEY)||'[]');}catch(_){return[];}}
+function saveLB(arr){localStorage.setItem(LB_KEY,JSON.stringify(arr));}
+function escHtml(s){return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');}
+
+function checkLBReset(){
+  const p=getLBPeriod();
+  if(localStorage.getItem(LB_RESET)!==p){
+    saveLB([]);localStorage.setItem(LB_RESET,p);
+    localStorage.removeItem(LB_MYNAME);localStorage.removeItem(LB_SKIP);
+  }
+}
+function updateMyLB(){
+  const name=localStorage.getItem(LB_MYNAME);if(!name)return;
+  const arr=getLB();const idx=arr.findIndex(e=>e.name===name);
+  if(idx>=0){arr[idx].streak=atharStats.streak;arr[idx].date=getToday();}
+  else arr.push({name,streak:atharStats.streak,date:getToday()});
+  saveLB(arr);
+}
+function lbMaybePrompt(){
+  checkLBReset();
+  if(localStorage.getItem(LB_SKIP)||localStorage.getItem(LB_MYNAME))return;
+  if(atharStats.streak<1)return;
+  setTimeout(openLbReg,800);
+}
+function openLbReg(){
+  document.getElementById('lbNameInput').value='';
+  document.getElementById('lbNameErr').textContent='';
+  document.getElementById('lbRegOverlay').classList.add('open');
+}
+function joinLeaderboard(){
+  const name=document.getElementById('lbNameInput').value.trim();
+  if(!name){document.getElementById('lbNameErr').textContent='الرجاء إدخال اسم';return;}
+  if(name.length<2){document.getElementById('lbNameErr').textContent='اسم قصير جداً';return;}
+  localStorage.setItem(LB_MYNAME,name);
+  document.getElementById('lbRegOverlay').classList.remove('open');
+  updateMyLB();
+}
+function skipLbReg(){localStorage.setItem(LB_SKIP,'1');document.getElementById('lbRegOverlay').classList.remove('open');}
+
+function showLeaderboard(){
+  checkLBReset();updateMyLB();_lbTab='local';
+  document.getElementById('lb-tab-local').classList.add('on');
+  document.getElementById('lb-tab-global').classList.remove('on');
+  renderLB();goTo('leaderboard');
+}
+function switchLbTab(tab){
+  _lbTab=tab;
+  document.getElementById('lb-tab-local').classList.toggle('on',tab==='local');
+  document.getElementById('lb-tab-global').classList.toggle('on',tab==='global');
+  renderLB();
+}
+const LOGO_MINI='<svg viewBox="0 0 80 100" xmlns="http://www.w3.org/2000/svg" fill="none" stroke="#7B1C1C" stroke-linecap="round" stroke-linejoin="round" width="26" height="32"><path d="M18,60 C5,52 6,33 18,25" stroke-width="2.8"/><path d="M62,60 C75,52 74,33 62,25" stroke-width="2.8"/><path d="M18,60 C18,26 40,6 40,6 C40,6 62,26 62,60" stroke-width="3.2"/><path d="M26,60 C26,30 40,14 40,14 C40,14 54,30 54,60" stroke-width="2.6"/><path d="M33,60 C33,45 40,39 40,39 C40,39 47,45 47,60" stroke-width="2.2"/><line x1="33" y1="60" x2="33" y2="80" stroke-width="2.2"/><line x1="47" y1="60" x2="47" y2="80" stroke-width="2.2"/><line x1="12" y1="82" x2="68" y2="82" stroke-width="2.8"/></svg>';
+function renderLB(){
+  const body=document.getElementById('lb-body');if(!body)return;
+  if(_lbTab==='global'){
+    body.innerHTML='<div class="lb-info-strip">الميزة العالمية قريباً إن شاء الله 🌍</div>';return;
+  }
+  const myName=localStorage.getItem(LB_MYNAME);
+  const arr=getLB().sort((a,b)=>b.streak-a.streak);
+  const M=['🥇','🥈','🥉'];
+  let html='<div class="lb-info-strip">يتجدد التصنيف في '+escHtml(nextLBReset())+'</div>';
+  if(!arr.length){
+    html+='<div style="text-align:center;padding:40px 16px;color:#bbb;font-size:14px">لا يوجد مشاركون بعد<br><small>أتمّ وردك اليوم لتظهر هنا</small></div>';
+  } else {
+    arr.forEach((e,i)=>{
+      const me=myName&&e.name===myName;
+      html+='<div class="lb-entry'+(me?' lb-me':'')+'">'+
+        '<div class="lb-rank">'+(i<3?M[i]:'#'+(i+1))+'</div>'+
+        '<div class="lb-logo-wrap">'+LOGO_MINI+'</div>'+
+        '<div class="lb-name">'+escHtml(e.name)+(me?'<span class="lb-me-tag">أنت</span>':'')+'</div>'+
+        '<div class="lb-streak-wrap"><div class="lb-streak-num">'+e.streak+'</div><div class="lb-streak-lbl">يوم</div></div>'+
+      '</div>';
+    });
+  }
+  if(!myName&&!localStorage.getItem(LB_SKIP)){
+    html+='<button class="lb-join-btn" onclick="openLbReg()">انضم للوحة الشرف 🏆</button>';
+  }
+  body.innerHTML=html;
+}
+
+/* ===== ADMIN ===== */
+function openPinOverlay(){
+  document.getElementById('pinInput').value='';
+  document.getElementById('pinErr').textContent='';
+  document.getElementById('pinOverlay').classList.add('open');
+  setTimeout(()=>{const el=document.getElementById('pinInput');if(el)el.focus();},200);
+}
+function closePinOverlay(){document.getElementById('pinOverlay').classList.remove('open');}
+function checkPin(){
+  const pin=document.getElementById('pinInput').value;
+  if(pin==='5158'){closePinOverlay();renderAdmin();goTo('admin');}
+  else{document.getElementById('pinErr').textContent='رمز خاطئ';}
+}
+function renderAdmin(){
+  const body=document.getElementById('admin-body');if(!body)return;
+  checkLBReset();
+  const arr=getLB().sort((a,b)=>b.streak-a.streak);
+  let html='<div class="lb-info-strip">إجمالي المشاركين: '+arr.length+' — يتجدد في '+escHtml(nextLBReset())+'</div>';
+  if(!arr.length){
+    html+='<div style="text-align:center;padding:32px;color:#bbb;font-size:14px">لا توجد إدخالات</div>';
+  } else {
+    arr.forEach((e,i)=>{
+      html+='<div class="admin-row">'+
+        '<div class="lb-name" style="flex:1">'+escHtml(e.name)+'<br><small style="color:#aaa;font-size:11px">'+e.streak+' يوم — '+escHtml(e.date||'')+'</small></div>'+
+        '<button class="admin-del" onclick="adminDel('+i+')">حذف</button>'+
+      '</div>';
+    });
+    html+='<button class="admin-del" style="width:100%;margin-top:16px;padding:12px;border-radius:13px;font-size:13px" onclick="adminClearAll()">🗑 مسح الكل</button>';
+  }
+  body.innerHTML=html;
+}
+function adminDel(idx){
+  const arr=getLB().sort((a,b)=>b.streak-a.streak);
+  const entry=arr[idx];if(!entry)return;
+  if(!confirm('حذف "'+entry.name+'"؟'))return;
+  const all=getLB().filter(e=>e.name!==entry.name);saveLB(all);
+  if(localStorage.getItem(LB_MYNAME)===entry.name)localStorage.removeItem(LB_MYNAME);
+  renderAdmin();
+}
+function adminClearAll(){
+  if(!confirm('مسح كل البيانات؟'))return;
+  saveLB([]);localStorage.removeItem(LB_MYNAME);localStorage.removeItem(LB_SKIP);
+  renderAdmin();
+}
 
 /* Init */
 showAdhkar('sabah');
