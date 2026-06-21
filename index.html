@@ -124,12 +124,15 @@ html,body{font-family:'Tajawal',sans-serif;background:var(--bg);min-height:100vh
 
 /* ===== QIBLA PAGE ===== */
 #p-qibla{background:var(--bg);}
-.qibla-body{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:28px;padding:24px;}
-.qibla-circle{width:200px;height:200px;border-radius:50%;border:2.5px solid rgba(123,28,28,.15);background:#fff;box-shadow:0 6px 24px rgba(0,0,0,.1);position:relative;display:flex;align-items:center;justify-content:center;}
-.qibla-needle-wrap{position:absolute;width:100%;height:100%;transition:transform .25s ease-out;}
-.qibla-arrow{position:absolute;top:16px;left:50%;transform:translateX(-50%);width:0;height:0;border-left:7px solid transparent;border-right:7px solid transparent;border-bottom:68px solid var(--primary);}
-.qibla-arrow-lo{position:absolute;bottom:16px;left:50%;transform:translateX(-50%);width:0;height:0;border-left:7px solid transparent;border-right:7px solid transparent;border-top:52px solid rgba(123,28,28,.2);}
-.qibla-dot{width:14px;height:14px;background:var(--primary);border-radius:50%;position:absolute;z-index:2;}
+.qibla-body{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:24px;padding:24px;}
+.qibla-circle{width:230px;height:230px;border-radius:50%;border:2px solid rgba(123,28,28,.12);background:#fff;box-shadow:0 6px 28px rgba(0,0,0,.1);position:relative;display:flex;align-items:center;justify-content:center;}
+.qibla-ring-lbl{position:absolute;font-size:11px;font-weight:700;color:rgba(123,28,28,.4);font-family:'Tajawal',sans-serif;}
+.qibla-ring-n{top:7px;left:50%;transform:translateX(-50%);}
+.qibla-ring-s{bottom:7px;left:50%;transform:translateX(-50%);}
+.qibla-ring-e{right:10px;top:50%;transform:translateY(-50%);}
+.qibla-ring-w{left:10px;top:50%;transform:translateY(-50%);}
+.qibla-needle-wrap{position:absolute;width:100%;height:100%;transition:transform .2s linear;display:flex;align-items:center;justify-content:center;}
+.qibla-needle-wrap.live svg{filter:drop-shadow(0 0 6px rgba(123,28,28,.35));}
 .qibla-deg-text{font-size:44px;font-weight:900;color:var(--primary);line-height:1;}
 .qibla-dir-label{font-size:13px;color:#999;}
 .qibla-status{font-size:13px;color:#666;text-align:center;padding:0 24px;line-height:1.7;}
@@ -483,11 +486,22 @@ html,body{font-family:'Tajawal',sans-serif;background:var(--bg);min-height:100vh
   </div>
   <div class="qibla-body">
     <div class="qibla-circle">
+      <span class="qibla-ring-lbl qibla-ring-n">N</span>
+      <span class="qibla-ring-lbl qibla-ring-s">S</span>
+      <span class="qibla-ring-lbl qibla-ring-e">E</span>
+      <span class="qibla-ring-lbl qibla-ring-w">W</span>
       <div class="qibla-needle-wrap" id="qiblaNeedle">
-        <div class="qibla-arrow"></div>
-        <div class="qibla-arrow-lo"></div>
+        <svg viewBox="0 0 80 100" xmlns="http://www.w3.org/2000/svg" fill="none" stroke="#7B1C1C" stroke-linecap="round" stroke-linejoin="round" style="width:72px;height:90px;">
+          <path d="M18,60 C5,52 6,33 18,25" stroke-width="2.8"/>
+          <path d="M62,60 C75,52 74,33 62,25" stroke-width="2.8"/>
+          <path d="M18,60 C18,26 40,6 40,6 C40,6 62,26 62,60" stroke-width="3.2"/>
+          <path d="M26,60 C26,30 40,14 40,14 C40,14 54,30 54,60" stroke-width="2.6"/>
+          <path d="M33,60 C33,45 40,39 40,39 C40,39 47,45 47,60" stroke-width="2.2"/>
+          <line x1="33" y1="60" x2="33" y2="80" stroke-width="2.2"/>
+          <line x1="47" y1="60" x2="47" y2="80" stroke-width="2.2"/>
+          <line x1="12" y1="82" x2="68" y2="82" stroke-width="2.8"/>
+        </svg>
       </div>
-      <div class="qibla-dot"></div>
     </div>
     <div style="text-align:center">
       <div class="qibla-deg-text" id="qiblaDeg">--°</div>
@@ -1109,7 +1123,7 @@ function menuAbout(){
 }
 
 /* ===== QIBLA ===== */
-let _qiblaBearing=null,_qiblaOrientFn=null,_qiblaAbsFn=null,_lastQiblaRot=0,_gotAbsoluteEvt=false;
+let _qiblaBearing=null,_qiblaFn=null,_qiblaAbsFn=null,_lastRot=0,_hasAbsolute=false;
 function calcQiblaDir(lat,lng){
   const mLat=21.4225*Math.PI/180,mLng=39.8262*Math.PI/180;
   const uLat=lat*Math.PI/180,uLng=lng*Math.PI/180;
@@ -1118,78 +1132,67 @@ function calcQiblaDir(lat,lng){
   const x=Math.cos(uLat)*Math.sin(mLat)-Math.sin(uLat)*Math.cos(mLat)*Math.cos(dLng);
   return((Math.atan2(y,x)*180/Math.PI)+360)%360;
 }
-function _applyCompassHeading(heading){
+function _rotateTo(deg){
+  // Shortest-path delta — prevents 359°→0° wild spin
+  const cur=(_lastRot%360+360)%360;
+  let d=((deg%360+360)%360)-cur;
+  if(d>180)d-=360;if(d<-180)d+=360;
+  _lastRot+=d;
+  document.getElementById('qiblaNeedle').style.transform='rotate('+_lastRot+'deg)';
+}
+function _onHeading(h){
   if(_qiblaBearing===null)return;
-  const target=(_qiblaBearing-heading+360)%360;
-  // Shortest-path delta to avoid 359°→0° wild spin across transition boundary
-  let delta=target-(_lastQiblaRot%360+360)%360;
-  if(delta>180)delta-=360;
-  if(delta<-180)delta+=360;
-  _lastQiblaRot+=delta;
-  document.getElementById('qiblaNeedle').style.transform='rotate('+_lastQiblaRot+'deg)';
+  _rotateTo((_qiblaBearing-h+360)%360);
 }
-function _handleOrientEvt(e,isAbsolute){
-  if(isAbsolute)_gotAbsoluteEvt=true;
-  if(!isAbsolute&&_gotAbsoluteEvt)return;
-  let h=null;
-  if(e.webkitCompassHeading!=null&&e.webkitCompassHeading>=0)h=e.webkitCompassHeading;
-  else if(e.alpha!=null)h=(360-e.alpha%360+360)%360;
-  if(h===null)return;
-  _applyCompassHeading(h);
-}
-function _startCompassListener(){
-  if(_qiblaOrientFn)return;
-  _gotAbsoluteEvt=false;
-  _qiblaOrientFn=function(e){_handleOrientEvt(e,false);};
-  _qiblaAbsFn=function(e){_handleOrientEvt(e,true);};
-  window.addEventListener('deviceorientationabsolute',_qiblaAbsFn,true);
-  window.addEventListener('deviceorientation',_qiblaOrientFn,true);
-}
-function _stopCompassListener(){
-  if(_qiblaOrientFn){window.removeEventListener('deviceorientation',_qiblaOrientFn,true);_qiblaOrientFn=null;}
+function _stopListeners(){
+  if(_qiblaFn){window.removeEventListener('deviceorientation',_qiblaFn,true);_qiblaFn=null;}
   if(_qiblaAbsFn){window.removeEventListener('deviceorientationabsolute',_qiblaAbsFn,true);_qiblaAbsFn=null;}
 }
-function _setLiveStatus(){
-  document.getElementById('qiblaStatus').textContent='البوصلة تعمل — القبلة '+Math.round(_qiblaBearing)+'° من الشمال';
-  document.getElementById('qiblaStartBtn').style.display='none';
-}
-function _attachCompass(){
-  if(typeof DeviceOrientationEvent!=='undefined'&&typeof DeviceOrientationEvent.requestPermission==='function'){
-    DeviceOrientationEvent.requestPermission().then(p=>{
-      if(p==='granted'){_startCompassListener();_setLiveStatus();}
-      else{_fallbackStatic();}
-    }).catch(()=>{
-      // No user gesture (auto-start) — show static bearing + prompt to tap button
-      _fallbackStatic();
-      document.getElementById('qiblaStatus').textContent='القبلة '+Math.round(_qiblaBearing)+'° من الشمال — اضغط الزر لتشغيل البوصلة الحية';
-      document.getElementById('qiblaStartBtn').style.display='block';
-      document.getElementById('qiblaStartBtn').textContent='تشغيل البوصلة';
-    });
-  }else{
-    _startCompassListener();
-    _setLiveStatus();
-  }
-}
-function _fallbackStatic(){
-  _lastQiblaRot=_qiblaBearing;
-  document.getElementById('qiblaNeedle').style.transform='rotate('+_qiblaBearing+'deg)';
-  document.getElementById('qiblaStatus').textContent='القبلة تقع على بُعد '+Math.round(_qiblaBearing)+'° من الشمال — وجّه الجهاز نحو الاتجاه المشار إليه';
+function _startListeners(){
+  _hasAbsolute=false;
+  // Only accept absolute heading — ignore non-absolute alpha (not compass)
+  _qiblaAbsFn=function(e){
+    if(e.alpha==null)return;
+    _hasAbsolute=true;
+    _onHeading((360-e.alpha+360)%360);
+  };
+  _qiblaFn=function(e){
+    if(_hasAbsolute)return; // prefer absolute event
+    if(e.webkitCompassHeading!=null&&e.webkitCompassHeading>=0){
+      // iOS: always absolute
+      _onHeading(e.webkitCompassHeading);
+    }
+    // Non-iOS non-absolute alpha: ignore (not reliable compass)
+  };
+  window.addEventListener('deviceorientationabsolute',_qiblaAbsFn,true);
+  window.addEventListener('deviceorientation',_qiblaFn,true);
 }
 function getQibla(){
   const st=document.getElementById('qiblaStatus');
+  const needle=document.getElementById('qiblaNeedle');
+  const btn=document.getElementById('qiblaStartBtn');
   st.textContent='جاري تحديد موقعك...';
-  _stopCompassListener();
-  _lastQiblaRot=0;_gotAbsoluteEvt=false;
+  btn.style.display='none';
+  needle.classList.remove('live');
+  _stopListeners();
+  _lastRot=0;_qiblaBearing=null;
+  // *** Request compass permission HERE — still inside user-gesture context ***
+  if(typeof DeviceOrientationEvent!=='undefined'&&typeof DeviceOrientationEvent.requestPermission==='function'){
+    DeviceOrientationEvent.requestPermission()
+      .then(p=>{if(p==='granted'){_startListeners();needle.classList.add('live');}})
+      .catch(()=>{});
+  }else{
+    _startListeners();needle.classList.add('live');
+  }
   if(!navigator.geolocation){st.textContent='المتصفح لا يدعم تحديد الموقع';return;}
   navigator.geolocation.getCurrentPosition(pos=>{
     _qiblaBearing=calcQiblaDir(pos.coords.latitude,pos.coords.longitude);
     document.getElementById('qiblaDeg').textContent=Math.round(_qiblaBearing)+'°';
-    _attachCompass();
+    st.textContent='البوصلة تعمل — القبلة '+Math.round(_qiblaBearing)+'° من الشمال';
   },()=>{
-    st.textContent='تعذّر تحديد الموقع. يرجى السماح بالوصول إلى الموقع.';
-    const btn=document.getElementById('qiblaStartBtn');
+    st.textContent='تعذّر تحديد الموقع — اسمح بالوصول للموقع ثم أعد المحاولة';
     btn.textContent='إعادة المحاولة';btn.style.display='block';
-  });
+  },{enableHighAccuracy:true,timeout:10000});
 }
 
 /* ===== PRAYER TIMES ===== */
