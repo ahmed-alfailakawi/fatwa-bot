@@ -1099,7 +1099,7 @@ function menuAbout(){
 }
 
 /* ===== QIBLA ===== */
-let _qiblaBearing=null,_qiblaOrientFn=null;
+let _qiblaBearing=null,_qiblaOrientFn=null,_qiblaAbsFn=null,_lastQiblaRot=0,_gotAbsoluteEvt=false;
 function calcQiblaDir(lat,lng){
   const mLat=21.4225*Math.PI/180,mLng=39.8262*Math.PI/180;
   const uLat=lat*Math.PI/180,uLng=lng*Math.PI/180;
@@ -1110,19 +1110,34 @@ function calcQiblaDir(lat,lng){
 }
 function _applyCompassHeading(heading){
   if(_qiblaBearing===null)return;
-  const rot=(_qiblaBearing-heading+360)%360;
-  document.getElementById('qiblaNeedle').style.transform='rotate('+rot+'deg)';
+  const target=(_qiblaBearing-heading+360)%360;
+  // Shortest-path delta to avoid 359°→0° wild spin across transition boundary
+  let delta=target-(_lastQiblaRot%360+360)%360;
+  if(delta>180)delta-=360;
+  if(delta<-180)delta+=360;
+  _lastQiblaRot+=delta;
+  document.getElementById('qiblaNeedle').style.transform='rotate('+_lastQiblaRot+'deg)';
+}
+function _handleOrientEvt(e,isAbsolute){
+  if(isAbsolute)_gotAbsoluteEvt=true;
+  if(!isAbsolute&&_gotAbsoluteEvt)return;
+  let h=null;
+  if(e.webkitCompassHeading!=null&&e.webkitCompassHeading>=0)h=e.webkitCompassHeading;
+  else if(e.alpha!=null)h=(360-e.alpha%360+360)%360;
+  if(h===null)return;
+  _applyCompassHeading(h);
 }
 function _startCompassListener(){
   if(_qiblaOrientFn)return;
-  _qiblaOrientFn=function(e){
-    let h;
-    if(e.webkitCompassHeading!=null)h=e.webkitCompassHeading;
-    else if(e.alpha!=null)h=(360-e.alpha+360)%360;
-    else return;
-    _applyCompassHeading(h);
-  };
+  _gotAbsoluteEvt=false;
+  _qiblaOrientFn=function(e){_handleOrientEvt(e,false);};
+  _qiblaAbsFn=function(e){_handleOrientEvt(e,true);};
+  window.addEventListener('deviceorientationabsolute',_qiblaAbsFn,true);
   window.addEventListener('deviceorientation',_qiblaOrientFn,true);
+}
+function _stopCompassListener(){
+  if(_qiblaOrientFn){window.removeEventListener('deviceorientation',_qiblaOrientFn,true);_qiblaOrientFn=null;}
+  if(_qiblaAbsFn){window.removeEventListener('deviceorientationabsolute',_qiblaAbsFn,true);_qiblaAbsFn=null;}
 }
 function _attachCompass(){
   if(typeof DeviceOrientationEvent!=='undefined'&&typeof DeviceOrientationEvent.requestPermission==='function'){
@@ -1136,13 +1151,15 @@ function _attachCompass(){
   }
 }
 function _fallbackStatic(){
+  _lastQiblaRot=_qiblaBearing;
   document.getElementById('qiblaNeedle').style.transform='rotate('+_qiblaBearing+'deg)';
   document.getElementById('qiblaStatus').textContent='القبلة تقع على بُعد '+Math.round(_qiblaBearing)+'° من الشمال — وجّه الجهاز نحو الاتجاه المشار إليه';
 }
 function getQibla(){
   const st=document.getElementById('qiblaStatus');
   st.textContent='جاري تحديد موقعك...';
-  if(_qiblaOrientFn){window.removeEventListener('deviceorientation',_qiblaOrientFn,true);_qiblaOrientFn=null;}
+  _stopCompassListener();
+  _lastQiblaRot=0;_gotAbsoluteEvt=false;
   if(!navigator.geolocation){st.textContent='المتصفح لا يدعم تحديد الموقع';return;}
   navigator.geolocation.getCurrentPosition(pos=>{
     _qiblaBearing=calcQiblaDir(pos.coords.latitude,pos.coords.longitude);
@@ -1336,8 +1353,7 @@ async function doSearch(mode){
   h.push(q);if(h.length>20)h.shift();localStorage.setItem('fatwa-history',JSON.stringify(h));
   goTo('loading');startDrawAnimation();startDhikr();
   try{
-    const apiMode=mode==='general'?'fatwa':mode;
-    const r=await fetch('/api/ask',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({question:q,mode:apiMode})});
+    const r=await fetch('/api/ask',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({question:q,mode})});
     const text=await r.text();
     let data;
     try{data=JSON.parse(text);}catch(e){throw new Error('خطأ في الخادم ('+r.status+'): '+text.slice(0,150));}
@@ -1345,7 +1361,9 @@ async function doSearch(mode){
     stopDrawAnimation();
     if(data.error)throw new Error(data.error);
     await new Promise(res=>setTimeout(res,550));
-    apiMode==='fatwa'?renderFatwa(q,data):renderHadith(q,data);
+    if(mode==='fatwa')renderFatwa(q,data);
+    else if(mode==='hadith')renderHadith(q,data);
+    else renderGeneral(q,data);
     goTo('results');
   }catch(err){
     console.error('[fatwa-bot]',err);
@@ -1392,6 +1410,16 @@ function renderHadith(q,data){
   const card=document.createElement('div');card.className='sc-card';
   const srcBtn=data.sourceUrl?'<a href="'+data.sourceUrl+'" target="_blank" class="src-btn">المصدر</a>':'';
   card.innerHTML='<div class="sc-head"><div class="sc-info"><div class="sc-nm">نص الحديث</div><div class="sc-tl">التحقق من الصحة</div></div>'+srcBtn+'<div class="ruling-dot '+dot+'"></div></div><div class="sc-body"><div style="font-family:Amiri,serif;font-size:16px;line-height:2;color:#1a1a1a;padding:12px 14px;background:rgba(123,28,28,.04);border-radius:10px;border-right:3px solid #7B1C1C;margin-bottom:10px">'+(data.text||q)+'</div><div style="display:flex;align-items:center;gap:8px;padding:8px 12px;border-radius:10px;background:#f9f9f9;border:1px solid #eee;margin-bottom:10px"><div class="ruling-dot '+dot+'"></div><span style="font-size:12px;color:#888">درجة الحديث:</span><span style="font-size:13px;font-weight:700">'+(data.grade||'غير محدد')+'</span></div><div style="font-size:12.5px;color:#555;padding:10px 14px;background:rgba(123,28,28,.04);border-radius:10px;border:1px solid rgba(123,28,28,.1)"><span style="font-weight:700;color:#7B1C1C;display:block;margin-bottom:4px">المصدر</span>'+(data.source||'لم يُعثر على مصدر')+'</div>'+(data.scholars?'<div style="margin-top:8px;font-size:12.5px;color:#555;padding:10px 14px;background:rgba(123,28,28,.04);border-radius:10px;border:1px solid rgba(123,28,28,.1)"><span style="font-weight:700;color:#7B1C1C;display:block;margin-bottom:4px">أقوال العلماء</span>'+data.scholars+'</div>':'')+'</div>';
+  body.appendChild(card);appendFooter(body);
+}
+
+function renderGeneral(q,data){
+  document.getElementById('resQ').textContent=q;
+  document.getElementById('resTitle').textContent='إجابة دينية موثقة';
+  document.getElementById('resBadge').textContent='معلومة';
+  const body=document.getElementById('resBody');body.innerHTML='';
+  const card=document.createElement('div');card.className='sc-card';
+  card.innerHTML='<div class="sc-head"><div class="sc-info"><div class="sc-nm">الإجابة</div><div class="sc-tl">على ضوء الدليل الشرعي</div></div></div><div class="sc-body"><div class="sc-ans">'+(data.answer||'')+'</div>'+(data.source?'<div class="sc-ev"><div class="sc-ev-line"></div><div><span class="sc-ev-ref">المصدر</span>'+data.source+'</div></div>':'')+'</div>';
   body.appendChild(card);appendFooter(body);
 }
 
