@@ -198,9 +198,12 @@ html,body{font-family:'Tajawal',sans-serif;background:var(--bg);min-height:100vh
 .tasbih-btn{width:180px;height:180px;border-radius:50%;background:linear-gradient(145deg,#9B3232,#5C1515);border:none;cursor:pointer;box-shadow:0 8px 30px rgba(91,21,21,.35),inset 0 2px 4px rgba(255,255,255,.12);display:flex;align-items:center;justify-content:center;transition:transform .12s,box-shadow .12s;user-select:none;touch-action:manipulation;-webkit-tap-highlight-color:transparent;}
 .tasbih-btn:active{transform:scale(.95);box-shadow:0 4px 14px rgba(91,21,21,.2);}
 .tasbih-btn-label{font-family:'Amiri',serif;font-size:20px;color:#fff;font-weight:700;pointer-events:none;}
-.tasbih-types{display:flex;gap:8px;flex-wrap:wrap;justify-content:center;max-width:320px;padding:0 16px;}
-.tasbih-type-btn{background:transparent;border:1.5px solid rgba(123,28,28,.22);color:var(--primary);border-radius:20px;padding:7px 14px;font-family:'Tajawal',sans-serif;font-size:13px;font-weight:700;cursor:pointer;touch-action:manipulation;transition:background .15s,color .15s;}
-.tasbih-type-btn.on{background:var(--primary);color:#fff;border-color:var(--primary);}
+.tasbih-input-wrap{width:100%;max-width:300px;}
+.tasbih-input{width:100%;padding:12px 16px;border:1.5px solid rgba(123,28,28,.2);border-radius:14px;font-family:'Amiri',serif;font-size:17px;color:#1a1a1a;background:#fff;text-align:center;box-sizing:border-box;outline:none;box-shadow:0 2px 8px rgba(0,0,0,.06);}
+.tasbih-input:focus{border-color:var(--primary);}
+.tasbih-presets{display:flex;gap:7px;flex-wrap:wrap;justify-content:center;max-width:320px;padding:0 8px;}
+.tasbih-preset{background:transparent;border:1.5px solid rgba(123,28,28,.18);color:var(--primary);border-radius:18px;padding:5px 12px;font-family:'Tajawal',sans-serif;font-size:12px;font-weight:700;cursor:pointer;touch-action:manipulation;transition:background .15s,color .15s;}
+.tasbih-preset.on{background:var(--primary);color:#fff;border-color:var(--primary);}
 .tasbih-actions{display:flex;gap:12px;}
 .tasbih-action{background:transparent;border:1.5px solid rgba(123,28,28,.2);color:var(--primary);border-radius:12px;padding:10px 20px;font-family:'Tajawal',sans-serif;font-size:13px;font-weight:700;cursor:pointer;touch-action:manipulation;}
 
@@ -556,11 +559,16 @@ html,body{font-family:'Tajawal',sans-serif;background:var(--bg);min-height:100vh
   <div class="tasbih-body">
     <div class="tasbih-num" id="tasbihNum">0</div>
     <div class="tasbih-cycle" id="tasbihCycle">المجموع: 0</div>
-    <div class="tasbih-types" id="tasbihTypes">
-      <button class="tasbih-type-btn on" onclick="setDhikr(this,'سبحان الله')">سبحان الله</button>
-      <button class="tasbih-type-btn" onclick="setDhikr(this,'الحمد لله')">الحمد لله</button>
-      <button class="tasbih-type-btn" onclick="setDhikr(this,'الله أكبر')">الله أكبر</button>
-      <button class="tasbih-type-btn" onclick="setDhikr(this,'لا إله إلا الله')">لا إله إلا الله</button>
+    <div class="tasbih-input-wrap">
+      <input class="tasbih-input" id="tasbihInput" type="text" placeholder="اكتب ذكرك أو دعاءك..." value="سبحان الله" maxlength="80" oninput="document.getElementById('tasbihLabel').textContent=this.value.trim()||'•'">
+    </div>
+    <div class="tasbih-presets">
+      <button class="tasbih-preset on" onclick="pickDhikr(this,'سبحان الله')">سبحان الله</button>
+      <button class="tasbih-preset" onclick="pickDhikr(this,'الحمد لله')">الحمد لله</button>
+      <button class="tasbih-preset" onclick="pickDhikr(this,'الله أكبر')">الله أكبر</button>
+      <button class="tasbih-preset" onclick="pickDhikr(this,'لا إله إلا الله')">لا إله إلا الله</button>
+      <button class="tasbih-preset" onclick="pickDhikr(this,'سبحان الله وبحمده')">سبحان الله وبحمده</button>
+      <button class="tasbih-preset" onclick="pickDhikr(this,'أستغفر الله')">أستغفر الله</button>
     </div>
     <button class="tasbih-btn" onclick="tasbihTap()">
       <span class="tasbih-btn-label" id="tasbihLabel">سبحان الله</span>
@@ -1415,9 +1423,11 @@ function tasbihSetTarget(){
   const v=prompt('أدخل الهدف (مثال: 33، 100):',tasbihTarget);
   if(v&&!isNaN(v)&&+v>0){tasbihTarget=+v;document.getElementById('tasbihTarget').textContent=tasbihTarget;}
 }
-function setDhikr(btn,text){
-  document.querySelectorAll('.tasbih-type-btn').forEach(b=>b.classList.remove('on'));
+function pickDhikr(btn,text){
+  document.querySelectorAll('.tasbih-preset').forEach(b=>b.classList.remove('on'));
   btn.classList.add('on');
+  const inp=document.getElementById('tasbihInput');
+  inp.value=text;
   document.getElementById('tasbihLabel').textContent=text;
   tasbihReset();
 }

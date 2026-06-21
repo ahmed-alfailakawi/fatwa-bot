@@ -37,6 +37,14 @@ async function fetchSource(url) {
   } catch (_) { return null; }
 }
 
+function parseJSON(raw) {
+  const clean = raw.replace(/```json/gi, "").replace(/```/g, "").trim();
+  try { return JSON.parse(clean); } catch (_) {}
+  const m = clean.match(/\{[\s\S]*\}/);
+  if (m) { try { return JSON.parse(m[0]); } catch (__) {} }
+  return { error: "parse error", raw: clean };
+}
+
 module.exports = async function handler(req, res) {
   res.setHeader("Access-Control-Allow-Origin", "*");
   res.setHeader("Access-Control-Allow-Methods", "POST, OPTIONS");
@@ -49,41 +57,24 @@ module.exports = async function handler(req, res) {
   const apiKey = process.env.ANTHROPIC_API_KEY;
   if (!apiKey) return res.status(500).json({ error: "no api key" });
 
+  const client = new Anthropic({ apiKey });
+
   try {
-    const q = encodeURIComponent(question);
-    const [kResult, jResult, fResult, uResult, binbazText, islamwebText, islamqaText] = await Promise.all([
-      findYT("عثمان الخميس", question),
-      findYT("مطلق الجاسر", question),
-      findYT("الفوزان", question),
-      findYT("ابن عثيمين", question),
-      fetchSource("https://binbaz.org.sa/fatwas?search=" + q),
-      fetchSource("https://www.islamweb.net/ar/fatwa/search/?q=" + q),
-      fetchSource("https://islamqa.info/ar/search/?q=" + q),
-    ]);
+    let system;
 
-    const kSrc = kResult ? kResult.url : "https://www.youtube.com/@othmanalkamees/search?query=" + encodeURIComponent(question);
-    const jSrc = jResult ? jResult.url : "https://www.youtube.com/@dr-mutlaq/search?query=" + encodeURIComponent(question);
-    const fSrc = fResult ? fResult.url : "https://www.youtube.com/@dralfawzann/search?query=" + encodeURIComponent(question);
-    const uSrc = uResult ? uResult.url : "https://www.youtube.com/@ibnothaimeentv/search?query=" + encodeURIComponent(question);
-    const kTitle = kResult ? kResult.title : "لم نجد فيديو للشيخ في هذه المسألة";
-    const jTitle = jResult ? jResult.title : "لم نجد فيديو للشيخ في هذه المسألة";
-    const fTitle = fResult ? fResult.title : "لم نجد فيديو للشيخ في هذه المسألة";
-    const uTitle = uResult ? uResult.title : "لم نجد فيديو للشيخ في هذه المسألة";
+    if (mode === "hadith") {
+      system = `أنت متخصص في علوم الحديث النبوي. مهمتك التحقق من الحديث وتخريجه وبيان درجته.
+قواعد صارمة:
+- إذا كان الحديث صحيحاً أو حسناً بيّن ذلك وذكر مصادره
+- إذا كان ضعيفاً أو موضوعاً وضّح سبب الضعف
+- اذكر الراوي والمصدر الأصلي
+- لا تخترع أحاديث أو أسانيد
 
-    const ctx = [
-      binbazText ? "[binbaz.org.sa]\n" + binbazText : null,
-      islamwebText ? "[islamweb.net]\n" + islamwebText : null,
-      islamqaText ? "[islamqa.info]\n" + islamqaText : null,
-    ].filter(Boolean).join("\n\n---\n\n");
-
-    const client = new Anthropic({ apiKey });
-
-    const system = mode === "hadith"
-      ? `أنت متخصص في علوم الحديث. مهمتك التحقق من صحة الحديث وتخريجه.
 أجب بـ JSON فقط بدون أي نص قبله أو بعده:
-{"text":"نص الحديث كاملاً","grade":"درجته (صحيح/حسن/ضعيف/موضوع)","source":"المصدر والراوي","sourceUrl":"","scholars":"أقوال العلماء في تخريجه","note":"ملاحظات إن وجدت"}`
-      : mode === "general"
-      ? `أنت موسوعة إسلامية شاملة على منهج أهل السنة والجماعة.
+{"text":"نص الحديث كاملاً","grade":"درجته (صحيح/حسن/ضعيف/موضوع/لا أصل له)","source":"المصدر والراوي","sourceUrl":"","scholars":"أقوال العلماء في تخريجه","note":"ملاحظات مهمة إن وجدت"}`;
+
+    } else if (mode === "general") {
+      system = `أنت موسوعة إسلامية شاملة على منهج أهل السنة والجماعة.
 أجب على السؤال بإجابة صحيحة موثقة مباشرة.
 القواعد:
 - إجابة واحدة صحيحة محددة، لا تسرد خلافاً إلا إذا كان ضرورياً
@@ -91,9 +82,38 @@ module.exports = async function handler(req, res) {
 - الإجابة واضحة ومختصرة وسهلة الفهم
 - استخدم أرقاماً ومعلومات دقيقة عند الحاجة
 
-أجب بـ JSON فقط:
-{"answer":"الإجابة الكاملة والصحيحة","source":"المصدر (مثل: صحيح البخاري / البداية والنهاية / سورة كذا آية كذا)"}`
-      : `أنت متخصص في الفقه الإسلامي على منهج أهل السنة والجماعة.
+أجب بـ JSON فقط بدون أي نص قبله أو بعده:
+{"answer":"الإجابة الكاملة والصحيحة","source":"المصدر (مثل: صحيح البخاري / البداية والنهاية / سورة كذا آية كذا)"}`;
+
+    } else {
+      // fatwa mode — fetch sources in parallel
+      const q = encodeURIComponent(question);
+      const [kResult, jResult, fResult, uResult, binbazText, islamwebText, islamqaText] = await Promise.all([
+        findYT("عثمان الخميس", question),
+        findYT("مطلق الجاسر", question),
+        findYT("الفوزان", question),
+        findYT("ابن عثيمين", question),
+        fetchSource("https://binbaz.org.sa/fatwas?search=" + q),
+        fetchSource("https://www.islamweb.net/ar/fatwa/search/?q=" + q),
+        fetchSource("https://islamqa.info/ar/search/?q=" + q),
+      ]);
+
+      const kSrc = kResult ? kResult.url : "https://www.youtube.com/@othmanalkamees/search?query=" + encodeURIComponent(question);
+      const jSrc = jResult ? jResult.url : "https://www.youtube.com/@dr-mutlaq/search?query=" + encodeURIComponent(question);
+      const fSrc = fResult ? fResult.url : "https://www.youtube.com/@dralfawzann/search?query=" + encodeURIComponent(question);
+      const uSrc = uResult ? uResult.url : "https://www.youtube.com/@ibnothaimeentv/search?query=" + encodeURIComponent(question);
+      const kTitle = kResult ? kResult.title : "لم نجد فيديو للشيخ في هذه المسألة";
+      const jTitle = jResult ? jResult.title : "لم نجد فيديو للشيخ في هذه المسألة";
+      const fTitle = fResult ? fResult.title : "لم نجد فيديو للشيخ في هذه المسألة";
+      const uTitle = uResult ? uResult.title : "لم نجد فيديو للشيخ في هذه المسألة";
+
+      const ctx = [
+        binbazText ? "[binbaz.org.sa]\n" + binbazText : null,
+        islamwebText ? "[islamweb.net]\n" + islamwebText : null,
+        islamqaText ? "[islamqa.info]\n" + islamqaText : null,
+      ].filter(Boolean).join("\n\n---\n\n");
+
+      system = `أنت متخصص في الفقه الإسلامي على منهج أهل السنة والجماعة.
 
 نتائج البحث من المواقع الرسمية:
 ${ctx || "لم نجد نتائج."}
@@ -109,6 +129,7 @@ ${ctx || "لم نجد نتائج."}
   "alkamees":  {"answer":"${kTitle}","evidence":"","ruling":"khilaf","sourceUrl":"${kSrc}"},
   "aljaser":   {"answer":"${jTitle}","evidence":"","ruling":"khilaf","sourceUrl":"${jSrc}"}
 }`;
+    }
 
     const msg = await client.messages.create({
       model: "claude-sonnet-4-6",
@@ -117,16 +138,7 @@ ${ctx || "لم نجد نتائج."}
       messages: [{ role: "user", content: question }],
     });
 
-    const raw = msg.content[0].text;
-    const clean = raw.replace(/```json/gi, "").replace(/```/g, "").trim();
-    let parsed;
-    try {
-      parsed = JSON.parse(clean);
-    } catch (_) {
-      const m = clean.match(/\{[\s\S]*\}/);
-      if (m) { try { parsed = JSON.parse(m[0]); } catch (__) { parsed = { error: "parse error", raw: clean }; } }
-      else { parsed = { error: "parse error", raw: clean }; }
-    }
+    const parsed = parseJSON(msg.content[0].text);
     return res.status(200).json(parsed);
   } catch (err) {
     return res.status(500).json({ error: err.message });
