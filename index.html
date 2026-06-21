@@ -229,7 +229,7 @@ html,body{font-family:'Tajawal',sans-serif;background:var(--bg);min-height:100vh
 
 /* Dashboard */
 .athar-streak{background:linear-gradient(135deg,#9B3232,#5C1515);border-radius:20px;padding:20px;color:#fff;text-align:center;margin-bottom:14px;display:flex;align-items:center;gap:16px;}
-.athar-streak-fire{font-size:48px;line-height:1;}
+.athar-streak-fire{width:52px;height:62px;flex-shrink:0;}
 .athar-streak-info{flex:1;text-align:right;}
 .athar-streak-num{font-size:52px;font-weight:900;line-height:1;}
 .athar-streak-label{font-size:12px;opacity:.8;margin-top:2px;}
@@ -629,7 +629,16 @@ html,body{font-family:'Tajawal',sans-serif;background:var(--bg);min-height:100vh
   <!-- Dashboard -->
   <div class="athar-body" id="at-panel-dash">
     <div class="athar-streak" id="athar-streak-card">
-      <div class="athar-streak-fire">🔥</div>
+      <svg class="athar-streak-fire" viewBox="0 0 80 100" xmlns="http://www.w3.org/2000/svg" fill="none" stroke="#fff" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M18,60 C5,52 6,33 18,25" stroke-width="2.8"/>
+        <path d="M62,60 C75,52 74,33 62,25" stroke-width="2.8"/>
+        <path d="M18,60 C18,26 40,6 40,6 C40,6 62,26 62,60" stroke-width="3.2"/>
+        <path d="M26,60 C26,30 40,14 40,14 C40,14 54,30 54,60" stroke-width="2.6"/>
+        <path d="M33,60 C33,45 40,39 40,39 C40,39 47,45 47,60" stroke-width="2.2"/>
+        <line x1="33" y1="60" x2="33" y2="80" stroke-width="2.2"/>
+        <line x1="47" y1="60" x2="47" y2="80" stroke-width="2.2"/>
+        <line x1="12" y1="82" x2="68" y2="82" stroke-width="2.8"/>
+      </svg>
       <div class="athar-streak-info">
         <div class="athar-streak-num" id="at-streak-num">0</div>
         <div class="athar-streak-label">يوم متتالي</div>
