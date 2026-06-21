@@ -242,13 +242,22 @@ html,body{font-family:'Tajawal',sans-serif;background:var(--bg);min-height:100vh
 .hbook-btn.on{background:var(--primary);color:#fff;border-color:var(--primary);}
 /* ===== DAILY WIRD ===== */
 .dw-card{background:#fff;border-radius:16px;padding:16px;box-shadow:var(--sh);margin-bottom:16px;}
-.dw-types{display:flex;flex-wrap:wrap;gap:7px;margin-bottom:14px;}
-.dw-chip{padding:7px 13px;border-radius:20px;border:1.5px solid rgba(123,28,28,.22);background:transparent;font-family:'Tajawal',sans-serif;font-size:12px;font-weight:700;color:var(--primary);cursor:pointer;touch-action:manipulation;transition:background .15s;}
-.dw-chip.on{background:var(--primary);color:#fff;border-color:var(--primary);}
-.dw-btn{width:100%;padding:15px;background:var(--primary);color:#fff;border:none;border-radius:13px;font-family:'Tajawal',sans-serif;font-size:16px;font-weight:900;cursor:pointer;touch-action:manipulation;display:flex;align-items:center;justify-content:center;gap:9px;transition:background .2s;}
+.dw-item{display:flex;align-items:center;gap:10px;padding:11px 0;border-bottom:1px solid rgba(123,28,28,.07);}
+.dw-item:last-of-type{border-bottom:none;}
+.dw-check{width:24px;height:24px;border-radius:7px;border:2px solid rgba(123,28,28,.3);background:transparent;cursor:pointer;flex-shrink:0;display:flex;align-items:center;justify-content:center;font-size:13px;color:#fff;touch-action:manipulation;transition:background .15s;}
+.dw-check.on{background:var(--primary);border-color:var(--primary);}
+.dw-item-name{flex:1;font-family:'Tajawal',sans-serif;font-size:14px;color:var(--text);line-height:1.4;}
+.dw-item-name.done{text-decoration:line-through;color:#ccc;}
+.dw-del{background:none;border:none;color:#ddd;font-size:18px;cursor:pointer;padding:2px 6px;touch-action:manipulation;line-height:1;}
+.dw-empty{text-align:center;color:#ccc;font-size:13px;padding:14px 0 6px;}
+.dw-add-row{display:flex;gap:8px;margin-top:12px;}
+.dw-add-input{flex:1;border:1.5px solid rgba(123,28,28,.18);border-radius:10px;padding:9px 12px;font-family:'Tajawal',sans-serif;font-size:13px;background:#fafafa;outline:none;color:var(--text);min-width:0;}
+.dw-add-input:focus{border-color:var(--primary);background:#fff;}
+.dw-add-btn{background:var(--primary);color:#fff;border:none;border-radius:10px;padding:9px 16px;font-family:'Tajawal',sans-serif;font-size:18px;font-weight:700;cursor:pointer;touch-action:manipulation;flex-shrink:0;}
+.dw-btn{width:100%;padding:15px;background:var(--primary);color:#fff;border:none;border-radius:13px;font-family:'Tajawal',sans-serif;font-size:16px;font-weight:900;cursor:pointer;touch-action:manipulation;display:flex;align-items:center;justify-content:center;gap:9px;margin-top:14px;transition:background .2s;}
 .dw-btn.done{background:#27ae60;cursor:default;}
-.dw-btn-lbl{font-size:22px;}
-.dw-done-sub{text-align:center;margin-top:10px;font-size:13px;color:#27ae60;font-weight:700;}
+.dw-btn-lbl{font-size:20px;}
+.dw-done-sub{text-align:center;margin-top:9px;font-size:13px;color:#27ae60;font-weight:700;}
 /* ===== FEATURES PAGE ===== */
 #p-features{background:var(--bg);}
 .features-body{flex:1;overflow-y:auto;padding:24px 20px;display:flex;flex-direction:column;gap:14px;}
@@ -1815,7 +1824,6 @@ let atharStats={streak:0,lastActive:'',totalDhikr:0,totalSalawat:0,totalQuranPag
 let atharHadithIdx=0;
 let _hbook='nawawi';
 let reminderTimer=null;
-let dailyWirdType=localStorage.getItem('daily-wird-type')||'adhkar';
 let dailyWirdDone=localStorage.getItem('daily-wird-done')||'';
 
 function loadAtharState(){
@@ -1823,7 +1831,6 @@ function loadAtharState(){
   const st=localStorage.getItem('athar-stats');if(st)try{atharStats=Object.assign(atharStats,JSON.parse(st));}catch(e){}
   const hi=localStorage.getItem('athar-hadith-idx');if(hi)atharHadithIdx=parseInt(hi)||0;
   const hb=localStorage.getItem('athar-hbook');if(hb)_hbook=hb;
-  dailyWirdType=localStorage.getItem('daily-wird-type')||'adhkar';
   dailyWirdDone=localStorage.getItem('daily-wird-done')||'';
   checkStreak();
 }
@@ -2071,20 +2078,27 @@ function stopReminderTimer(){clearInterval(reminderTimer);reminderTimer=null;}
 function restartReminderTimer(){startReminderTimer();}
 
 /* ===== DAILY WIRD ===== */
-const DW_TYPES=[
-  {id:'adhkar',label:'ذكر الصباح والمساء'},
-  {id:'quran',label:'قراءة القرآن'},
-  {id:'night',label:'قيام الليل'},
-  {id:'tasbih',label:'التسبيح والذكر'},
-  {id:'hafiz',label:'حفظ القرآن'},
-  {id:'sunnah',label:'السنن الرواتب'},
-];
-function setDailyWirdType(type){
-  dailyWirdType=type;
-  localStorage.setItem('daily-wird-type',type);
-  renderDailyWird();
-}
+function getDWList(){try{return JSON.parse(localStorage.getItem('dw-list')||'[]');}catch(_){return[];}}
+function saveDWList(a){localStorage.setItem('dw-list',JSON.stringify(a));}
+function getDWChecked(){try{return JSON.parse(localStorage.getItem('dw-checked')||'{}');}catch(_){return{};}}
+function saveDWChecked(o){localStorage.setItem('dw-checked',JSON.stringify(o));}
+
 function isDailyWirdDoneToday(){return dailyWirdDone===getToday();}
+
+function toggleDWItem(id){
+  const c=getDWChecked();const today=getToday();
+  if(c[id]===today)delete c[id];else c[id]=today;
+  saveDWChecked(c);renderDailyWird();
+}
+function deleteDWItem(id){
+  saveDWList(getDWList().filter(i=>i.id!==id));renderDailyWird();
+}
+function addDWItem(){
+  const inp=document.getElementById('dw-add-input');if(!inp)return;
+  const name=inp.value.trim();if(!name)return;
+  const list=getDWList();list.push({id:Date.now(),name});
+  saveDWList(list);inp.value='';renderDailyWird();
+}
 function completeDailyWird(){
   const today=getToday();
   if(isDailyWirdDoneToday())return;
@@ -2104,13 +2118,33 @@ function completeDailyWird(){
 function renderDailyWird(){
   const el=document.getElementById('daily-wird-section');if(!el)return;
   const done=isDailyWirdDoneToday();
-  const chips=DW_TYPES.map(t=>
-    '<button class="dw-chip'+(t.id===dailyWirdType?' on':'')+'" onclick="setDailyWirdType(\''+t.id+'\')">'+t.label+'</button>'
-  ).join('');
+  const list=getDWList();
+  const checked=getDWChecked();
+  const today=getToday();
+  let items='';
+  if(!list.length){
+    items='<div class="dw-empty">أضف بنود وردك أدناه</div>';
+  } else {
+    list.forEach(item=>{
+      const on=checked[item.id]===today;
+      items+=
+        '<div class="dw-item">'+
+          '<button class="dw-check'+(on?' on':'')+'" onclick="toggleDWItem('+item.id+')">'+(on?'✓':'')+'</button>'+
+          '<span class="dw-item-name'+(on?' done':'')+'">'+escHtml(item.name)+'</span>'+
+          (!done?'<button class="dw-del" onclick="deleteDWItem('+item.id+')">×</button>':'')+
+        '</div>';
+    });
+  }
   el.innerHTML=
     '<div class="athar-sec-title">الورد اليومي</div>'+
     '<div class="dw-card">'+
-      '<div class="dw-types">'+chips+'</div>'+
+      items+
+      (!done?
+        '<div class="dw-add-row">'+
+          '<input class="dw-add-input" id="dw-add-input" placeholder="أضف بنداً لوردك..." maxlength="40" onkeydown="if(event.key===\'Enter\')addDWItem()">'+
+          '<button class="dw-add-btn" onclick="addDWItem()">+</button>'+
+        '</div>'
+      :'')+
       '<button class="dw-btn'+(done?' done':'')+'" onclick="completeDailyWird()"'+(done?' disabled':'')+'>'+
         '<span class="dw-btn-lbl">'+(done?'✓':'🌙')+'</span>'+
         (done?'تم إتمام وردك اليوم':'أتممت وردي اليوم')+
