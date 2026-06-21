@@ -493,8 +493,8 @@ html,body{font-family:'Tajawal',sans-serif;background:var(--bg);min-height:100vh
       <div class="qibla-deg-text" id="qiblaDeg">--°</div>
       <div class="qibla-dir-label">اتجاه القبلة</div>
     </div>
-    <div class="qibla-status" id="qiblaStatus">اضغط الزر لتحديد اتجاه القبلة بناءً على موقعك</div>
-    <button class="qibla-start-btn" onclick="getQibla()">تحديد القبلة</button>
+    <div class="qibla-status" id="qiblaStatus">جاري تحديد موقعك...</div>
+    <button class="qibla-start-btn" id="qiblaStartBtn" onclick="getQibla()" style="display:none">إعادة المحاولة</button>
   </div>
 </div>
 
@@ -982,10 +982,11 @@ function goTo(id){
   document.getElementById('p-'+id).scrollTop=0;
   if(id==='adhkar')showAdhkar('sabah');
   if(id==='athar'){loadAtharState();showAtharTab('dash');}
+  if(id==='qibla')getQibla();
 }
 
 function focusSearch(mode){
-  currentMode=mode==='general'?'fatwa':mode;
+  currentMode=mode;
   const input=document.getElementById('mainInput');
   input.placeholder=PLACEHOLDERS[mode]||PLACEHOLDERS.fatwa;
   input.focus();
@@ -1148,15 +1149,25 @@ function _stopCompassListener(){
   if(_qiblaOrientFn){window.removeEventListener('deviceorientation',_qiblaOrientFn,true);_qiblaOrientFn=null;}
   if(_qiblaAbsFn){window.removeEventListener('deviceorientationabsolute',_qiblaAbsFn,true);_qiblaAbsFn=null;}
 }
+function _setLiveStatus(){
+  document.getElementById('qiblaStatus').textContent='البوصلة تعمل — القبلة '+Math.round(_qiblaBearing)+'° من الشمال';
+  document.getElementById('qiblaStartBtn').style.display='none';
+}
 function _attachCompass(){
   if(typeof DeviceOrientationEvent!=='undefined'&&typeof DeviceOrientationEvent.requestPermission==='function'){
     DeviceOrientationEvent.requestPermission().then(p=>{
-      if(p==='granted'){_startCompassListener();document.getElementById('qiblaStatus').textContent='البوصلة تعمل — القبلة '+Math.round(_qiblaBearing)+'° من الشمال';}
+      if(p==='granted'){_startCompassListener();_setLiveStatus();}
       else{_fallbackStatic();}
-    }).catch(_fallbackStatic);
+    }).catch(()=>{
+      // No user gesture (auto-start) — show static bearing + prompt to tap button
+      _fallbackStatic();
+      document.getElementById('qiblaStatus').textContent='القبلة '+Math.round(_qiblaBearing)+'° من الشمال — اضغط الزر لتشغيل البوصلة الحية';
+      document.getElementById('qiblaStartBtn').style.display='block';
+      document.getElementById('qiblaStartBtn').textContent='تشغيل البوصلة';
+    });
   }else{
     _startCompassListener();
-    document.getElementById('qiblaStatus').textContent='البوصلة تعمل — القبلة '+Math.round(_qiblaBearing)+'° من الشمال';
+    _setLiveStatus();
   }
 }
 function _fallbackStatic(){
@@ -1174,7 +1185,11 @@ function getQibla(){
     _qiblaBearing=calcQiblaDir(pos.coords.latitude,pos.coords.longitude);
     document.getElementById('qiblaDeg').textContent=Math.round(_qiblaBearing)+'°';
     _attachCompass();
-  },()=>{st.textContent='تعذّر تحديد الموقع. يرجى السماح بالوصول إلى الموقع.';});
+  },()=>{
+    st.textContent='تعذّر تحديد الموقع. يرجى السماح بالوصول إلى الموقع.';
+    const btn=document.getElementById('qiblaStartBtn');
+    btn.textContent='إعادة المحاولة';btn.style.display='block';
+  });
 }
 
 /* ===== PRAYER TIMES ===== */
