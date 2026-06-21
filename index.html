@@ -240,6 +240,15 @@ html,body{font-family:'Tajawal',sans-serif;background:var(--bg);min-height:100vh
 .hbook-row{display:flex;gap:6px;flex-wrap:wrap;padding-bottom:12px;border-bottom:1px solid rgba(123,28,28,.08);margin-bottom:12px;}
 .hbook-btn{flex:1;min-width:58px;padding:7px 4px;border:1.5px solid rgba(123,28,28,.2);border-radius:10px;font-family:'Tajawal',sans-serif;font-size:11px;font-weight:700;color:var(--primary);background:transparent;cursor:pointer;touch-action:manipulation;white-space:nowrap;text-align:center;}
 .hbook-btn.on{background:var(--primary);color:#fff;border-color:var(--primary);}
+/* ===== DAILY WIRD ===== */
+.dw-card{background:#fff;border-radius:16px;padding:16px;box-shadow:var(--sh);margin-bottom:16px;}
+.dw-types{display:flex;flex-wrap:wrap;gap:7px;margin-bottom:14px;}
+.dw-chip{padding:7px 13px;border-radius:20px;border:1.5px solid rgba(123,28,28,.22);background:transparent;font-family:'Tajawal',sans-serif;font-size:12px;font-weight:700;color:var(--primary);cursor:pointer;touch-action:manipulation;transition:background .15s;}
+.dw-chip.on{background:var(--primary);color:#fff;border-color:var(--primary);}
+.dw-btn{width:100%;padding:15px;background:var(--primary);color:#fff;border:none;border-radius:13px;font-family:'Tajawal',sans-serif;font-size:16px;font-weight:900;cursor:pointer;touch-action:manipulation;display:flex;align-items:center;justify-content:center;gap:9px;transition:background .2s;}
+.dw-btn.done{background:#27ae60;cursor:default;}
+.dw-btn-lbl{font-size:22px;}
+.dw-done-sub{text-align:center;margin-top:10px;font-size:13px;color:#27ae60;font-weight:700;}
 /* ===== FEATURES PAGE ===== */
 #p-features{background:var(--bg);}
 .features-body{flex:1;overflow-y:auto;padding:24px 20px;display:flex;flex-direction:column;gap:14px;}
@@ -786,14 +795,13 @@ html,body{font-family:'Tajawal',sans-serif;background:var(--bg);min-height:100vh
         <div class="athar-streak-label">يوم متتالي</div>
       </div>
     </div>
+    <div id="daily-wird-section"></div>
     <div class="athar-stats-grid">
-      <div class="athar-stat"><div class="athar-stat-num" id="at-stat-today">0</div><div class="athar-stat-label">أوراد مكتملة اليوم</div></div>
+      <div class="athar-stat"><div class="athar-stat-num" id="at-stat-today">0</div><div class="athar-stat-label">أيام مكتملة</div></div>
       <div class="athar-stat"><div class="athar-stat-num" id="at-stat-dhikr">0</div><div class="athar-stat-label">مجموع الأذكار</div></div>
       <div class="athar-stat"><div class="athar-stat-num" id="at-stat-salawat">0</div><div class="athar-stat-label">الصلاة على النبي ﷺ</div></div>
       <div class="athar-stat"><div class="athar-stat-num" id="at-stat-quran">0</div><div class="athar-stat-label">صفحات القرآن</div></div>
     </div>
-    <div class="athar-sec-title">تقدم أوراد اليوم</div>
-    <div id="at-dash-wirds"></div>
   </div>
 
   <!-- Wirds -->
@@ -1807,12 +1815,16 @@ let atharStats={streak:0,lastActive:'',totalDhikr:0,totalSalawat:0,totalQuranPag
 let atharHadithIdx=0;
 let _hbook='nawawi';
 let reminderTimer=null;
+let dailyWirdType=localStorage.getItem('daily-wird-type')||'adhkar';
+let dailyWirdDone=localStorage.getItem('daily-wird-done')||'';
 
 function loadAtharState(){
   const ss=localStorage.getItem('athar-setts');if(ss)try{atharSetts=Object.assign(atharSetts,JSON.parse(ss));}catch(e){}
   const st=localStorage.getItem('athar-stats');if(st)try{atharStats=Object.assign(atharStats,JSON.parse(st));}catch(e){}
   const hi=localStorage.getItem('athar-hadith-idx');if(hi)atharHadithIdx=parseInt(hi)||0;
   const hb=localStorage.getItem('athar-hbook');if(hb)_hbook=hb;
+  dailyWirdType=localStorage.getItem('daily-wird-type')||'adhkar';
+  dailyWirdDone=localStorage.getItem('daily-wird-done')||'';
   checkStreak();
 }
 function saveAtharSetts(){localStorage.setItem('athar-setts',JSON.stringify(atharSetts));}
@@ -1847,16 +1859,7 @@ function renderAtharDash(){
   document.getElementById('at-stat-dhikr').textContent=fmtNum(atharStats.totalDhikr);
   document.getElementById('at-stat-salawat').textContent=fmtNum(atharStats.totalSalawat);
   document.getElementById('at-stat-quran').textContent=fmtNum(atharStats.totalQuranPages);
-  const wirds=getWirds();
-  const el=document.getElementById('at-dash-wirds');el.innerHTML='';
-  if(!wirds.length){el.innerHTML='<div class="athar-empty">أضف ورداً من تبويب "أوراد"</div>';return;}
-  wirds.forEach(w=>{
-    const pct=Math.min(100,Math.round(w.todayCount/w.target*100));
-    const done=pct>=100;
-    const d=document.createElement('div');d.className='wird-card';
-    d.innerHTML='<div class="wird-top"><span class="wird-badge">'+typeLabel(w.type)+'</span><span class="wird-name">'+w.name+'</span></div><div class="wird-progress"><div class="wird-bar'+(done?' done':'')+'\" style="width:'+pct+'%"></div></div><div class="wird-meta"><span>'+w.todayCount+' / '+w.target+' '+w.unit+'</span><span>'+(done?'✓ مكتمل':pct+'%')+'</span></div>';
-    el.appendChild(d);
-  });
+  renderDailyWird();
 }
 function fmtNum(n){return n>=1000?(n/1000).toFixed(1)+'k':String(n);}
 
@@ -2066,6 +2069,55 @@ function startReminderTimer(){
 }
 function stopReminderTimer(){clearInterval(reminderTimer);reminderTimer=null;}
 function restartReminderTimer(){startReminderTimer();}
+
+/* ===== DAILY WIRD ===== */
+const DW_TYPES=[
+  {id:'adhkar',label:'ذكر الصباح والمساء'},
+  {id:'quran',label:'قراءة القرآن'},
+  {id:'night',label:'قيام الليل'},
+  {id:'tasbih',label:'التسبيح والذكر'},
+  {id:'hafiz',label:'حفظ القرآن'},
+  {id:'sunnah',label:'السنن الرواتب'},
+];
+function setDailyWirdType(type){
+  dailyWirdType=type;
+  localStorage.setItem('daily-wird-type',type);
+  renderDailyWird();
+}
+function isDailyWirdDoneToday(){return dailyWirdDone===getToday();}
+function completeDailyWird(){
+  const today=getToday();
+  if(isDailyWirdDoneToday())return;
+  dailyWirdDone=today;
+  localStorage.setItem('daily-wird-done',today);
+  if(atharStats.lastActive!==today){
+    atharStats.streak++;
+    atharStats.lastActive=today;
+    updateMyLB();
+    lbMaybePrompt();
+  }
+  atharStats.completedToday++;
+  saveAtharStats();
+  if(navigator.vibrate)navigator.vibrate([60,40,60]);
+  renderAtharDash();
+}
+function renderDailyWird(){
+  const el=document.getElementById('daily-wird-section');if(!el)return;
+  const done=isDailyWirdDoneToday();
+  const chips=DW_TYPES.map(t=>
+    '<button class="dw-chip'+(t.id===dailyWirdType?' on':'')+'" onclick="setDailyWirdType(\''+t.id+'\')">'+t.label+'</button>'
+  ).join('');
+  el.innerHTML=
+    '<div class="athar-sec-title">الورد اليومي</div>'+
+    '<div class="dw-card">'+
+      '<div class="dw-types">'+chips+'</div>'+
+      '<button class="dw-btn'+(done?' done':'')+'" onclick="completeDailyWird()"'+(done?' disabled':'')+'>'+
+        '<span class="dw-btn-lbl">'+(done?'✓':'🌙')+'</span>'+
+        (done?'تم إتمام وردك اليوم':'أتممت وردي اليوم')+
+      '</button>'+
+      (done?'<div class="dw-done-sub">ستريكك اليوم محسوب 🔥 استمر غداً</div>':'')+
+    '</div>';
+}
 
 /* ===== HADITH BOOK SELECTOR ===== */
 function getHBook(){
