@@ -36,10 +36,11 @@ html,body{font-family:'Tajawal',sans-serif;background:var(--bg);min-height:100vh
 
 /* Feature cards - Row 1 */
 .feat-row{display:flex;gap:10px;width:100%;max-width:390px;margin-bottom:10px;}
-.feat-card{flex:1;background:var(--card);border-radius:18px;padding:16px 6px 14px;display:flex;flex-direction:column;align-items:center;gap:9px;box-shadow:var(--sh);border:none;cursor:pointer;transition:transform .15s,box-shadow .15s;font-family:'Tajawal',sans-serif;}
-.feat-card:active{transform:scale(.95);box-shadow:none;background:var(--primary);}
-.feat-card:active .feat-label{color:#fff;}
-.feat-card:active svg{stroke:#fff;}
+.feat-card{flex:1;background:var(--card);border-radius:18px;padding:16px 6px 14px;display:flex;flex-direction:column;align-items:center;gap:9px;box-shadow:var(--sh);border:none;cursor:pointer;transition:background .2s,box-shadow .15s,transform .15s;font-family:'Tajawal',sans-serif;}
+.feat-card:active{transform:scale(.95);}
+.feat-card.selected,.feat-card:active{background:var(--primary);box-shadow:0 4px 16px rgba(123,28,28,.3);}
+.feat-card.selected .feat-label,.feat-card:active .feat-label{color:#fff;}
+.feat-card.selected svg,.feat-card:active svg{stroke:#fff;}
 .feat-card svg{width:26px;height:26px;}
 .feat-label{font-size:10.5px;font-weight:700;color:var(--text);text-align:center;line-height:1.35;}
 
@@ -363,21 +364,21 @@ html,body{font-family:'Tajawal',sans-serif;background:var(--bg);min-height:100vh
 
     <!-- Row 1: Search functions (original) -->
     <div class="feat-row">
-      <button class="feat-card" onclick="focusSearch('fatwa')">
+      <button class="feat-card" id="card-fatwa" onclick="focusSearch('fatwa')">
         <svg viewBox="0 0 24 24" fill="none" stroke="#7B1C1C" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
           <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>
           <path d="M8 9h8M8 13h5"/>
         </svg>
         <span class="feat-label" id="i18n-c1">ابحث عن فتوى</span>
       </button>
-      <button class="feat-card" onclick="focusSearch('hadith')">
+      <button class="feat-card" id="card-hadith" onclick="focusSearch('hadith')">
         <svg viewBox="0 0 24 24" fill="none" stroke="#7B1C1C" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
           <path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/>
           <path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/>
         </svg>
         <span class="feat-label" id="i18n-c2">استخراج الاحاديث</span>
       </button>
-      <button class="feat-card" onclick="focusSearch('general')">
+      <button class="feat-card" id="card-general" onclick="focusSearch('general')">
         <svg viewBox="0 0 24 24" fill="none" stroke="#7B1C1C" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
           <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>
           <circle cx="12" cy="10" r="1.5" fill="#7B1C1C" stroke="none"/>
@@ -998,6 +999,10 @@ function goTo(id){
 
 function focusSearch(mode){
   currentMode=mode;
+  ['fatwa','hadith','general'].forEach(m=>{
+    const c=document.getElementById('card-'+m);
+    if(c)c.classList.toggle('selected',m===mode);
+  });
   const input=document.getElementById('mainInput');
   input.placeholder=PLACEHOLDERS[mode]||PLACEHOLDERS.fatwa;
   input.focus();
@@ -1185,7 +1190,7 @@ function getQibla(){
   navigator.geolocation.getCurrentPosition(pos=>{
     _qiblaBearing=calcQiblaDir(pos.coords.latitude,pos.coords.longitude);
     document.getElementById('qiblaDeg').textContent=Math.round(_qiblaBearing)+'°';
-    st.textContent='البوصلة تعمل — القبلة '+Math.round(_qiblaBearing)+'° من الشمال';
+    st.textContent='';
   },()=>{
     st.textContent='تعذّر تحديد الموقع — اسمح بالوصول للموقع ثم أعد المحاولة';
     btn.textContent='إعادة المحاولة';btn.style.display='block';
