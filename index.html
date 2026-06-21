@@ -386,14 +386,6 @@ html,body{font-family:'Tajawal',sans-serif;background:var(--bg);min-height:100vh
         </svg>
         <span class="feat-label" id="i18n-c3">سؤال ديني عام</span>
       </button>
-      <button class="feat-card" onclick="showHistory()">
-        <svg viewBox="0 0 24 24" fill="none" stroke="#7B1C1C" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-          <polyline points="1 4 1 10 7 10"/>
-          <path d="M3.51 15a9 9 0 1 0 .49-4.49"/>
-          <polyline points="12 7 12 12 15 14"/>
-        </svg>
-        <span class="feat-label" id="i18n-c4">تاريخ البحث</span>
-      </button>
     </div>
 
     <!-- Search -->
@@ -621,8 +613,24 @@ html,body{font-family:'Tajawal',sans-serif;background:var(--bg);min-height:100vh
         <span class="feat-tool-label">أثرك</span>
         <span class="feat-tool-desc">الأوراد اليومية والتذكيرات</span>
       </button>
+      <button class="feat-tool-card" onclick="showHistory()">
+        <div class="feat-tool-icon">
+          <svg viewBox="0 0 24 24"><polyline points="1 4 1 10 7 10"/><path d="M3.51 15a9 9 0 1 0 .49-4.49"/><polyline points="12 7 12 12 15 14"/></svg>
+        </div>
+        <span class="feat-tool-label">تاريخ البحث</span>
+        <span class="feat-tool-desc">أسئلتك السابقة</span>
+      </button>
     </div>
   </div>
+</div>
+
+<!-- HISTORY PAGE -->
+<div class="page" id="p-history">
+  <div class="sub-hdr">
+    <button class="sub-back" onclick="goTo('features')">←</button>
+    <h2>تاريخ البحث</h2>
+  </div>
+  <div id="historyBody" style="flex:1;overflow-y:auto;padding:12px 16px 24px;display:flex;flex-direction:column;gap:10px;"></div>
 </div>
 
 <!-- ATHAR PAGE -->
@@ -1011,9 +1019,29 @@ function focusSearch(mode){
 
 function showHistory(){
   const h=JSON.parse(localStorage.getItem('fatwa-history')||'[]');
-  if(!h.length){alert('لا يوجد تاريخ بحث بعد');return;}
-  document.getElementById('mainInput').value=h[h.length-1];
-  document.getElementById('mainInput').focus();
+  const body=document.getElementById('historyBody');
+  body.innerHTML='';
+  if(!h.length){
+    body.innerHTML='<div style="text-align:center;padding:60px 20px;color:#bbb;font-size:14px;">لا يوجد تاريخ بحث بعد</div>';
+  }else{
+    [...h].reverse().forEach((q,i)=>{
+      const d=document.createElement('button');
+      d.style.cssText='background:#fff;border:1.5px solid rgba(123,28,28,.09);border-radius:14px;padding:14px 16px;text-align:right;font-family:Tajawal,sans-serif;font-size:14px;color:#1a1a1a;cursor:pointer;display:flex;align-items:center;gap:12px;width:100%;box-shadow:0 2px 8px rgba(0,0,0,.05);';
+      d.innerHTML='<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#7B1C1C" stroke-width="2" stroke-linecap="round" style="flex-shrink:0"><polyline points="1 4 1 10 7 10"/><path d="M3.51 15a9 9 0 1 0 .49-4.49"/></svg><span style="flex:1">'+q+'</span>';
+      d.onclick=()=>{
+        document.getElementById('mainInput').value=q;
+        goTo('home');
+        setTimeout(()=>document.getElementById('mainInput').focus(),200);
+      };
+      body.appendChild(d);
+    });
+    const clr=document.createElement('button');
+    clr.style.cssText='background:transparent;border:1.5px solid rgba(123,28,28,.15);border-radius:14px;padding:12px;font-family:Tajawal,sans-serif;font-size:13px;color:#7B1C1C;cursor:pointer;margin-top:6px;';
+    clr.textContent='مسح التاريخ';
+    clr.onclick=()=>{localStorage.removeItem('fatwa-history');showHistory();};
+    body.appendChild(clr);
+  }
+  goTo('history');
 }
 
 /* ===== MENU ===== */
