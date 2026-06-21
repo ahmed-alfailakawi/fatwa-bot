@@ -79,7 +79,9 @@ module.exports = async function handler(req, res) {
     const client = new Anthropic({ apiKey });
 
     const system = mode === "hadith"
-      ? "أنت متخصص في علوم الحديث. أجب بـ JSON فقط: {\"text\":\"...\",\"grade\":\"...\",\"source\":\"...\",\"sourceUrl\":\"\",\"scholars\":\"...\",\"note\":\"...\"}"
+      ? `أنت متخصص في علوم الحديث. مهمتك التحقق من صحة الحديث وتخريجه.
+أجب بـ JSON فقط بدون أي نص قبله أو بعده:
+{"text":"نص الحديث كاملاً","grade":"درجته (صحيح/حسن/ضعيف/موضوع)","source":"المصدر والراوي","sourceUrl":"","scholars":"أقوال العلماء في تخريجه","note":"ملاحظات إن وجدت"}`
       : mode === "general"
       ? `أنت موسوعة إسلامية شاملة على منهج أهل السنة والجماعة.
 أجب على السؤال بإجابة صحيحة موثقة مباشرة.
@@ -109,7 +111,7 @@ ${ctx || "لم نجد نتائج."}
 }`;
 
     const msg = await client.messages.create({
-      model: "claude-sonnet-4-5",
+      model: "claude-sonnet-4-6",
       max_tokens: 3000,
       system,
       messages: [{ role: "user", content: question }],
@@ -118,7 +120,13 @@ ${ctx || "لم نجد نتائج."}
     const raw = msg.content[0].text;
     const clean = raw.replace(/```json/gi, "").replace(/```/g, "").trim();
     let parsed;
-    try { parsed = JSON.parse(clean); } catch (_) { parsed = { error: "parse error", raw: clean }; }
+    try {
+      parsed = JSON.parse(clean);
+    } catch (_) {
+      const m = clean.match(/\{[\s\S]*\}/);
+      if (m) { try { parsed = JSON.parse(m[0]); } catch (__) { parsed = { error: "parse error", raw: clean }; } }
+      else { parsed = { error: "parse error", raw: clean }; }
+    }
     return res.status(200).json(parsed);
   } catch (err) {
     return res.status(500).json({ error: err.message });
